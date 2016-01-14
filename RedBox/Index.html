@@ -1,21 +1,30 @@
 ﻿<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="utf-8"/>
+    <meta charset="utf-8" />
     <title>RedBox</title>
-    <link href="Content/bootstrap.min.css" rel="stylesheet"/>
-    <link href="Content/select.min.css" rel="stylesheet"/>
-    <link href="Content/Main.css" rel="stylesheet"/>
-    <link href="Content/angular-toastr.min.css" rel="stylesheet"/>
+
+
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.css">
+
+
+    <link href="Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="Content/select.min.css" rel="stylesheet" />
+    <link href="Content/Main.css" rel="stylesheet" />
+    <link href="Content/angular-toastr.min.css" rel="stylesheet" />
     <link rel="icon" href="favicon.png" type="image/png">
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,500,700,300,100' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-    <link href="Content/loader.css" rel="stylesheet"/>
+    <link href="Content/loader.css" rel="stylesheet" />
+
+
+
+
 </head>
 
 <body ng-app="myApp" ng-cloak>
     <div class="wrapper" ng-controller="mainController">
-        <header ng-show="isLogged()">
+        <header>
             <div class="header">
                 <div class="changer">
                     <div></div>
@@ -47,11 +56,16 @@
         </div>
         <div class="max-div" ng-view></div>
         <script src="Scripts/jquery-2.2.0.min.js"></script>
-        <script src="Scripts/angular.min.js"></script>
-        <script src="Scripts/angular-sanitize.min.js"></script>
+        <script src="Scripts/angular.js"></script>
+        <script src="Scripts/angular-sanitize.js"></script>
         <!--<script src="Scripts/angular-local-storage.min.js"></script>-->
-        <script src="Scripts/angular-route.min.js"></script>
+        <script src="Scripts/angular-route.js"></script>
         <script src="Scripts/angular-animate.js"></script>
+        <script src="Scripts/angular-aria.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js"></script>
+
+
         <script src="Scripts/angular-ui/ui-bootstrap-tpls.min.js"></script>
         <!--<script src="Scripts/angular-toastr.tpls.min.js"></script>
         <script src="Scripts/select.js"></script>-->
@@ -60,21 +74,9 @@
         <script src="Scripts/clickoutside.directive.js"></script>-->
         <script src="app/external/underscoreModule.js"></script>
         <script src="app/services/appRouter.js"></script>
-        <script src="app/services/authentification.js"></script>
-        <script src="app/services/authInterceptorService.js"></script>
-        <script src="app/controllers/evaluationController.js"></script>
-        <script src="app/controllers/userController.js"></script>
         <script src="app/controllers/mainController.js"></script>
-        <script src="app/controllers/registerController.js"></script>
-        <script src="app/controllers/rolesController.js"></script>
-        <script src="app/controllers/myEvaluationController.js"></script>
-        <script src="app/controllers/feedbackToPeersController.js"></script>
-        <script src="app/controllers/giveFeedbackController.js"></script>
-        <script src="app/controllers/apprenticeController.js"></script>
-        <script src="app/controllers/apprenticeDetailController.js"></script>
-        <script src="app/controllers/apprenticeController.js"></script>
-        <script src="app/controllers/apprenticeDetailController.js"></script>
-        <script src="app/controllers/myEvaluationDetailController.js"></script>
+        <script src="app/controllers/suggestionsController.js"></script>
+
         <script>
             $(".changer").mouseenter(function () {
                 $(this).addClass("open");

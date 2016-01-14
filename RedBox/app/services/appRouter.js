@@ -1,5 +1,5 @@
 ﻿(function () {
-    var myApp = angular.module('myApp', ['ngRoute']);
+    var myApp = angular.module('myApp', ['ngRoute' ,'ngMaterial']);
 
     myApp.config(function ($routeProvider, $httpProvider) {
 
@@ -9,8 +9,8 @@
             //    controller: 'userController'
             //})
             .when('/', {
-                templateUrl: 'app/views/Sugestions.html',
-                controller: 'sugestionsController',
+                templateUrl: 'app/views/Suggestions.html',
+                controller: 'suggestionsController',
                 authorize: true
             })
             .when('/MyEvaluation', {
@@ -20,44 +20,44 @@
             })
             .otherwise({ redirectTo: '/' });
 
-        $httpProvider.interceptors.push('authInterceptorService');
+        //$httpProvider.interceptors.push('authInterceptorService');
 
     });
 
-    myApp.config(function (uiSelectConfig) {
-        uiSelectConfig.theme = 'bootstrap';
-        uiSelectConfig.resetSearchInput = true;
-        uiSelectConfig.appendToBody = true;
+    myApp.config(function () {
+        //uiSelectConfig.theme = 'bootstrap';
+        //uiSelectConfig.resetSearchInput = true;
+        //uiSelectConfig.appendToBody = true;
     });
 
-    myApp.run(function ($rootScope, authService, $location) {
-        $rootScope.$on('$routeChangeStart', function (event, currentRoute) {
-            if (!authService.authentification.isAuth) {
+    //myApp.run(function ($rootScope, authService, $location) {
+    //    $rootScope.$on('$routeChangeStart', function (event, currentRoute) {
+    //        if (!authService.authentification.isAuth) {
 
 
-                //event.preventDefault();
-                $rootScope.$evalAsync(function () {
-                    $location.path('/Login');
-                });
-            }
+    //            //event.preventDefault();
+    //            $rootScope.$evalAsync(function () {
+    //                $location.path('/Login');
+    //            });
+    //        }
 
-            //    if (authService.authentification.isAuth) {
+    //        //    if (authService.authentification.isAuth) {
 
-            //        $rootScope.$evalAsync(function () {
-            //            $location.path('/SelfEvaluation');
-            //        });
+    //        //        $rootScope.$evalAsync(function () {
+    //        //            $location.path('/SelfEvaluation');
+    //        //        });
 
-            //}else{
+    //        //}else{
 
-            //        //  console.log('Not authorized for route  ' + currentRoute.$$route.originalPath);
+    //        //        //  console.log('Not authorized for route  ' + currentRoute.$$route.originalPath);
 
-            //   // event.preventDefault();
-            //    $rootScope.$evalAsync(function () {
-            //        $location.path('/');
-            //    });
-            //}
-        });
+    //        //   // event.preventDefault();
+    //        //    $rootScope.$evalAsync(function () {
+    //        //        $location.path('/');
+    //        //    });
+    //        //}
+    //    });
 
-        authService.fillAuthData();
-    });
+    //    authService.fillAuthData();
+    //});
 }());
