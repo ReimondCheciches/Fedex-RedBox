@@ -11,13 +11,13 @@ namespace RedBox.DataAccess.Repositories
     {
         private static readonly List<EntityState> Changed = new List<EntityState> { EntityState.Added, EntityState.Deleted, EntityState.Modified };
 
-        private readonly RedBoxEntities _context;
+        private readonly RedBoxEntities1 _context;
         private bool _isDisposed;
 
 
         public Repository()
         {
-            _context = new RedBoxEntities();
+            _context = new RedBoxEntities1();
         }
 
         public IQueryable<T> GetEntities<T>() where T : class
