@@ -36,5 +36,12 @@ namespace RedBox.Web.Controllers
         {
             _suggestionService.RemoveSuggestion(id);
         }
+
+        public void Vote(int suggestionId, bool upVote)
+        {
+            var userId="87022DBA-F137-49FF-9C9B-E1F216D53545";
+            if (!_suggestionService.UserhasVoted(userId)) return;
+            _suggestionService.Vote(suggestionId, upVote, userId);
+        }
     }
 }
