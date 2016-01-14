@@ -11,10 +11,11 @@ using System.Net.Http.Headers;
 using System.Web.Http;
 using System.Web.Http.Controllers;
 using System.Web.Http.Description;
-using RedBox.Areas.HelpPage.ModelDescriptions;
-using RedBox.Areas.HelpPage.Models;
+using RedBox.Web.Areas.HelpPage.ModelDescriptions;
+using RedBox.Web.Areas.HelpPage.Models;
+using RedBox.Web.Areas.HelpPage.SampleGeneration;
 
-namespace RedBox.Areas.HelpPage
+namespace RedBox.Web.Areas.HelpPage
 {
     public static class HelpPageConfigurationExtensions
     {

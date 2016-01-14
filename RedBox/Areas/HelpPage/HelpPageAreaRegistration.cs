@@ -1,7 +1,8 @@
 using System.Web.Http;
 using System.Web.Mvc;
+using RedBox.Web.Areas.HelpPage.App_Start;
 
-namespace RedBox.Areas.HelpPage
+namespace RedBox.Web.Areas.HelpPage
 {
     public class HelpPageAreaRegistration : AreaRegistration
     {
