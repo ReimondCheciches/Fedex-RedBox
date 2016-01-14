@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RedBox", "RedBox\RedBox.csproj", "{56698AB5-C16D-49FA-9151-5B04F235F865}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RedBox.Web", "RedBox\RedBox.Web.csproj", "{56698AB5-C16D-49FA-9151-5B04F235F865}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RedBox.DataAccess", "RedBox.DataAccess\RedBox.DataAccess.csproj", "{304F5B14-6C13-4014-9C67-F8E4D18313FD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{56698AB5-C16D-49FA-9151-5B04F235F865}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{56698AB5-C16D-49FA-9151-5B04F235F865}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{56698AB5-C16D-49FA-9151-5B04F235F865}.Release|Any CPU.Build.0 = Release|Any CPU
+		{304F5B14-6C13-4014-9C67-F8E4D18313FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{304F5B14-6C13-4014-9C67-F8E4D18313FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{304F5B14-6C13-4014-9C67-F8E4D18313FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{304F5B14-6C13-4014-9C67-F8E4D18313FD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

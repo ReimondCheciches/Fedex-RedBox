@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
-namespace RedBox.Models
+namespace RedBox.Web.Models
 {
     // Models returned by AccountController actions.
 

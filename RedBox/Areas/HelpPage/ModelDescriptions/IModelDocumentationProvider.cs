@@ -1,7 +1,7 @@
 using System;
 using System.Reflection;
 
-namespace RedBox.Areas.HelpPage.ModelDescriptions
+namespace RedBox.Web.Areas.HelpPage.ModelDescriptions
 {
     public interface IModelDocumentationProvider
     {

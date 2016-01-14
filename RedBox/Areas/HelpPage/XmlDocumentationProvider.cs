@@ -5,9 +5,9 @@ using System.Reflection;
 using System.Web.Http.Controllers;
 using System.Web.Http.Description;
 using System.Xml.XPath;
-using RedBox.Areas.HelpPage.ModelDescriptions;
+using RedBox.Web.Areas.HelpPage.ModelDescriptions;
 
-namespace RedBox.Areas.HelpPage
+namespace RedBox.Web.Areas.HelpPage
 {
     /// <summary>
     /// A custom <see cref="IDocumentationProvider"/> that reads the API documentation from an XML documentation file.

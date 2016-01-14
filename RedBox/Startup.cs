@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.Owin;
+﻿using Microsoft.Owin;
 using Owin;
+using RedBox.Web;
 
-[assembly: OwinStartup(typeof(RedBox.Startup))]
+[assembly: OwinStartup(typeof(Startup))]
 
-namespace RedBox
+namespace RedBox.Web
 {
     public partial class Startup
     {

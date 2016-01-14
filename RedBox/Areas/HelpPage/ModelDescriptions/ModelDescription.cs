@@ -1,6 +1,6 @@
 using System;
 
-namespace RedBox.Areas.HelpPage.ModelDescriptions
+namespace RedBox.Web.Areas.HelpPage.ModelDescriptions
 {
     /// <summary>
     /// Describes a type model.

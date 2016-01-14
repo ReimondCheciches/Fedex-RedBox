@@ -7,17 +7,16 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
-using System.Web.Http.ModelBinding;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
-using RedBox.Models;
-using RedBox.Providers;
+using RedBox.Web.Models;
+using RedBox.Web.Providers;
 
-namespace RedBox.Controllers
+namespace RedBox.Web.Controllers
 {
     [Authorize]
     [RoutePrefix("api/Account")]
@@ -321,8 +320,16 @@ namespace RedBox.Controllers
         // POST api/Account/Register
         [AllowAnonymous]
         [Route("Register")]
-        public async Task<IHttpActionResult> Register(RegisterBindingModel model)
+        [HttpGet]
+        public async Task<IHttpActionResult> Register()
         {
+            RegisterBindingModel model = new RegisterBindingModel()
+            {
+                Email = "Redbox1@tmx.com",
+                Password = "Redbox1@tmx.com",
+                ConfirmPassword = "Redbox1@tmx.com"
+            };
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -339,6 +346,25 @@ namespace RedBox.Controllers
 
             return Ok();
         }
+
+        //public async Task<IHttpActionResult> Register(RegisterBindingModel model)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
+
+        //    var user = new ApplicationUser() { UserName = model.Email, Email = model.Email };
+
+        //    IdentityResult result = await UserManager.CreateAsync(user, model.Password);
+
+        //    if (!result.Succeeded)
+        //    {
+        //        return GetErrorResult(result);
+        //    }
+
+        //    return Ok();
+        //}
 
         // POST api/Account/RegisterExternal
         [OverrideAuthentication]

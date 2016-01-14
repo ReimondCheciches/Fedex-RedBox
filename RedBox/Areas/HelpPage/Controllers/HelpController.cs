@@ -1,10 +1,10 @@
 using System;
 using System.Web.Http;
 using System.Web.Mvc;
-using RedBox.Areas.HelpPage.ModelDescriptions;
-using RedBox.Areas.HelpPage.Models;
+using RedBox.Web.Areas.HelpPage.ModelDescriptions;
+using RedBox.Web.Areas.HelpPage.Models;
 
-namespace RedBox.Areas.HelpPage.Controllers
+namespace RedBox.Web.Areas.HelpPage.Controllers
 {
     /// <summary>
     /// The controller that will handle requests for the help page.

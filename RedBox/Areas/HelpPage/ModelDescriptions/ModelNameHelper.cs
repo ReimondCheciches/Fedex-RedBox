@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Linq;
 using System.Reflection;
 
-namespace RedBox.Areas.HelpPage.ModelDescriptions
+namespace RedBox.Web.Areas.HelpPage.ModelDescriptions
 {
     internal static class ModelNameHelper
     {
