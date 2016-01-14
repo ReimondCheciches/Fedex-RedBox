@@ -19,9 +19,9 @@
                 controller: 'suggestionsController',
                 authorize: true
             })
-            .when('/MyEvaluation', {
-                templateUrl: 'app/views/MyEvaluation.html',
-                controller: 'myEvaluationController',
+            .when('/EOM', {
+                templateUrl: 'app/views/EOM.html',
+                controller: 'eomController',
                 authorize: true
             })
             .otherwise({ redirectTo: '/' });

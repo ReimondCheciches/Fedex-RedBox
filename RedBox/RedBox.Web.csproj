@@ -214,6 +214,7 @@
   <ItemGroup>
     <Content Include="app\controllers\apprenticeController.js" />
     <Content Include="app\controllers\apprenticeDetailController.js" />
+    <Content Include="app\controllers\eomController.js" />
     <Content Include="app\controllers\evaluationController.js" />
     <Content Include="app\controllers\feedbackToPeersController.js" />
     <Content Include="app\controllers\giveFeedbackController.js" />
@@ -231,6 +232,7 @@
     <Content Include="app\services\authInterceptorService.js" />
     <Content Include="app\views\Apprentice.html" />
     <Content Include="app\views\ApprenticeDetail.html" />
+    <Content Include="app\views\EOM.html" />
     <Content Include="app\views\FeedBack.html" />
     <Content Include="app\views\GiveFeedback.html" />
     <Content Include="app\views\Login.html" />
@@ -245,7 +247,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="favicon.ico" />
+    <Content Include="favicon.png" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Areas\HelpPage\Views\Web.config" />

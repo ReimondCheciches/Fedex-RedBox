@@ -23,7 +23,7 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
 }
 
 body {
-    padding: 110px 0 64px 0;
+    padding: 134px 0 64px 0;
     font-family: "Roboto";
 }
 
@@ -855,7 +855,6 @@ md-toolbar:not(.md-menu-toolbar).md-dark {
 }
 
 .callout-box {
-    padding-top: 24px;
     margin-bottom: 32px;
 }
 
@@ -920,6 +919,38 @@ md-toolbar:not(.md-menu-toolbar).md-dark {
     margin-left: 0;
     border-radius: 0;
     margin-right: 0;
+}
+
+
+.winner {
+    font-size: 26px;
+    font-weight: 300;
+}
+
+.month {
+    font-size: 18px;
+    font-weight: 400;
+}
+
+md-card > md-toolbar {
+    min-height: 100%;
+}
+
+.callout-box-mini {
+    padding-top: 16px;
+}
+
+.callout-box-mini label {
+    margin-bottom: -16px;
+}
+
+p {
+    font-weight: 300;
+}
+
+
+.md-accent h1 {
+    color: rgba(255,255,255,.91);
 }
 
 @media screen and (max-width: 767px) {
