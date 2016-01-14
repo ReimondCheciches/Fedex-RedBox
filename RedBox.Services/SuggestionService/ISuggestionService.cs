@@ -9,5 +9,7 @@ namespace RedBox.Services.SuggestionService
         List<Suggestion> GetArchivedSuggestions();
         void AddSuggestion(Suggestion suggestion);
         void RemoveSuggestion(int id);
+        void Vote(int id, bool upVote);
+        bool UserhasVoted(string userId);
     }
 }

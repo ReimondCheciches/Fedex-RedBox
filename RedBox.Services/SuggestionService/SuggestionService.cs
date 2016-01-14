@@ -41,5 +41,38 @@ namespace RedBox.Services.SuggestionService
             _repository.Delete(suggestion);
             _repository.SaveChanges();
         }
+
+
+        public void Vote(int suggestionId, bool upVote)
+        {
+            var userId = "87022DBA-F137-49FF-9C9B-E1F216D53545";
+            
+            var suggestion = _repository.GetEntities<Suggestion>().FirstOrDefault(p => p.Id == suggestionId);
+            if (suggestion == null) return;
+            
+            if(upVote)
+                suggestion.UpVotes++;
+            else
+                suggestion.DownVotes++;
+
+            _repository.Update(suggestion);
+            _repository.Add(new SuggestionVote()
+            {
+                UserId = userId,
+                SuggestionId = suggestionId
+            });
+
+            _repository.SaveChanges();
+        }
+
+        public bool UserhasVoted(string userId)
+        {
+            var votes= _repository.GetEntities<SuggestionVote>().Where(p => p.UserId == userId).ToList();
+
+            if (votes.Count > 0) 
+                return true;
+
+            return false;
+        }
     }
 }
