@@ -29,28 +29,22 @@
 
             $http.post(serviceBase + 'token', data, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }).success(function (response) {
 
+                localStorageService.set('authorizationData', { token: response.access_token, userName: loginData.Username });
 
-                $http.get('api/User/NeedsPasswordReset?userName=' + loginData.Username).success(function (isResetNeeded) {
+                $http.get('api/Account/UserInfo').then(function (userInfoResponse) {
+                    _authentification.isAuth = true;
+                    _authentification.userName = userInfoResponse.data.Email;
 
-                    localStorageService.set('authorizationData', { token: response.access_token, userName: loginData.Username });
+                    localStorageService.remove('authorizationData');
+                    localStorageService.set('authorizationData', { token: response.access_token, userName: userInfoResponse.data.email });
 
-                  
-
-                    if (isResetNeeded) {
-                        response.isResetNeeded = true;
-                       
-                    } else {
-                          _authentification.isAuth = true;
-                    _authentification.userName = loginData.Username;
-                    }
                     deferred.resolve(response);
                 });
+            }).error(function (err, status) {
+                    localStorageService.remove('authorizationData');
 
-
-
-            })
-                .error(function (err, status) {
-                    _logOut();
+                    _authentification.isAuth = false;
+                    _authentification.userName = '';
                     deferred.reject(err);
 
                 });
@@ -61,6 +55,8 @@
 
             _authentification.isAuth = false;
             _authentification.userName = '';
+
+            window.location = "http://localhost:58902/Account/LogOut.aspx";
         };
 
         var _fillAuthData = function () {

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Net;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity.Owin;
@@ -26,25 +28,63 @@ namespace RedBox.Web.Providers
 
         public override async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
         {
-            var userManager = context.OwinContext.GetUserManager<ApplicationUserManager>();
-
-            ApplicationUser user = await userManager.FindAsync(context.UserName, context.Password);
-
-            if (user == null)
+            try
             {
-                context.SetError("invalid_grant", "The user name or password is incorrect.");
-                return;
+                string userName = null;
+                var webRequest = WebRequest.Create("http://localhost:58902/Pages/SSO.aspx") as HttpWebRequest;
+                webRequest.CookieContainer = new CookieContainer();
+
+                foreach (var cookieFromRequest in context.Request.Cookies.ToList())
+                {
+                    var cookie = new Cookie(cookieFromRequest.Key, cookieFromRequest.Value);
+
+                    webRequest.CookieContainer.Add(new Uri("http://localhost:58902"), cookie);
+
+                    if (cookieFromRequest.Key == "userInfo")
+                    {
+                        userName = cookieFromRequest.Value.Split('=')[1];
+                    }
+                }
+
+                var response = (HttpWebResponse)webRequest.GetResponse();
+
+                var status = response.StatusCode;
+
+                if (status != HttpStatusCode.OK && string.IsNullOrEmpty(userName))
+                {
+                    context.SetError("invalid_grant", "The user name or password is incorrect.");
+                    return;
+                }
+
+
+
+                var userManager = context.OwinContext.GetUserManager<ApplicationUserManager>();
+
+                //ApplicationUser user = await userManager.FindAsync(context.UserName, context.Password);       
+                ApplicationUser user = await userManager.FindByNameAsync(userName);
+
+                if (user == null)
+                {
+                    context.SetError("invalid_grant", "The user name or password is incorrect.");
+                    return;
+                }
+
+                ClaimsIdentity oAuthIdentity = await user.GenerateUserIdentityAsync(userManager,
+                   OAuthDefaults.AuthenticationType);
+                ClaimsIdentity cookiesIdentity = await user.GenerateUserIdentityAsync(userManager,
+                    CookieAuthenticationDefaults.AuthenticationType);
+
+                AuthenticationProperties properties = CreateProperties(user.UserName);
+                AuthenticationTicket ticket = new AuthenticationTicket(oAuthIdentity, properties);
+                context.Validated(ticket);
+                context.Request.Context.Authentication.SignIn(cookiesIdentity);
+
             }
+            catch (Exception e)
+            {
 
-            ClaimsIdentity oAuthIdentity = await user.GenerateUserIdentityAsync(userManager,
-               OAuthDefaults.AuthenticationType);
-            ClaimsIdentity cookiesIdentity = await user.GenerateUserIdentityAsync(userManager,
-                CookieAuthenticationDefaults.AuthenticationType);
-
-            AuthenticationProperties properties = CreateProperties(user.UserName);
-            AuthenticationTicket ticket = new AuthenticationTicket(oAuthIdentity, properties);
-            context.Validated(ticket);
-            context.Request.Context.Authentication.SignIn(cookiesIdentity);
+                var ex = e;
+            }
         }
 
         public override Task TokenEndpoint(OAuthTokenEndpointContext context)

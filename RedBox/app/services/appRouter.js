@@ -1,5 +1,5 @@
 ﻿(function () {
-    var myApp = angular.module('myApp', ['ngRoute' ,'ngMaterial']);
+    var myApp = angular.module('myApp', ['ngRoute' ,'ngMaterial', 'LocalStorageModule']);
 
     myApp.config(function($mdThemingProvider) {
       $mdThemingProvider.theme('default')
@@ -36,34 +36,24 @@
         //uiSelectConfig.appendToBody = true;
     });
 
-    //myApp.run(function ($rootScope, authService, $location) {
-    //    $rootScope.$on('$routeChangeStart', function (event, currentRoute) {
-    //        if (!authService.authentification.isAuth) {
+    myApp.run(function ($rootScope, authService, $location) {
+        $rootScope.$on('$routeChangeStart', function (event, currentRoute) {
+            if (!authService.authentification.isAuth) {
 
+                authService.login({ Username: "sso", Password: "sso" }).then(function () {
+                    $location.path('/');
+                }, function () {
+                    window.location = 'http://localhost:58902/Account/Login.aspx?ReturnUrl=' + encodeURIComponent($location.absUrl());
+                });
 
-    //            //event.preventDefault();
-    //            $rootScope.$evalAsync(function () {
-    //                $location.path('/Login');
-    //            });
-    //        }
+                //event.preventDefault();
+                //$rootScope.$evalAsync(function () {
+                //    $location.path('/Login');
+                //});
+            }
 
-    //        //    if (authService.authentification.isAuth) {
+        });
 
-    //        //        $rootScope.$evalAsync(function () {
-    //        //            $location.path('/SelfEvaluation');
-    //        //        });
-
-    //        //}else{
-
-    //        //        //  console.log('Not authorized for route  ' + currentRoute.$$route.originalPath);
-
-    //        //   // event.preventDefault();
-    //        //    $rootScope.$evalAsync(function () {
-    //        //        $location.path('/');
-    //        //    });
-    //        //}
-    //    });
-
-    //    authService.fillAuthData();
-    //});
+        authService.fillAuthData();
+    });
 }());
