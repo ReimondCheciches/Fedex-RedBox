@@ -13,9 +13,9 @@ namespace RedBox.DataAccess
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class RedBoxEntities : DbContext
+    public partial class RedBoxEntities1 : DbContext
     {
-        public RedBoxEntities()
+        public RedBoxEntities1()
             : base("name=RedBoxEntities1")
         {
         }

@@ -1,0 +1,92 @@
+﻿<div class="container">
+	<div layout-gt-sm="columns">
+		<div flex-gt-sm="40">
+			<md-card>
+	            <md-card-content layout-align="top left">
+	                <h2>January 2016</h2>
+						<form ng-submit="$event.preventDefault()">
+							<md-autocomplete
+							  ng-disabled="ctrl.isDisabled"
+							  md-no-cache="ctrl.noCache"
+							  md-selected-item="ctrl.selectedItem"
+							  md-search-text-change="ctrl.searchTextChange(ctrl.searchText)"
+							  md-search-text="ctrl.searchText"
+							  md-selected-item-change="ctrl.selectedItemChange(item)"
+							  md-items="item in ctrl.querySearch(ctrl.searchText)"
+							  md-item-text="item.display"
+							  md-min-length="0"
+							  placeholder="Search Employee...">
+							<md-item-template>
+							  <span md-highlight-text="ctrl.searchText" md-highlight-flags="^i">{{item.display}}</span>
+							</md-item-template>
+							<md-not-found>
+							  No states matching "{{ctrl.searchText}}" were found.
+							  <a ng-click="ctrl.newState(ctrl.searchText)">Create a new one!</a>
+							</md-not-found>
+							</md-autocomplete>
+				            <md-input-container class="md-block callout-box-mini" flex>
+				                    <label>Reason</label>
+				                    <textarea ng-model="user.biography" columns="1" maxlength="100" md-maxlength="100"></textarea>
+				            </md-input-container>
+						</form>
+	            </md-card-content>
+				<div layout="row" layout-padding layout-align="right center">
+				  <md-button class="md-raised md-accent"><span class="fa fa-thumbs-up"></span> Vote</md-button>
+				</div>
+			</md-card>
+			<md-card>
+				<md-toolbar layout-padding class="md-accent">
+					<h1>Thank you for your vote!</h1>
+					<p>Others are still deciding.<br>You will be announced when voting concludes.</p>
+				</md-toolbar>
+			</md-card>
+		</div>
+		<div flex>
+			<md-card>
+				<md-toolbar class="md-primary">
+					<md-card-content layout="row" class="layout-align-space-between-center" flex layout-align="left center" >
+		                <div>
+		                	<span class="winner">Roxana Plaian</span>
+		                	<br>
+		                	<span class="month">December 2016</span>
+		                </div>
+		                <span class="fa fa-trophy fa-5x "></span>
+		            </md-card-content>
+					<md-card-actions layout-padding layout="row" layout-align="left center">
+					  <md-button><span class="fa fa-chevron-down"></span> Details</md-button>
+					</md-card-actions>
+				</md-toolbar>
+			</md-card>
+			<md-card>
+				<md-toolbar class="md-primary">
+					<md-card-content layout="row" class="layout-align-space-between-center" flex layout-align="left center" >
+		                <div>
+		                	<span class="winner">Reimond Checiches</span>
+		                	<br>
+		                	<span class="month">November 2016</span>
+		                </div>
+		                <span class="fa fa-trophy fa-5x "></span>
+		            </md-card-content>
+					<md-card-actions layout-padding layout="row" layout-align="left center">
+					  <md-button><span class="fa fa-chevron-down"></span> Details</md-button>
+					</md-card-actions>
+				</md-toolbar>
+			</md-card>
+			<md-card>
+				<md-toolbar class="md-primary">
+					<md-card-content layout="row" class="layout-align-space-between-center" flex layout-align="left center" >
+		                <div>
+		                	<span class="winner">Mihai Runcan-Pop</span>
+		                	<br>
+		                	<span class="month">October 2016</span>
+		                </div>
+		                <span class="fa fa-trophy fa-5x "></span>
+		            </md-card-content>
+					<md-card-actions layout-padding layout="row" layout-align="left center">
+					  <md-button><span class="fa fa-chevron-down"></span> Details</md-button>
+					</md-card-actions>
+				</md-toolbar>
+			</md-card>
+		</div>
+	</div>
+</div>

@@ -12,7 +12,7 @@
     <link href="Content/select.min.css" rel="stylesheet" />
     <link href="Content/Main.css" rel="stylesheet" />
     <link href="Content/angular-toastr.min.css" rel="stylesheet" />
-    <link rel="icon" href="favicon.png" type="image/png">
+    <link rel="icon" href="/favicon.png" type="image/png">
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,500,700,300,100' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <link href="Content/loader.css" rel="stylesheet" />
@@ -42,8 +42,7 @@
             <nav>
                 <ul class="nav nav-tabs" role="tablist">
                     <li role="presentation" ng-class="{'active': isTabActive('SelfEvaluation')}" ng-hide="hideSelfEvaluation"><a href="#SelfEvaluation">Suggestions</a></li>
-                    <li role="presentation" ng-class="{'active': isTabActive('MyEvaluation')}"><a href="#MyEvaluation">EOM</a></li>
-                    <!--<li role="presentation"><a href="#Roles">Guidelines</a></li>-->
+                    <li role="presentation" ng-class="{'active': isTabActive('EOM')}"><a href="#EOM">EOM</a></li>
                 </ul>
             </nav>
         </header>
@@ -70,6 +69,7 @@
         <script src="app/services/authentification.js"></script>
         <script src="app/controllers/mainController.js"></script>
         <script src="app/controllers/suggestionsController.js"></script>
+        <script src="app/controllers/eomController.js"></script>
 
         <script>
             $(".changer").mouseenter(function () {

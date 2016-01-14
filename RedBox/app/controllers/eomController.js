@@ -1,7 +1,7 @@
 ﻿(function () {
     var myApp = angular.module('myApp');
 
-    myApp.controller('mainController', function ($scope) {
+    myApp.controller('eomController', function ($scope) {
 
     });
 }());
