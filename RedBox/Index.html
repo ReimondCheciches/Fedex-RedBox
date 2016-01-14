@@ -1,0 +1,86 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Evaluation</title>
+    <link href="Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="Content/select.min.css" rel="stylesheet" />
+    <link href="Content/Main.css" rel="stylesheet" />
+    <link href="Content/angular-toastr.min.css" rel="stylesheet" />
+    <link rel="icon" href="favicon.png" type="image/png"> 
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,500,700,300,100' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link href="Content/loader.css" rel="stylesheet" />
+</head>
+<body ng-app="myApp" ng-cloak>
+    <div class="wrapper" ng-controller="mainController">
+        <header ng-show="isLogged()">
+            <div class="header">
+                <div class="changer">
+                    <div></div>
+                    <ul>
+                        <li><a href="http://www2.techromix.com:85">Timesheet</a></li>
+                        <li class="active"><a href="http://www2.techromix.com:1006">Evaluation</a></li>
+                        <li><a href="http://blog.techromix.com">Blog</a></li>
+                        <li><a target="_blank" href="https://sites.google.com/a/techromix.com/internal-site/">Google Site <span class="fa fa-external-link"></span></a></li>
+                        <li><a target="_blank" href="https://sites.google.com/a/techromix.com/dev/">Dev Team <span class="fa fa-external-link"></span></a></li>
+                        <li><a target="_blank" href="https://sites.google.com/a/techromix.com/tmx-qa-team/home/">QA Team <span class="fa fa-external-link"></span></a></li>
+                    </ul>
+                </div>
+                <h1>Evaluation</h1>
+                <div class="col-md-8 no-padding text-right logged" ng-show="isLogged()">
+                    <span>Welcome <strong>{{currentUser.userName}}</strong> !</span>&nbsp;<a ng-click="logOut()">logout</a>
+                </div>
+            </div>
+            <nav>
+                <ul class="nav nav-tabs" role="tablist" ng-if="isLogged()">
+                    <li role="presentation" ng-class="{'active': isTabActive('SelfEvaluation')}" ng-hide="hideSelfEvaluation"><a href="#SelfEvaluation">Self-Evaluation</a></li>
+                    <li role="presentation" ng-class="{'active': isTabActive('MyEvaluation')}"><a href="#MyEvaluation">My Evaluations</a></li>
+                    <li role="presentation" ng-class="{'active': isTabActive('Feedback')}"><a href="#Feedback">Give Feedback</a></li>
+                    <li role="presentation" ng-class="{'active': isTabActive('Apprentice')}" ng-show="currentUser.isCoach"><a href="#Apprentice">My Apprentices</a></li>
+                    <!--<li role="presentation"><a href="#Roles">Guidelines</a></li>-->
+                </ul>
+            </nav>
+        </header>
+        <div class="max-div" ng-view></div>
+        <script src="Scripts/jquery-2.1.4.min.js"></script>
+        <script src="Scripts/angular.min.js"></script>
+        <script src="Scripts/angular-sanitize.min.js"></script>
+        <script src="Scripts/angular-local-storage.min.js"></script>
+        <script src="Scripts/angular-route.min.js"></script>
+        <script src="Scripts/angular-animate.js"></script>
+        <script src="Scripts/angular-ui/ui-bootstrap-tpls.min.js"></script>
+        <script src="Scripts/angular-toastr.tpls.min.js"></script>
+        <script src="Scripts/select.js"></script>
+        <script src="Scripts/underscore-min.js"></script>
+        <script src="Scripts/ngDraggable.js"></script>
+        <script src="Scripts/clickoutside.directive.js"></script>
+        <script src="app/external/underscoreModule.js"></script>
+        <script src="app/services/appRouter.js"></script>
+        <script src="app/services/authentification.js"></script>
+        <script src="app/services/authInterceptorService.js"></script>
+        <script src="app/controllers/evaluationController.js"></script>
+        <script src="app/controllers/userController.js"></script>
+        <script src="app/controllers/mainController.js"></script>
+        <script src="app/controllers/registerController.js"></script>
+        <script src="app/controllers/rolesController.js"></script>
+        <script src="app/controllers/myEvaluationController.js"></script>
+        <script src="app/controllers/feedbackToPeersController.js"></script>
+        <script src="app/controllers/giveFeedbackController.js"></script>
+        <script src="app/controllers/apprenticeController.js"></script>
+        <script src="app/controllers/apprenticeDetailController.js"></script>
+        <script src="app/controllers/apprenticeController.js"></script>
+        <script src="app/controllers/apprenticeDetailController.js"></script>
+        <script src="app/controllers/myEvaluationDetailController.js"></script>
+        <script>
+            $(".changer").mouseenter(function () {
+                $(this).addClass("open");
+            });
+            $(".changer").mouseleave(function () {
+                $(this).removeClass("open");
+            });
+        </script>
+
+    </div>
+</body>
+</html>

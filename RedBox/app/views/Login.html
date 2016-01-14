@@ -1,0 +1,53 @@
+﻿<div class="login">
+    <div class="container">
+        <div class="login-div" ng-class="{'change-password-div' : isResetNeeded}">
+            <div class="login-header md-toolbar md-default-theme">
+                <img src="Content/Images/login-bg.png" />
+            </div>
+            <div class="md-toolbar md-default-theme">
+                <div class="login-changer">
+                    <h2>Evaluation</h2>
+                    <ul>
+                        <li><a href="http://www2.techromix.com:85">
+                            <h2>Timesheet</h2></a></li>
+                        <li><a href="http://blog.techromix.com:2059">
+                            <h2>Blog</h2></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div ng-hide="isResetNeeded">
+                <form>
+                    <span ng-show="isNotAuthenticated" class="failureNotification">{{message}}</span>
+                    <div class="form-group">
+                        <input type="text" name="name" placeholder="Username" ng-model="loginData.Username"/>
+                        <input type="password" name="name" placeholder="Password" ng-model="loginData.Password"/>
+                    </div>
+                    <div class="form-group">
+                        <button name="LoginBtn" type="submit" value="Login" class="btn btn-primary" ng-click="loginClick()">
+                            Log in
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <div ng-show="isResetNeeded">
+                <form>
+                    <span class="failureNotification"><h2>Change Password</h2></span>
+                    <span class="change-password-req failureNotification">New password must contain at least one of the following [0-9], [A-Z] and [a-z]</span>
+                    <span ng-show="isNotAuthenticated" class="failureNotification">{{message}}</span>
+                    <div class="form-group">
+                        <input type="password" name="name" placeholder="Old password" ng-model="loginData.OldPassword"/>
+                        <input type="password" name="name" placeholder="New password" ng-model="loginData.NewPassword"/>
+                        <input type="password" name="name" placeholder="Confirm new password" ng-model="loginData.NewPasswordConfirm"/>
+                    </div>
+                    <div class="form-group">
+                        <button name="LoginBtn" type="submit" value="Login" class="btn btn-primary" ng-click="changePassword()">
+                            Change password
+                        </button>
+                    </div>
+                </form>
+            </div>
+            
+            <div class="loader" ng-show="loading">Loading...</div>
+        </div>
+    </div>
+</div>

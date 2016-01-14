@@ -1,0 +1,164 @@
+﻿﻿<div class="container">
+    <div class="form-group">
+        <div class="row">
+            <div class="col-md-6">
+                <h1>Self-Evaluation</h1>
+            </div>
+            <div class="col-md-6">
+                <h2 class="highlight-header">{{dueDate}}</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th><h2>Achievements</h2></th>
+                            <th class="text-center" ng-repeat="coreValue in coreValues">
+                            </th>
+                            <th class="actions"></th>
+                        </tr>
+                        <tr class="vertical-align">
+                            <td class="description">
+                                <textarea rows="1" ng-model="editedAchievement.description"></textarea>
+                            </td>
+                            <td class="text-center" ng-repeat="coreValue in editedAchievement.coreValues">
+                                <div class="core-value-icon contrast {{coreValue.name}}" ng-click="coreValue.isSelected=!coreValue.isSelected" ng-class="{'checked':coreValue.isSelected}"></div>
+                                <input type="checkbox" ng-model="coreValue.isSelected" />
+                            </td>
+                            <td class="text-right actions">
+                                <button ng-click="saveItem(editedAchievement)" class="link" ng-disabled="!(editedAchievement.description)">Add</button>
+                            </td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <tr class="clickable" ng-repeat="achievement in selectedAchievements | orderBy: 'sortOrder'" id="{{'trAchievement' + $id}}" click-outside="setEditValue(achievement, false)" 
+                        ng-click="setEditValue(achievement, true, 'achievText' + $id)" ng-drop="true" ng-drop-success="onDropComplete($index, $data, $event, 1)">
+                            <td class="description" ng-drag="true" ng-drag-data="achievement" ng-drag-success="dragSuccess($event)">
+                                <pre ng-hide="achievement.isEditable">{{achievement.description}}<span class="label label-danger" ng-show="achievement.description.length === 0">Achievement cannot be empty</span></pre>
+                                <textarea id="{{'achievText' + $id}}" ng-class="{textvalidation:achievement.description.length === 0}" ng-show="achievement.isEditable" rows="1" ng-model="achievement.description"></textarea>
+                            </td>
+                            <td class="text-center" ng-repeat="coreValue in achievement.coreValues">
+                                <div class="core-value-icon contrast {{coreValue.name}}" ng-click="coreValue.isSelected=!coreValue.isSelected" ng-class="{'checked':coreValue.isSelected}"></div>
+                                <input ng-show="achievement.isEditable" type="checkbox" ng-model="coreValue.isSelected" />
+                            </td>
+                            <td class="text-right actions">
+                                <!--<button ng-if="achivement.isEditable" ng-click="achivement.isEditable = false">Ok</button>-->
+                                <button ng-if="achievement.isEditable" class="link" ng-click="removeItem(achievement)">Remove</button>
+                                <!--</tdclass="button">-->
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th><h2>To-Do List</h2></th>
+                            <th class="text-center" ng-repeat="coreValue in coreValues">
+                            </th>
+                            <th class="actions"></th>
+                        </tr>
+                        <tr class="vertical-align">
+                            <td class="description">
+                                <textarea rows="1" ng-model="editedToDo.description"></textarea>
+                            </td>
+                            <td class="text-center" ng-repeat="coreValue in editedToDo.coreValues">
+                                <div class="core-value-icon contrast {{coreValue.name}}" ng-click="coreValue.isSelected=!coreValue.isSelected" ng-class="{'checked':coreValue.isSelected}"></div>
+                                <input type="checkbox" ng-model="coreValue.isSelected" />
+                            </td>
+                            <td class="text-right actions">
+                                <button ng-click="saveItem(editedToDo)" class="link" ng-disabled="!(editedToDo.description)">Add</button>
+                            </td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="clickable" ng-repeat="todo in selectedToDos | orderBy: 'sortOrder'" id="{{'trToDo' + $id}}" click-outside="setEditValue(todo, false)" ng-click="setEditValue(todo, true, 'toDoText' + $id)"
+                            ng-drop="true" ng-drop-success="onDropComplete($index, $data, $event, 2)">
+                            <td class="description" ng-drag="true" ng-drag-data="todo" ng-drag-success="dragSuccess($event)">
+                                <pre ng-hide="todo.isEditable">{{todo.description}}<span class="label label-danger" ng-show="todo.description.length === 0">To Do cannot be empty</span></pre>
+                                <textarea id="{{'toDoText' + $id}}" ng-class="{textvalidation:todo.description.length === 0}" ng-show="todo.isEditable" rows="1" ng-model="todo.description"></textarea>
+                            </td>
+                            <td class="text-center" ng-repeat="coreValue in todo.coreValues">
+                                <div class="core-value-icon contrast {{coreValue.name}}" ng-click="coreValue.isSelected=!coreValue.isSelected" ng-class="{'checked':coreValue.isSelected}"></div>
+                                <input ng-show="todo.isEditable" type="checkbox" ng-model="coreValue.isSelected" />
+                            </td>
+                            <td class="text-right actions">
+                                <!--<button ng-if="achivement.isEditable" ng-click="achivement.isEditable = false">Ok</button>-->
+                                <button ng-if="todo.isEditable" class="link" ng-click="removeItem(todo)">Remove</button>
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <h2>Choose Your Coach</h2>
+                <form name="coachForm">
+                    <ui-select ng-required="true"
+                               ng-model="$parent.selectedCoach"
+                               name="selectedCoach"
+                               ng-disabled="disabled"
+                               reset-search-input="true"
+                               on-select="coachSelected($item)">
+                        <ui-select-match placeholder="Select a coach">
+                            {{$select.selected.name}}
+                        </ui-select-match>
+                        <ui-select-choices repeat="coach in coaches | filter: $select.search track by coach.id">
+                            <span ng-bind-html="coach.name | highlight: $select.search"></span>
+                        </ui-select-choices>
+                    </ui-select>
+                </form>
+            </div>
+            <div class="col-md-6">
+                <h2>Select Reviewers</h2>
+                <form name="reviewersForm">
+                    <div ng-class="{'error' :( selectedReviewers.length < 3 ), 'success': (selectedReviewers.length > 4) }">
+                        <ui-select ng-required="true"
+                                   multiple
+                                   ng-model="$parent.selectedReviewers"
+                                   name="selectedReviewers"
+                                   ng-disabled="isDropDownDisabled"
+                                   reset-search-input="true"
+                                   on-select="reviewerAdded($item)"
+                                   on-remove="reviewerRemoved($item)"
+                                   placeholder="Select or search a reviewer">
+                            <ui-select-match ui-lock-choice="$item.username == selectedCoach.username">
+                                {{$item.name}}
+                            </ui-select-match>
+                            <ui-select-choices ui-disable-choice="reviewer.username == selectedCoach.username" repeat="reviewer in reviewers | filter: $select.search track by reviewer.id">
+                                <span ng-show="$select.isEmpty()" class="ng-binding ng-hide">My Placeholder</span>
+                                <span ng-bind-html="reviewer.name | highlight: $select.search"></span>
+                            </ui-select-choices>
+                        </ui-select>
+                        <label ng-show="( selectedReviewers.length < 2 )">
+                            You need to add at least 2 more reviewers.
+                        </label>
+                        <label ng-show="( selectedReviewers.length === 2 )">
+                            You need to add at least 1 more reviewer.
+                        </label>
+                        <label ng-show="( selectedReviewers.length > 4 )">
+                            You have selected the maximum number of reviewers.
+                        </label>
+                        <label>
+                            {{remnoveErrorMessage}}
+                        </label>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 text-right">
+                <a href="javascript:void(0)" class="link" ng-click="setApplyPromotion()"><input type="checkbox" ng-model="apply" style="pointer-events: none" /> <span>Apply for promotion</span></a>
+                <button disabled class="btn btn-primary" ng-click="confirm()" ng-disabled="!isReady || selectedReviewers.length < 3 || selectedReviewers.length > 5">Submit for review</button>
+            </div>
+        </div>
+    </div>
+</div>

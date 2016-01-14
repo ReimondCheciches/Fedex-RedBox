@@ -20,6 +20,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -208,10 +209,36 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
-    <Compile Include="Results\ChallengeResult.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app\controllers\apprenticeController.js" />
+    <Content Include="app\controllers\apprenticeDetailController.js" />
+    <Content Include="app\controllers\evaluationController.js" />
+    <Content Include="app\controllers\feedbackToPeersController.js" />
+    <Content Include="app\controllers\giveFeedbackController.js" />
+    <Content Include="app\controllers\mainController.js" />
+    <Content Include="app\controllers\myEvaluationController.js" />
+    <Content Include="app\controllers\myEvaluationDetailController.js" />
+    <Content Include="app\controllers\registerController.js" />
+    <Content Include="app\controllers\rolesController.js" />
+    <Content Include="app\controllers\userController.js" />
+    <Content Include="app\directives\toggleClass.js" />
+    <Content Include="app\external\underscoreModule.js" />
+    <Content Include="app\services\appRouter.js" />
+    <Content Include="app\services\authentification.js" />
+    <Content Include="app\services\authInterceptorService.js" />
+    <Content Include="app\views\Apprentice.html" />
+    <Content Include="app\views\ApprenticeDetail.html" />
+    <Content Include="app\views\FeedBack.html" />
+    <Content Include="app\views\GiveFeedback.html" />
+    <Content Include="app\views\Login.html" />
+    <Content Include="app\views\MyEvaluation.html" />
+    <Content Include="app\views\MyEvaluationDetail.html" />
+    <Content Include="app\views\Register.html" />
+    <Content Include="app\views\Roles.html" />
+    <Content Include="app\views\SelfEvaluation.html" />
+    <Content Include="app\views\Sugestions.html" />
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -248,6 +275,7 @@
     <Content Include="Content\bootstrap.min.css.map" />
     <Content Include="Content\bootstrap.css.map" />
     <None Include="Scripts\jquery-2.2.0.intellisense.js" />
+    <Content Include="Index.html" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-2.2.0.js" />
@@ -273,11 +301,6 @@
     <Content Include="Areas\HelpPage\Views\_ViewStart.cshtml" />
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Views\Web.config" />
-    <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

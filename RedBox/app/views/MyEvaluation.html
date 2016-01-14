@@ -1,0 +1,31 @@
+﻿<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            <h1>My Evaluations</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="form-group">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th class="table-bordered">Evaluation Start Date</th>
+                            <th class="table-bordered">Review Status</th>
+                            <th class="table-bordered"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="myEvaluation in myEvaluations">
+                            <td>{{myEvaluation.evaluationDate | date:'longDate'}} </td>
+                            <td>
+                                {{myEvaluation.statusName}}
+                            </td>
+                            <td class="text-right"> <button class="link" ng-click='getDetail(myEvaluation.evaluationId)'>Open</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
