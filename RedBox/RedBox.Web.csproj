@@ -1105,6 +1105,16 @@
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\RedBox.DataAccess\RedBox.DataAccess.csproj">
+      <Project>{304f5b14-6c13-4014-9c67-f8e4d18313fd}</Project>
+      <Name>RedBox.DataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RedBox.Services\RedBox.Services.csproj">
+      <Project>{b8d0a502-a18d-40e5-a2c8-06f98106d337}</Project>
+      <Name>RedBox.Services</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
