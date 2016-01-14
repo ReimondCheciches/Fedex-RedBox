@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="9de5dd37a738449b8deea0512cad5cf1" Name="Diagram1">
+        <EntityTypeShape EntityType="RedBoxModel.AspNetUser" Width="1.5" PointX="0.75" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="RedBoxModel.EOM" Width="1.5" PointX="3" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="RedBoxModel.EOMUserVote" Width="1.5" PointX="5.25" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="RedBoxModel.EOMVote" Width="1.5" PointX="5.25" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="RedBoxModel.Suggestion" Width="1.5" PointX="3.75" PointY="12.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="RedBoxModel.SuggestionVote" Width="1.5" PointX="6" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="RedBoxModel.UserInfo" Width="1.5" PointX="3" PointY="9.75" IsExpanded="true" />
+        <AssociationConnector Association="RedBoxModel.FK_EOM_AspNetUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="RedBoxModel.FK_EOMUserVotes_AspNetUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="RedBoxModel.FK_EOMVotes_AspNetUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="RedBoxModel.FK_SuggestionVotes_AspNetUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="RedBoxModel.FK_UserInfo_AspNetUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="RedBoxModel.FK_EOMUserVotes_EOM" ManuallyRouted="false" />
+        <AssociationConnector Association="RedBoxModel.FK_EOMVotes_EOM" ManuallyRouted="false" />
+        <AssociationConnector Association="RedBoxModel.FK_SuggestionVotes_Suggestions1" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
