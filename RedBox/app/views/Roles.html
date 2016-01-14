@@ -1,0 +1,99 @@
+﻿<div class="container">
+    <span>
+        <h3>Base Responsabilities</h3>
+    </span>
+    <div class="form-group">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th class="table-bordered">Core Value</th>
+                    <th class="table-bordered">Responsabilities</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="coreValue in coreValues">
+                    <td>{{coreValue.description}}</td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="form-group">
+        <span class="label-info"><h3>DEV Roles & Responsabilities</h3></span>
+
+        <div class="form-group">
+            <span class="label-info">Software Engineer</span>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th class="table-bordered">Level </th>
+                        <th class="table-bordered">Responsabilities</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{devReviewer.responsability.level}}</td>
+                        <td>{{devReviewer.responsability.Description}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="form-group">
+            <span class="label-info">Senior Software Engineer</span>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th class="table-bordered">Level</th>
+                        <th class="table-bordered">Responsabilities</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{seniorDevReviewer.responsability.level}}</td>
+                        <td>{{seniorDevReviewer.responsability.Description}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <div class="form-group">
+        <span class="label-info"><h3>QA Roles & Responsabilities</h3></span>
+        
+        <div class="form-group">
+            <span class="label-info">Quality Assurance Engineer</span>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th class="table-bordered">Level</th>
+                        <th class="table-bordered">Responsabilities</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{qaReviewer.responsability.level}}</td>
+                        <td>{{qaReviewer.responsability.Description}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="form-group">
+            <span class="label-info">Senior Quality Assurance Engineer</span>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th class="table-bordered">Level</th>
+                        <th class="table-bordered">Responsabilities</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{seniorQAReviewer.responsability.level}}</td>
+                        <td>{{seniorQAReviewer.responsability.Description}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
