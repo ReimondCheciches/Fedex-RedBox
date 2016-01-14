@@ -1,5 +1,5 @@
 ﻿(function () {
-    var myApp = angular.module('myApp', ['ngRoute', 'LocalStorageModule', 'underscore', 'ui.select', 'ngSanitize', 'angular-click-outside', 'toastr', 'ngDraggable']);
+    var myApp = angular.module('myApp', ['ngRoute']);
 
     myApp.config(function ($routeProvider, $httpProvider) {
 
