@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Security.Claims;
 using System.Security.Cryptography;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
@@ -489,5 +490,18 @@ namespace RedBox.Controllers
         }
 
         #endregion
+    }
+
+    public class ChallengeResult : IHttpActionResult
+    {
+        public ChallengeResult(string provider, AccountController accountController)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<HttpResponseMessage> ExecuteAsync(CancellationToken cancellationToken)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
