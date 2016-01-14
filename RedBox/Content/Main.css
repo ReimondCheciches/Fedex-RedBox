@@ -23,7 +23,7 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
 }
 
 body {
-    padding: 128px 0 64px 0;
+    padding: 110px 0 64px 0;
     font-family: "Roboto";
 }
 
@@ -71,7 +71,7 @@ header {
     position: fixed;
     left: 0;
     top: 0;
-    z-index: 1;
+    z-index: 1000;
     right: 0;
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.14), 0px 4px 8px rgba(0, 0, 0, 0.28);
 }
@@ -424,7 +424,6 @@ textarea {
     font-size: 13px;
     box-sizing: border-box;
     width: 100%;
-    max-width: 360px;
     color: #333;
 }
 
@@ -440,7 +439,7 @@ textarea {
     resize: vertical;
     line-height: 20px;
     padding: 8px;
-    
+
 }
 
 textarea:first-child:last-child {
@@ -832,4 +831,90 @@ th h2 {
 .failureNotification h2 {
     color: rgba(255,255,255,.76);
     margin: 4px 0;
+}
+
+.score {
+    margin: 32px 0 16px 0;
+    display: inline-block;
+    line-height: 62px;
+    font-size: 62px;
+    font-weight: 700;
+}
+
+md-card {
+    overflow: hidden;
+}
+
+md-toolbar.md-default-theme:not(.md-menu-toolbar).md-dark,
+md-toolbar:not(.md-menu-toolbar).md-dark {
+    background: #424242;
+}
+
+.container {
+    max-width: 800px;
+}
+
+.callout-box {
+    padding-top: 24px;
+    margin-bottom: 32px;
+}
+
+.callout-box .md-block {
+    padding-top: 46px;
+}
+
+.callout-box .md-block label {
+    font-size: 24px;
+    font-weight: normal;
+    margin-bottom: -36px;
+    margin-left: 8px;
+}
+
+.callout-box .md-block textarea {
+    font-size: 24px;
+    font-weight: 400;
+}
+
+.fa {
+    margin: 0 8px 0 0;
+}
+
+@media screen and (max-width: 767px) {
+    .callout-box .md-block {
+         padding-top: 32px;
+         margin-bottom: 0;
+         margin-top: 0;
+    }
+
+    .callout-box md-input-container .md-errors-spacer {
+        float: left;
+    }
+
+    .callout-box .md-block label {
+        font-size: 16px;
+        margin-bottom: -24px;
+    }
+
+    .callout-box .md-block textarea {
+        font-size: 20px;
+    }
+
+    .score {
+        font-size: 40px;
+        line-height: 40px;
+        margin: 16px 0 8px 0;
+    }
+}
+
+
+
+@media screen and (max-width: 600px) {
+    .claim {
+        font-size: 16px;
+    }
+
+    .score {
+        font-size: 40px;
+        line-height: 40px;
+    }
 }

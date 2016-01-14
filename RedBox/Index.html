@@ -40,20 +40,14 @@
                 </div>
             </div>
             <nav>
-                <ul class="nav nav-tabs" role="tablist" ng-if="isLogged()">
+                <ul class="nav nav-tabs" role="tablist">
                     <li role="presentation" ng-class="{'active': isTabActive('SelfEvaluation')}" ng-hide="hideSelfEvaluation"><a href="#SelfEvaluation">Suggestions</a></li>
                     <li role="presentation" ng-class="{'active': isTabActive('MyEvaluation')}"><a href="#MyEvaluation">EOM</a></li>
                     <!--<li role="presentation"><a href="#Roles">Guidelines</a></li>-->
                 </ul>
             </nav>
         </header>
-        <!--MOVE ME IN A VIEW THINGY-->
-        <div class="container">
-            <textarea name="" id="" cols="30" rows="10" placeholder="Type your idea"></textarea>
-        </div>
-        <!--END MOVE ME IN A VIEW THINGY-->
-
-        <div class="max-div" ng-view></div>
+        <div ng-view></div>
         <script src="Scripts/jquery-2.2.0.min.js"></script>
         <script src="Scripts/angular.js"></script>
         <script src="Scripts/angular-sanitize.js"></script>

@@ -1,6 +1,12 @@
 ﻿(function () {
     var myApp = angular.module('myApp', ['ngRoute' ,'ngMaterial']);
 
+    myApp.config(function($mdThemingProvider) {
+      $mdThemingProvider.theme('default')
+        .primaryPalette('red')
+        .accentPalette('blue');
+    });
+
     myApp.config(function ($routeProvider, $httpProvider) {
 
         $routeProvider
