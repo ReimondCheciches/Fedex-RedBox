@@ -879,8 +879,29 @@ md-toolbar:not(.md-menu-toolbar).md-dark {
     margin: 0 8px 0 0;
 }
 
+.md-btn-group {
+    padding: 0;
+    border-radius: 3px;
+    min-height: auto;
+    overflow: hidden;
+    width: auto;
+}
+
 .md-btn-group button {
     float: left;
+    padding-left: 16px;
+    padding-right: 16px;
+    margin: 0;
+    border-radius: 0 !important;
+}
+
+.md-btn-group button.md-button .md-ripple-container {
+    border-radius: 0;
+}
+
+.md-btn-group button.md-button.md-raised[disabled] {
+    color: rgba(0,0,0,.67) !important;
+    background: rgba(255,255,255,.91);
 }
 
 .md-btn-group button:first-child {
@@ -928,8 +949,6 @@ md-toolbar:not(.md-menu-toolbar).md-dark {
     }
 }
 
-
-
 @media screen and (max-width: 600px) {
     .claim {
         font-size: 16px;
@@ -938,5 +957,14 @@ md-toolbar:not(.md-menu-toolbar).md-dark {
     .score {
         font-size: 40px;
         line-height: 40px;
+    }
+
+    .md-btn-group button {
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    .md-btn-group .fa {
+        display: none;
     }
 }
