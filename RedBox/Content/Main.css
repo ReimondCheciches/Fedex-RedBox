@@ -79,7 +79,7 @@ header {
 .header {
     width: 100%;
     height: 51px;
-    background: #00897b;
+    background: #d32f2f;
 }
 
     .header h1 {
@@ -112,7 +112,7 @@ header {
 }
 
 nav {
-    background: #009688;
+    background: #f44336;
 }
 
 h1 {
@@ -218,7 +218,7 @@ h1 {
 
 .login-header img {
     padding: 0;
-    background: #009688;
+    background: #f44336;
     width: 100%;
     height: auto;
 }
@@ -520,7 +520,7 @@ body {
 
 .md-toolbar.md-default-theme {
     color: rgba(255, 255, 255, 0.87);
-    background-color: #009688;
+    background-color: #f44336;
 }
 
 .login-div span.failureNotification {
@@ -549,7 +549,7 @@ body {
 
 
 .link {
-    color: #009688;
+    color: #f44336;
     border-radius: 2px;
     text-transform: uppercase;
     font-size: 13px;
@@ -567,7 +567,7 @@ body {
 
     .link:hover,
     .link:focus {
-        color: #009688;
+        color: #f44336;
         text-decoration: none;
         background: rgba(158,158,158,.17);
     }
@@ -580,7 +580,7 @@ body {
     }
 
 .circular-icon {
-    color: #009688;
+    color: #f44336;
     width: 20px;
     font-weight: bold;
     font-size: 20px;
@@ -589,7 +589,7 @@ body {
     border-radius: 50%;
     line-height: 10px;
     display: block;
-    border: 2px solid #00897b;
+    border: 2px solid #d32f2f;
 }
 
 input[type="text"],
@@ -643,7 +643,7 @@ textarea {
     height: auto;
     border: none;
     font-size: 13px;
-    background: #009688 !important;
+    background: #f44336 !important;
     text-transform: uppercase;
     transform: translate3d(0px, 0px, 0px);
     text-decoration: none;
@@ -730,7 +730,7 @@ th h2 {
 }
 
 .table thead tr th {
-    background: #009688;
+    background: #f44336;
     color: rgba(255,255,255,.67);
 }
 
@@ -783,7 +783,7 @@ th h2 {
 
 .success label {
     font-weight: 400;
-    color: #009688;
+    color: #f44336;
 }
 
 .ui-select-multiple.ui-select-bootstrap.form-control {
@@ -826,7 +826,7 @@ th h2 {
 
     .changer ul {
         list-style-type: none;
-        background: #00897b;
+        background: #d32f2f;
         width: 200px;
         padding: 0;
         position: absolute;
@@ -927,9 +927,9 @@ th h2 {
 }
 
 .ui-select-multiple.ui-select-bootstrap .ui-select-match-item.btn.select-locked {
-    background: #009688 !important;
+    background: #f44336 !important;
     color: rgba(255, 255, 255, 0.67) !important;
-    border: 1px solid #009688;
+    border: 1px solid #f44336;
     overflow: visible;
     cursor: not-allowed;
     position: relative;
@@ -1048,12 +1048,12 @@ th h2 {
 }
 
 .reviewable {
-    border-top: 2px solid #009688;
+    border-top: 2px solid #f44336;
     background: #f5f5f5;
 }
 
 .table thead tr:not(:first-child):last-child {
-    border-top: 2px solid #009688;
+    border-top: 2px solid #f44336;
 }
 
 .reviewable pre {
@@ -1075,7 +1075,7 @@ th h2 {
 }
 
     .bubble.green {
-        background: #009688;
+        background: #f44336;
     }
 
 .reviewable td {
@@ -1143,7 +1143,7 @@ th h2 {
         left: 0; 
         border-top: 3px solid #00796b;
         position: absolute;
-        background: #009688;
+        background: #f44336;
         top: 41px;
         width: 100%;
     }

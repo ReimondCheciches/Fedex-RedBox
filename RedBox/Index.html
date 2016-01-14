@@ -21,28 +21,30 @@
                     <div></div>
                     <ul>
                         <li><a href="http://www2.techromix.com:85">Timesheet</a></li>
-                        <li class="active"><a href="http://www2.techromix.com:1006">Evaluation</a></li>
+                        <li><a href="http://www2.techromix.com:1006">Evaluation</a></li>
+                        <li class="active"><a href="http://www2.techromix.com:85">Redbox</a></li>
                         <li><a href="http://blog.techromix.com">Blog</a></li>
                         <li><a target="_blank" href="https://sites.google.com/a/techromix.com/internal-site/">Google Site <span class="fa fa-external-link"></span></a></li>
                         <li><a target="_blank" href="https://sites.google.com/a/techromix.com/dev/">Dev Team <span class="fa fa-external-link"></span></a></li>
                         <li><a target="_blank" href="https://sites.google.com/a/techromix.com/tmx-qa-team/home/">QA Team <span class="fa fa-external-link"></span></a></li>
                     </ul>
                 </div>
-                <h1>Evaluation</h1>
+                <h1>Redbox</h1>
                 <div class="col-md-8 no-padding text-right logged" ng-show="isLogged()">
                     <span>Welcome <strong>{{currentUser.userName}}</strong> !</span>&nbsp;<a ng-click="logOut()">logout</a>
                 </div>
             </div>
             <nav>
                 <ul class="nav nav-tabs" role="tablist" ng-if="isLogged()">
-                    <li role="presentation" ng-class="{'active': isTabActive('SelfEvaluation')}" ng-hide="hideSelfEvaluation"><a href="#SelfEvaluation">Self-Evaluation</a></li>
-                    <li role="presentation" ng-class="{'active': isTabActive('MyEvaluation')}"><a href="#MyEvaluation">My Evaluations</a></li>
-                    <li role="presentation" ng-class="{'active': isTabActive('Feedback')}"><a href="#Feedback">Give Feedback</a></li>
-                    <li role="presentation" ng-class="{'active': isTabActive('Apprentice')}" ng-show="currentUser.isCoach"><a href="#Apprentice">My Apprentices</a></li>
+                    <li role="presentation" ng-class="{'active': isTabActive('SelfEvaluation')}" ng-hide="hideSelfEvaluation"><a href="#SelfEvaluation">Suggestions</a></li>
+                    <li role="presentation" ng-class="{'active': isTabActive('MyEvaluation')}"><a href="#MyEvaluation">EOM</a></li>
                     <!--<li role="presentation"><a href="#Roles">Guidelines</a></li>-->
                 </ul>
             </nav>
         </header>
+        <!--MOVE ME IN A VIEW THINGY-->
+        <div>
+        </div>
         <div class="max-div" ng-view></div>
         <script src="Scripts/jquery-2.2.0.min.js"></script>
         <script src="Scripts/angular.min.js"></script>
