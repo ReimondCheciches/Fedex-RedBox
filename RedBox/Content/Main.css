@@ -879,6 +879,28 @@ md-toolbar:not(.md-menu-toolbar).md-dark {
     margin: 0 8px 0 0;
 }
 
+.md-btn-group button {
+    float: left;
+}
+
+.md-btn-group button:first-child {
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+    margin-right: 0;
+}
+
+.md-btn-group button:last-child {
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+    margin-left: 0;
+}
+
+.md-btn-group button:not(:last-child):not(:first-child) {
+    margin-left: 0;
+    border-radius: 0;
+    margin-right: 0;
+}
+
 @media screen and (max-width: 767px) {
     .callout-box .md-block {
          padding-top: 32px;
