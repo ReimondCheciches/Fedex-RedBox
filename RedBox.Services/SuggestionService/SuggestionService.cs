@@ -2,6 +2,7 @@
 using System.Linq;
 using RedBox.DataAccess;
 using RedBox.DataAccess.Repositories;
+using System;
 
 namespace RedBox.Services.SuggestionService
 {
@@ -24,12 +25,13 @@ namespace RedBox.Services.SuggestionService
             return _repository.GetEntities<Suggestion>().Where(s => (bool) !s.Archived).ToList();
         }
 
-        public void AddSuggestion(Suggestion suggestion)
+        public void AddSuggestion(string suggestionDesc)
         {
+
             _repository.Add(new Suggestion()
             {
-                Description = suggestion.Description,
-                Date = suggestion.Date
+                Description = suggestionDesc,
+                Date = DateTime.Now
             });
             _repository.SaveChanges();
         }
@@ -42,25 +44,31 @@ namespace RedBox.Services.SuggestionService
             _repository.SaveChanges();
         }
 
+        static object LockObject = new object();
+
 
         public void Vote(int suggestionId, bool upVote, string userId)
-        {                      
-            var suggestion = _repository.GetEntities<Suggestion>().FirstOrDefault(p => p.Id == suggestionId);
-            if (suggestion == null) return;
-            
-            if(upVote)
-                suggestion.UpVotes++;
-            else
-                suggestion.DownVotes++;
-
-            _repository.Update(suggestion);
-            _repository.Add(new SuggestionVote()
+        {
+            lock (LockObject)
             {
-                UserId = userId,
-                SuggestionId = suggestionId
-            });
+                var suggestion = _repository.GetEntities<Suggestion>().FirstOrDefault(p => p.Id == suggestionId);
+                if (suggestion == null) return;
 
-            _repository.SaveChanges();
+                if (upVote)
+                    suggestion.UpVotes++;
+                else
+                    suggestion.DownVotes++;
+
+                _repository.Update(suggestion);
+                _repository.Add(new SuggestionVote()
+                {
+                    UserId = userId,
+                    SuggestionId = suggestionId
+                });
+
+                _repository.SaveChanges();
+            }
+        
         }
 
         public bool UserhasVoted(string userId)

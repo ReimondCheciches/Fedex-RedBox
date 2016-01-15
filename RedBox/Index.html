@@ -21,15 +21,19 @@
 <body ng-app="myApp" ng-cloak>
 
 
-    <div class="login-div checking" ng-hide="true" ng-class="{'change-password-div' : isResetNeeded}">
+
+<div class="wrapper" ng-controller="mainController">
+    <div class="login" ng-hide="isLogged()">
+    <div class="login-div checking"   ng-cloak>
         <div class="login-header md-toolbar md-default-theme">
             <div class="logging-in">
               <div class="indeterminate"><img src="Content/Images/login-bg.png"></div>
             </div>
         </div>
     </div>
-    <div class="wrapper" ng-controller="mainController">
-        <header>
+    </div>
+
+    <header ng-show="isLogged()" class="ng-hide" ng-cloak>
             <div class="header">
                 <div class="changer">
                     <div></div>
@@ -51,11 +55,13 @@
             <nav>
                 <ul class="nav nav-tabs" role="tablist">
                     <li role="presentation" ng-class="{'active': isTabActive('Suggestions')}" ng-hide="hideSelfEvaluation"><a href="#Suggestions">Suggestions</a></li>
+                <li role="presentation" ng-class="{'active': isTabActive('Events')}"><a href="#Events">Events</a></li>
                     <li role="presentation" ng-class="{'active': isTabActive('EOM')}"><a href="#EOM">EOM</a></li>
                 </ul>
             </nav>
         </header>
-        <div ng-view></div>
+
+    <div ng-show="isLogged()" ng-cloak ng-view></div>
         <script src="Scripts/jquery-2.2.0.min.js"></script>
         <script src="Scripts/angular.js"></script>
         <script src="Scripts/angular-sanitize.js"></script>
@@ -75,6 +81,7 @@
         <script src="Scripts/clickoutside.directive.js"></script>-->
 
         <script src="app/services/appRouter.js"></script>
+    <script src="app/services/authInterceptorService.js"></script>
         <script src="app/services/authentification.js"></script>
         <script src="app/services/userService.js"></script>
         <script src="app/services/eomService.js"></script>
@@ -82,12 +89,14 @@
         <script src="app/controllers/mainController.js"></script>
         <script src="app/controllers/suggestionsController.js"></script>
         <script src="app/controllers/eomController.js"></script>
+    <script src="app/controllers/eventsController.js"></script>
+        <script src="app/services/suggestionService.js"></script>
 
         <script>
-            $(".changer").mouseenter(function () {
+        $(".changer").mouseenter(function() {
                 $(this).addClass("open");
             });
-            $(".changer").mouseleave(function () {
+        $(".changer").mouseleave(function() {
                 $(this).removeClass("open");
             });
         </script>

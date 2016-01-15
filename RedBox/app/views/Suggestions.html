@@ -3,10 +3,10 @@
         <md-card layout-sm="columns" layout-gt-sm="columns" layout-padding>
             <md-input-container class="md-block" flex>
                     <label>Type your suggestion or idea here</label>
-                    <textarea ng-model="user.biography" columns="1" maxlength="100" md-maxlength="100"></textarea>
+                <textarea ng-model="suggestionDesc" columns="1" maxlength="100" md-maxlength="100"></textarea>
             </md-input-container>
             <md-card-actions layout="row" layout-align="center center">
-              <md-button class="md-raised md-primary"><span class="fa fa-lightbulb-o"></span> Submit</md-button>
+                <md-button class="md-raised md-primary" ng-click="submitSuggestion(suggestionDesc)"><span class="fa fa-lightbulb-o"></span> Submit</md-button>
             </md-card-actions>
         </md-card>
     </div>

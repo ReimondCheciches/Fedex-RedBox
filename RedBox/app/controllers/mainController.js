@@ -1,10 +1,11 @@
 ﻿(function () {
     var myApp = angular.module('myApp');
 
-    myApp.controller('mainController', function ($scope, $location) {
+    myApp.controller('mainController', function ($scope, $location, authService, $http) {
         var tabToUrlMapping = {
             "Suggestions": ["/", "Suggestions"],
-            "EOM": ["/EOM"]
+            "EOM": ["/EOM"],
+            "Events": ["/Events"]
         };
 
         $scope.isTabActive = function(tabName) {
@@ -19,5 +20,26 @@
             });
 
         };
+
+         $scope.isLogged = function () {
+
+            if (authService.authentification.userName != "") {
+                $scope.currentUser = authService.authentification;
+                console.log('isLogged');
+                return true;
+            }
+
+       console.log('isNot');
+            return false;
+         };
+
+         $scope.logOut = function () {
+             authService.logOut();
+         };
+
+       
+
     });
+
+   
 }());
