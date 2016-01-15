@@ -10,5 +10,6 @@ namespace RedBox.Services.Models
         public int UpVote { get; set; }
         public int DownVote { get; set; }
         public bool Archived { get; set; }
+        public bool HasVoted { get; set; }
     }
 }
