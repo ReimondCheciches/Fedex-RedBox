@@ -84,8 +84,7 @@
             submitEvent: submitEvent,
             respondToEvent: respondToEvent,
             getEvents: getEvents,
-            archiveEvent: archiveEvent
-            getEvents: getEvents,
+            archiveEvent: archiveEvent,
             getEventsForCurrentMonth: getEventsForCurrentMonth,
             getEventsForCurrentWeek: getEventsForCurrentWeek
         };
