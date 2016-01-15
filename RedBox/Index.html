@@ -2,6 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Redbox</title>
     <link href="Content/bootstrap.min.css" rel="stylesheet"/>
     <link href="Content/select.min.css" rel="stylesheet"/>
@@ -14,7 +15,7 @@
     <link href="Content/angular-toastr.min.css" rel="stylesheet" />
     <link rel="icon" href="/favicon.png" type="image/png">
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,500,700,300,100' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <link href="Content/loader.css" rel="stylesheet" />
 </head>
 
@@ -34,32 +35,33 @@
     </div>
 
     <header ng-show="isLogged()" class="ng-hide" ng-cloak>
-            <div class="header">
-                <div class="changer">
-                    <div></div>
-                    <ul>
-                        <li><a href="http://localhost:58902/">Timesheet</a></li>
-                        <li><a href="http://localhost:61503">Evaluation</a></li>
-                        <li class="active"><a href="http://www2.techromix.com:85">Redbox</a></li>
-                        <li><a href="http://blog.techromix.com">Blog</a></li>
-                        <li><a target="_blank" href="https://sites.google.com/a/techromix.com/internal-site/">Google Site <span class="fa fa-external-link"></span></a></li>
-                        <li><a target="_blank" href="https://sites.google.com/a/techromix.com/dev/">Dev Team <span class="fa fa-external-link"></span></a></li>
-                        <li><a target="_blank" href="https://sites.google.com/a/techromix.com/tmx-qa-team/home/">QA Team <span class="fa fa-external-link"></span></a></li>
-                    </ul>
-                </div>
-                <h1>Redbox</h1>
-                <div class="col-md-8 no-padding text-right logged" ng-show="isLogged()">
-                    <span>Welcome <strong>{{currentUser.userName}}</strong> !</span>&nbsp;<a ng-click="logOut()">logout</a>
-                </div>
-            </div>
-            <nav>
-                <ul class="nav nav-tabs" role="tablist">
-                    <li role="presentation" ng-class="{'active': isTabActive('Suggestions')}" ng-hide="hideSelfEvaluation"><a href="#Suggestions">Suggestions</a></li>
-                <li role="presentation" ng-class="{'active': isTabActive('Events')}"><a href="#Events">Events</a></li>
-                    <li role="presentation" ng-class="{'active': isTabActive('EOM')}"><a href="#EOM">EOM</a></li>
+        <div class="header">
+            <div class="changer">
+                <div></div>
+                <ul>
+                    <li class="user-status"><span>Welcome <strong>{{currentUser.userName}}</strong> !</li>
+                    <li><a href="http://192.168.1.57:2016">Timesheet</a></li>
+                    <li><a href="http://192.168.1.57:2017">Evaluation</a></li>
+                    <li class="active"><a href="http://192.168.1.57:2018">Redbox</a></li>
+                    <li><a href="http://blog.techromix.com">Blog</a></li>
+                    <li><a target="_blank" href="https://sites.google.com/a/techromix.com/internal-site/">Google Site <span class="fa fa-external-link"></span></a></li>
+                    <li><a target="_blank" href="https://sites.google.com/a/techromix.com/dev/">Dev Team <span class="fa fa-external-link"></span></a></li>
+                    <li><a target="_blank" href="https://sites.google.com/a/techromix.com/tmx-qa-team/home/">QA Team <span class="fa fa-external-link"></span></a></li>
                 </ul>
-            </nav>
-        </header>
+            </div>
+            <h1>Redbox</h1>
+            <div class="col-md-8 no-padding text-right logged" ng-show="isLogged()">
+                <span>Welcome <strong>{{currentUser.userName}}</strong> !</span>&nbsp;<a ng-click="logOut()">logout</a>
+            </div>
+        </div>
+        <nav>
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" ng-class="{'active': isTabActive('Suggestions')}" ng-hide="hideSelfEvaluation"><a href="#Suggestions">Suggestions</a></li>
+                <li role="presentation" ng-class="{'active': isTabActive('Events')}"><a href="#Events">Gatherings</a></li>
+                <li role="presentation" ng-class="{'active': isTabActive('EOM')}"><a href="#EOM">EOM</a></li>
+            </ul>
+        </nav>
+    </header>
 
     <div ng-show="isLogged()" ng-cloak ng-view></div>
         <script src="Scripts/jquery-2.2.0.min.js"></script>
