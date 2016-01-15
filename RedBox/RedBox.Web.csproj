@@ -224,6 +224,7 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\EOMController.cs" />
+    <Compile Include="Controllers\EventController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SuggestionController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -243,6 +244,7 @@
     <Content Include="app\controllers\apprenticeDetailController.js" />
     <Content Include="app\controllers\eomController.js" />
     <Content Include="app\controllers\evaluationController.js" />
+    <Content Include="app\controllers\eventsController.js" />
     <Content Include="app\controllers\feedbackToPeersController.js" />
     <Content Include="app\controllers\giveFeedbackController.js" />
     <Content Include="app\controllers\suggestionsController.js" />
@@ -262,6 +264,7 @@
     <Content Include="app\views\Apprentice.html" />
     <Content Include="app\views\ApprenticeDetail.html" />
     <Content Include="app\views\EOM.html" />
+    <Content Include="app\views\Events.html" />
     <Content Include="app\views\FeedBack.html" />
     <Content Include="app\views\GiveFeedback.html" />
     <Content Include="app\views\Login.html" />
@@ -272,10 +275,20 @@
     <Content Include="app\views\SelfEvaluation.html" />
     <Content Include="app\views\Suggestions.html" />
     <Content Include="Areas\HelpPage\HelpPage.css" />
+    <Content Include="Content\angular-toastr.css" />
+    <Content Include="Content\angular-toastr.min.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Images\bg.png" />
+    <Content Include="Content\Images\login-bg.png" />
+    <Content Include="Content\Images\m_logo.png" />
+    <Content Include="Content\loader.css" />
+    <Content Include="Content\Main.css" />
+    <Content Include="Content\select.css" />
+    <Content Include="Content\select.min.css" />
+    <Content Include="Content\ui-bootstrap-csp.css" />
     <Content Include="favicon.png" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -1123,6 +1136,10 @@
     <Content Include="Scripts\_references.js" />
     <Content Include="Scripts\underscore.min.map" />
     <Content Include="Scripts\version.json" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

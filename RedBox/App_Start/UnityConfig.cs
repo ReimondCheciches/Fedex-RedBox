@@ -1,4 +1,5 @@
 ﻿using Microsoft.Practices.Unity;
+using RedBox.Services.EventService;
 using RedBox.Services.SuggestionService;
 using System;
 using System.Web.Http;
@@ -38,6 +39,7 @@ namespace RedBox.Web
             container.RegisterType<ISuggestionService, SuggestionService>();
             container.RegisterType<IUserService, UserService>();
             container.RegisterType<IEOMService, EOMService>();
+            container.RegisterType<IEventService, EventService>();
             GlobalConfiguration.Configuration.DependencyResolver = new UnityDependencyResolver(container);
         }
         public static void RegisterComponents()
@@ -52,6 +54,7 @@ namespace RedBox.Web
             container.RegisterType<ISuggestionService, SuggestionService>();
             container.RegisterType<IUserService, UserService>();
             container.RegisterType<IEOMService, EOMService>();
+            container.RegisterType<IEventService, EventService>();
             // e.g. container.RegisterType<ITestService, TestService>();
 
             GlobalConfiguration.Configuration.DependencyResolver = new UnityDependencyResolver(container);

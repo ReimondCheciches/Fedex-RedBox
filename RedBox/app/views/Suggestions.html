@@ -1,8 +1,8 @@
 ﻿<div class="callout-box">
-    <div class="container" >
+    <div class="container">
         <md-card layout-sm="columns" layout-gt-sm="columns" layout-padding>
             <md-input-container class="md-block" flex>
-                    <label>Type your suggestion or idea here</label>
+                <label>Type your suggestion or idea here</label>
                 <textarea ng-model="suggestionDesc" columns="1" maxlength="100" md-maxlength="100"></textarea>
             </md-input-container>
             <md-card-actions layout="row" layout-align="center center">
@@ -14,42 +14,28 @@
 
 <div class="container">
     <div layout-gt-sm="row">
-        <md-toolbar class="md-whiteframe-3dp md-btn-group md-accent" flex layout="row" layout-margin layout-align="left top">
+        <md-toolbar class="md-whiteframe-3dp md-btn-group md-accent" flex layout-xs="columns" layout-sm="row" layout-gt-sm="row" layout-margin layout-align="left top">
             <md-button class="md-raised md-button" ng-disabled="true"><span class="fa fa-certificate"></span> New</md-button>
             <md-button class=""><span class="fa fa-fire"></span> Popular</md-button>
             <md-button class=""><span class="fa fa-archive"></span> Archived</md-button>
         </md-toolbar>
-        <md-toolbar class="md-whiteframe-3dp md-btn-group md-accent" flex layout="row" layout-margin layout-align="left top">
+        <md-toolbar class="md-whiteframe-3dp md-btn-group md-accent" flex layout-xs="columns" layout-sm="row" layout-gt-sm="row" layout-margin layout-align="left top">
             <md-button class="md-raised md-button" ng-disabled="true"><span class="fa fa-calendar-o"></span> Week</md-button>
             <md-button class=""><span class="fa fa-calendar-times-o"></span> Month</md-button>
             <md-button class=""><span class="fa fa-calendar"></span> All-time</md-button>
         </md-toolbar>
     </div>
-    <md-card layout-gt-sm="columns">
+    <md-card layout-gt-sm="columns" ng-repeat="suggestion in suggestions">
         <md-toolbar>
             <md-card-content layout="row" flex layout-align="center center">
-                <span class="claim">I think we should go home</span>
+                <span class="claim">{{suggestion.description}}</span>
             </md-card-content>
         </md-toolbar>
         <md-toolbar flex-gt-sm="50" class="md-dark text-center">
-            <div class="score"><span>50</span></div>
+            <div class="score"><span>{{(suggestion.upVote - suggestion.downVote)>-1?suggestion.upVote - suggestion.downVote:0}}</span></div>
             <md-card-actions layout="row" layout-align="center center">
-              <md-button class="md-raised md-accent"><span class="fa fa-thumbs-up"></span> Up</md-button>
-              <md-button class="md-raised md-primary"><span class="fa fa-thumbs-down"></span> Down</md-button>
-            </md-card-actions>
-        </md-toolbar>
-    </md-card>
-    <md-card layout-gt-sm="columns">
-        <md-toolbar>
-            <md-card-content layout="row" flex layout-align="center center">
-                <span class="claim">This is something lorem ipsum would say when asked what is lorem ipsum something else in this box...</span>
-            </md-card-content>
-        </md-toolbar>
-        <md-toolbar flex-gt-sm="50" class="md-dark text-center">
-            <div class="score"><span>50</span></div>
-            <md-card-actions layout="row" layout-align="center center">
-              <md-button class="md-raised md-accent"><span class="fa fa-thumbs-up"></span> Up</md-button>
-              <md-button class="md-raised md-primary"><span class="fa fa-thumbs-down"></span> Down</md-button>
+                <md-button class="md-raised md-accent" ng-click="vote(suggestion.id, true)"><span class="fa fa-thumbs-up"></span> Up</md-button>
+                <md-button class="md-raised md-primary" ng-click="vote(suggestion.id, false)"><span class="fa fa-thumbs-down"></span> Down</md-button>
             </md-card-actions>
         </md-toolbar>
     </md-card>

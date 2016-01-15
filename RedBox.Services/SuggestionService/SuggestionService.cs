@@ -71,9 +71,9 @@ namespace RedBox.Services.SuggestionService
         
         }
 
-        public bool UserhasVoted(string userId)
+        public bool UserHasVoted(string userId, int suggestionId)
         {
-            var votes= _repository.GetEntities<SuggestionVote>().Where(p => p.UserId == userId).ToList();
+            var votes= _repository.GetEntities<SuggestionVote>().Where(p => p.UserId == userId && p.SuggestionId == suggestionId).ToList();
 
             if (votes.Count > 0) 
                 return true;
