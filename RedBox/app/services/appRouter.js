@@ -24,6 +24,11 @@
                 controller: 'eomController',
                 authorize: true
             })
+            .when('/Events', {
+                templateUrl: 'app/views/Events.html',
+                controller: 'eventsController',
+                authorize: true
+            })
             .otherwise({ redirectTo: '/' });
 
         $httpProvider.interceptors.push('authInterceptorService');
