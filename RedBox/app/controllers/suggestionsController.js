@@ -12,6 +12,12 @@
         }
 
         var init = function (controller) {
+            $scope.allTime = false;
+            $scope.currentWeek = true;
+            $scope.hotest = false;
+            $scope.newest = true;
+            $scope.archived = false;
+            $scope.currentMonth = false;
             controller.loadSuggestions();
         };
         init(controller);
@@ -29,34 +35,72 @@
         }
 
         $scope.showSuggestionsForCurrentWeek = function () {
+            $scope.allTime = false;
+            $scope.currentWeek = true;
+            $scope.currentMonth = false;
             suggestionService.getSuggestionForCurrentWeek().then(function (suggestions) {
                 $scope.suggestions = suggestions;
+                if ($scope.newest)
+                { $scope.orderNewest($scope.suggestions); return; }
+                if ($scope.hotest)
+                { $scope.orderHotest($scope.suggestions); return; }
+                $scope.showArchived($scope.suggestions);
             });
         }
 
         $scope.showSuggestionsForCurrentMonth = function () {
+            $scope.allTime = false;
+            $scope.currentWeek = false;
+            $scope.currentMonth = true;
             suggestionService.getSuggestionForCurrentMonth().then(function (suggestions) {
                 $scope.suggestions = suggestions;
+                if ($scope.newest)
+                { $scope.orderNewest($scope.suggestions); return; }
+                if ($scope.hotest)
+                { $scope.orderHotest($scope.suggestions); return; }
+                $scope.showArchived($scope.suggestions);
             });
         }
 
         $scope.orderNewest = function () {
-            $scope.suggestions = _.sortBy($scope.allSuggestions, 'date');
+            if ($scope.archived)
+                $scope.suggestions = $scope.allSuggestions;
+            $scope.hotest = false;
+            $scope.newest = true;
+            $scope.archived = false;
+            $scope.suggestions = _.sortBy($scope.suggestions, 'date');
             $scope.suggestions = $scope.suggestions.reverse();
         }
 
         $scope.orderHotest = function () {
-            $scope.suggestions = _.sortBy($scope.allSuggestions, function (item) { return item.upVote - item.downVote; });
+            if ($scope.archived)
+                $scope.suggestions = $scope.allSuggestions;
+            $scope.hotest = true;
+            $scope.newest = false;
+            $scope.archived = false;
+            $scope.suggestions = _.sortBy($scope.suggestions, function (item) { return item.upVote - item.downVote; });
             $scope.suggestions = $scope.suggestions.reverse();
         }
 
         $scope.showArchived = function () {
-
-            $scope.suggestions = _.filter($scope.allSuggestions, function (item) { return item.archived === true; });
+            $scope.hotest = false;
+            $scope.newest = false;
+            $scope.archived = true;
+            $scope.suggestions = _.filter($scope.suggestions, function (item) { return item.archived === true; });
         }
 
-        $scope.showAll = function () {
+        $scope.showAllTime = function () {
+            $scope.allTime = true;
+            $scope.currentWeek = false;
+            $scope.currentMonth = false;
+
             $scope.suggestions = $scope.allSuggestions;
+            if ($scope.newest)
+            { $scope.orderNewest($scope.suggestions); return; }
+            if ($scope.hotest)
+            { $scope.orderHotest($scope.suggestions); return; }
+            $scope.showArchived($scope.suggestions);
+
         }
     }]);
 }());

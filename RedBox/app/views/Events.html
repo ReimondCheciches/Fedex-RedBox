@@ -12,6 +12,18 @@
     </div>
 </div>
 <div class="container">
+    <div layout-gt-sm="row">
+        <md-toolbar class="md-whiteframe-3dp md-btn-group md-accent" flex layout-xs="columns" layout-sm="row" layout-gt-sm="row" layout-margin layout-align="left top">
+            <md-button ng-class="{'md-raised md-ink-ripple':newest}" ng-disabled="newest" ng-click="orderNewest()"><span class="fa fa-certificate"></span> New</md-button>
+            <md-button ng-class="{'md-raised md-ink-ripple':hotest}" ng-disabled="hotest" ng-click="orderHotest()"><span class="fa fa-fire"></span> Popular</md-button>
+            <md-button ng-class="{'md-raised md-ink-ripple':archived}" ng-disabled="archived" ng-click="showArchived()"><span class="fa fa-archive"></span> Archived</md-button>
+        </md-toolbar>
+        <md-toolbar class="md-whiteframe-3dp md-btn-group md-accent" flex layout-xs="columns" layout-sm="row" layout-gt-sm="row" layout-margin layout-align="left top">
+            <md-button ng-class="{'md-raised md-ink-ripple':currentWeek}" ng-disabled="currentWeek" ng-click="showEventsForCurrentWeek()"><span class="fa fa-calendar-o"></span> Week</md-button>
+            <md-button ng-class="{'md-raised md-ink-ripple':currentMonth}" ng-disabled="currentMonth" ng-click=" showEventsForCurrentMonth()"><span class="fa fa-calendar-times-o"></span> Month</md-button>
+            <md-button ng-class="{'md-raised md-ink-ripple':allTime}" ng-disabled="allTime" ng-click="showAllTime()"><span class="fa fa-calendar"></span> All-time</md-button>
+        </md-toolbar>
+    </div>
     <md-card ng-repeat="event in events">
         <md-toolbar class="md-primary">
             <md-card-content layout="row" class="layout-align-space-between-center" flex layout-align="left center">
