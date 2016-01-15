@@ -1,37 +1,37 @@
 ﻿<div class="container">
 	<div layout-gt-sm="columns">
-		<div flex-gt-sm="40">
+		<div flex-gt-sm="40"> {{selectedItem}}
 			<md-card>
 	            <md-card-content layout-align="top left">
 	                <h2>January 2016</h2>
 						<form ng-submit="$event.preventDefault()">
 							<md-autocomplete
-							  ng-disabled="ctrl.isDisabled"
-							  md-no-cache="ctrl.noCache"
-							  md-selected-item="ctrl.selectedItem"
-							  md-search-text-change="ctrl.searchTextChange(ctrl.searchText)"
-							  md-search-text="ctrl.searchText"
-							  md-selected-item-change="ctrl.selectedItemChange(item)"
-							  md-items="item in ctrl.querySearch(ctrl.searchText)"
-							  md-item-text="item.display"
+							  ng-disabled="isDisabled"
+							  md-no-cache="noCache"
+							  md-selected-item="selectedItem"
+							  md-search-text-change="searchTextChange(searchText)"
+							  md-search-text="searchUser"
+							  md-selected-item-change="selectedItemChange(item)"
+							  md-items="item in querySearch(searchUser)"
+							  md-item-text="item.fullName"
 							  md-min-length="0"
 							  placeholder="Search Employee...">
 							<md-item-template>
-							  <span md-highlight-text="ctrl.searchText" md-highlight-flags="^i">{{item.display}}</span>
+							  <span md-highlight-text="searchText" md-highlight-flags="^i">{{item.fullName}}</span>
 							</md-item-template>
 							<md-not-found>
-							  No states matching "{{ctrl.searchText}}" were found.
-							  <a ng-click="ctrl.newState(ctrl.searchText)">Create a new one!</a>
+							  No states matching "{{searchText}}" were found.
+							  <a ng-click="ctrl.newState(searchText)">Create a new one!</a>
 							</md-not-found>
 							</md-autocomplete>
 				            <md-input-container class="md-block callout-box-mini" flex>
 				                    <label>Reason</label>
-				                    <textarea ng-model="user.biography" columns="1" maxlength="100" md-maxlength="100"></textarea>
+				                    <textarea ng-model="reason" columns="1" maxlength="100" md-maxlength="100"></textarea>
 				            </md-input-container>
 						</form>
 	            </md-card-content>
 				<div layout="row" layout-padding layout-align="right center">
-				  <md-button class="md-raised md-accent"><span class="fa fa-thumbs-up"></span> Vote</md-button>
+				  <md-button class="md-raised md-accent" ng-click="vote()"><span class="fa fa-thumbs-up"></span> Vote</md-button>
 				</div>
 			</md-card>
 			<md-card>
