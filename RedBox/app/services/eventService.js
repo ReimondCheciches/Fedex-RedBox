@@ -43,6 +43,17 @@
             return deferred.promise;
         };
 
+        var getEventsForCurrentWeek = function () {
+            var deferred = $q.defer();
+            $http.get('/api/event/GetEventsForCurrentWeek').success(function (response) {
+                deferred.resolve(response);
+
+            }).error(function (err) {
+                deferred.reject(err);
+            });
+
+            return deferred.promise;
+        };
         var archiveEvent = function (id) {
 
             var deferred = $q.defer();
@@ -57,11 +68,25 @@
             return deferred.promise;
         };
 
+        var getEventsForCurrentMonth = function () {
+            var deferred = $q.defer();
+            $http.get('/api/event/GetEventsForCurrentMonth').success(function (response) {
+                deferred.resolve(response);
+
+            }).error(function (err) {
+                deferred.reject(err);
+            });
+
+            return deferred.promise;
+        };
+
         return {
             submitEvent: submitEvent,
             respondToEvent: respondToEvent,
             getEvents: getEvents,
-            archiveEvent: archiveEvent
+            archiveEvent: archiveEvent,
+            getEventsForCurrentMonth: getEventsForCurrentMonth,
+            getEventsForCurrentWeek: getEventsForCurrentWeek
         };
 
     }]);
