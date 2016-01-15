@@ -22,7 +22,7 @@
                 </div>
             </md-card-content>
             <md-card-actions layout-padding layout-gt-sm="row" layout-align="center center" class="layout-align-space-between-center text-center">
-                <md-toolbar class="md-whiteframe-3dp md-btn-group md-accent" layout-xs="columns" layout-sm="row" layout-gt-sm="row" layout-margin layout-align="left top">
+                <md-toolbar class="md-whiteframe-3dp md-btn-group md-accent" layout-xs="columns" layout-sm="row" layout-gt-sm="row" layout-margin layout-align="left top" ng-if="!event.archived">
                     <md-button ng-class="{'md-raised md-button':event.going}" ng-click="respondToEvent(event.id, 'Going')" ng-disabled="event.going"><span class="fa fa-play-circle"></span> Going</md-button>
                     <md-button ng-class="{'md-raised md-button':event.tentative}" ng-click="respondToEvent(event.id, 'Tentative')" ng-disabled="event.tentative"><span class="fa fa-pause-circle"></span> Tentative</md-button>
                     <md-button ng-class="{'md-raised md-button':event.notNow}" ng-click="respondToEvent(event.id, 'NotNow')" ng-disabled="event.notNow"><span class="fa fa-stop-circle"></span> Not Now</md-button>
