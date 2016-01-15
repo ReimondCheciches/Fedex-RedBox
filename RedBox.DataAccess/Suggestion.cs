@@ -14,7 +14,6 @@ namespace RedBox.DataAccess
     
     public partial class Suggestion
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Suggestion()
         {
             this.SuggestionVotes = new HashSet<SuggestionVote>();
@@ -27,7 +26,6 @@ namespace RedBox.DataAccess
         public int DownVotes { get; set; }
         public Nullable<bool> Archived { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SuggestionVote> SuggestionVotes { get; set; }
     }
 }

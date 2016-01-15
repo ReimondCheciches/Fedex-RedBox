@@ -12,20 +12,11 @@ namespace RedBox.DataAccess
     using System;
     using System.Collections.Generic;
     
-    public partial class EOM
+    public partial class C__MigrationHistory
     {
-        public EOM()
-        {
-            this.EOMUserVotes = new HashSet<EOMUserVote>();
-            this.EOMVotes = new HashSet<EOMVote>();
-        }
-    
-        public int Id { get; set; }
-        public System.DateTime Date { get; set; }
-        public string WinnerId { get; set; }
-    
-        public virtual AspNetUser AspNetUser { get; set; }
-        public virtual ICollection<EOMUserVote> EOMUserVotes { get; set; }
-        public virtual ICollection<EOMVote> EOMVotes { get; set; }
+        public string MigrationId { get; set; }
+        public string ContextKey { get; set; }
+        public byte[] Model { get; set; }
+        public string ProductVersion { get; set; }
     }
 }
