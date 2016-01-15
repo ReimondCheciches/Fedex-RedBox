@@ -26,7 +26,7 @@
             })
             .otherwise({ redirectTo: '/' });
 
-        //$httpProvider.interceptors.push('authInterceptorService');
+        $httpProvider.interceptors.push('authInterceptorService');
 
     });
 

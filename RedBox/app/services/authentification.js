@@ -36,18 +36,21 @@
                     _authentification.userName = userInfoResponse.data.Email;
 
                     localStorageService.remove('authorizationData');
-                    localStorageService.set('authorizationData', { token: response.access_token, userName: userInfoResponse.data.email });
+
+                    var email = angular.copy(userInfoResponse.data.email);
+
+                    localStorageService.set('authorizationData', { token: response.access_token, userName: email });
 
                     deferred.resolve(response);
                 });
             }).error(function (err, status) {
-                    localStorageService.remove('authorizationData');
+                localStorageService.remove('authorizationData');
 
-                    _authentification.isAuth = false;
-                    _authentification.userName = '';
-                    deferred.reject(err);
+                _authentification.isAuth = false;
+                _authentification.userName = '';
+                deferred.reject(err);
 
-                });
+            });
             return deferred.promise;
         };
         var _logOut = function () {
@@ -65,6 +68,13 @@
             if (authData) {
                 _authentification.isAuth = true;
                 _authentification.userName = authData.userName;
+            }
+
+            if (authData.userName == null) {
+                $http.get('api/Account/UserInfo').then(function (userInfoResponse) {
+                    _authentification.isAuth = true;
+                    _authentification.userName = userInfoResponse.data.email;
+                });
             }
         };
 
