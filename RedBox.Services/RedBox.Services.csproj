@@ -41,6 +41,12 @@
   <ItemGroup>
     <Compile Include="EOMService\EOMService.cs" />
     <Compile Include="EOMService\IEOMService.cs" />
+    <Compile Include="Models\EOMModel.cs" />
+    <Compile Include="Models\EOMUserVotesModel.cs" />
+    <Compile Include="Models\EOMVotesModel.cs" />
+    <Compile Include="Models\SuggestionModel.cs" />
+    <Compile Include="Models\SuggestionVoteModel.cs" />
+    <Compile Include="Models\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SuggestionService\ISuggestionService.cs" />
     <Compile Include="SuggestionService\SuggestionService.cs" />

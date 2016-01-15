@@ -4,14 +4,20 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="9de5dd37a738449b8deea0512cad5cf1" Name="Diagram1">
-        <EntityTypeShape EntityType="RedBoxModel.AspNetUser" Width="1.5" PointX="0.75" PointY="4.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="RedBoxModel.EOM" Width="1.5" PointX="3" PointY="4" IsExpanded="true" />
-        <EntityTypeShape EntityType="RedBoxModel.EOMUserVote" Width="1.5" PointX="5.25" PointY="5.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="RedBoxModel.EOMVote" Width="1.5" PointX="5.25" PointY="2.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="RedBoxModel.Suggestion" Width="1.5" PointX="3.75" PointY="12.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="RedBoxModel.SuggestionVote" Width="1.5" PointX="6" PointY="8.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="RedBoxModel.UserInfo" Width="1.5" PointX="3" PointY="9.75" IsExpanded="true" />
+      <Diagram DiagramId="e23a870d65dd4bafa4b9724fe8da88d2" Name="Diagram1">
+        <EntityTypeShape EntityType="RedBoxModel.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="RedBoxModel.AspNetRole" Width="1.5" PointX="0.75" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="RedBoxModel.AspNetUserClaim" Width="1.5" PointX="5.25" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="RedBoxModel.AspNetUserLogin" Width="1.5" PointX="5.25" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="RedBoxModel.AspNetUser" Width="1.5" PointX="3" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="RedBoxModel.EOM" Width="1.5" PointX="5.25" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="RedBoxModel.EOMUserVote" Width="1.5" PointX="7.5" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="RedBoxModel.EOMVote" Width="1.5" PointX="7.5" PointY="11.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="RedBoxModel.Suggestion" Width="1.5" PointX="6" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="RedBoxModel.SuggestionVote" Width="1.5" PointX="8.25" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="RedBoxModel.UserInfo" Width="1.5" PointX="5.25" PointY="15.25" IsExpanded="true" />
+        <AssociationConnector Association="RedBoxModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="RedBoxModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="RedBoxModel.FK_EOM_AspNetUsers" ManuallyRouted="false" />
         <AssociationConnector Association="RedBoxModel.FK_EOMUserVotes_AspNetUsers" ManuallyRouted="false" />
         <AssociationConnector Association="RedBoxModel.FK_EOMVotes_AspNetUsers" ManuallyRouted="false" />
@@ -20,6 +26,7 @@
         <AssociationConnector Association="RedBoxModel.FK_EOMUserVotes_EOM" ManuallyRouted="false" />
         <AssociationConnector Association="RedBoxModel.FK_EOMVotes_EOM" ManuallyRouted="false" />
         <AssociationConnector Association="RedBoxModel.FK_SuggestionVotes_Suggestions1" ManuallyRouted="false" />
+        <AssociationConnector Association="RedBoxModel.AspNetUserRoles" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
