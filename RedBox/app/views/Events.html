@@ -49,24 +49,24 @@
                     <dl flex>
                         <dt><span class="fa fa-play-circle"></span> Going</dt>
                         <dd>
-                            <ol ng-repeat="guser in event.goingUsers">
-                                <li>{{guser.fullName}}</li>
+                            <ol>
+                                <li ng-repeat="guser in event.goingUsers">{{guser.fullName}}</li>
                             </ol>
                         </dd>
                     </dl>
                     <dl flex>
                         <dt><span class="fa fa-pause-circle"></span> Tentative</dt>
                         <dd>
-                            <ol ng-repeat="tuser in event.tentativeUsers">
-                                <li>{{tuser.fullName}}</li>
+                            <ol>
+                                <li ng-repeat="tuser in event.tentativeUsers">{{tuser.fullName}}</li>
                             </ol>
                         </dd>
                     </dl>
                     <dl flex>
                         <dt><span class="fa fa-stop-circle"></span> Not Now</dt>
                         <dd>
-                            <ol ng-repeat="nuser in event.notNowUsers">
-                                <li>{{nuser.fullName}}</li>
+                            <ol>
+                                <li ng-repeat="nuser in event.notNowUsers">{{nuser.fullName}}</li>
                             </ol>
                         </dd>
                     </dl>
