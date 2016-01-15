@@ -3,6 +3,8 @@ using System.Web.Http;
 using RedBox.DataAccess;
 using RedBox.Services.SuggestionService;
 using System.Web.Security;
+using Microsoft.AspNet.Identity;
+using RedBox.Services.Models;
 
 namespace RedBox.Web.Controllers
 {
@@ -10,31 +12,45 @@ namespace RedBox.Web.Controllers
     {
         private readonly ISuggestionService _suggestionService;
 
-        public SuggestionController()
-        {
-
-        }
         public SuggestionController(ISuggestionService suggestionService)
         {
             _suggestionService = suggestionService;
         }
 
         [HttpGet]
-        public List<Suggestion> GetSuggestions()
+        public IEnumerable<SuggestionModel> GetSuggestions()
         {
-            return _suggestionService.GetSuggestions();
+            var suggestions=new List<SuggestionModel>();
+            _suggestionService.GetSuggestions().ForEach(p => suggestions.Add(new SuggestionModel() { 
+                Description = p.Description, 
+                Id = p.Id,
+                UpVote = p.UpVotes, 
+                DownVote = p.DownVotes, 
+                Archived = p.Archived??true }));
+            
+            return suggestions;
         }
 
         [HttpGet]
-        public List<Suggestion> GetArchivedSuggestions()
+        public IEnumerable<SuggestionModel> GetArchivedSuggestions()
         {
-            return _suggestionService.GetArchivedSuggestions();
+            var suggestions = new List<SuggestionModel>();
+            _suggestionService.GetArchivedSuggestions().ForEach(p => suggestions.Add(new SuggestionModel()
+            {
+                Description = p.Description,
+                Id = p.Id,
+                UpVote = p.UpVotes,
+                DownVote = p.DownVotes,
+                Archived = p.Archived ?? true
+            }));
+
+            return suggestions;
         }
 
         [HttpPost]
-        public void AddSuggestion(SuggestionRequest SuggestionDesc)
+        public void AddSuggestion(SuggestionRequest SuggestionReq)
         {
-            _suggestionService.AddSuggestion(SuggestionDesc.SuggestionDesc);
+            _suggestionService.AddSuggestion(SuggestionReq.SuggestionDesc);
         }
 
         [HttpPost]
@@ -44,14 +60,15 @@ namespace RedBox.Web.Controllers
         }
 
         [HttpPost]
-        public void Vote(int suggestionId, bool upVote)
+        public void Vote(SuggestionVoteModel vote)
         {
-            MembershipUser user = Membership.GetUser();
-            if (!_suggestionService.UserhasVoted(user.ProviderUserKey.ToString())) return;
-            _suggestionService.Vote(suggestionId, upVote, user.ProviderUserKey.ToString());
+            var userId = User.Identity.GetUserId();
+            if (_suggestionService.UserHasVoted(userId, vote.SuggestionId)) return;
+            _suggestionService.Vote(vote.SuggestionId, vote.UpVote, userId);
         }
 
-        public class SuggestionRequest {
+        public class SuggestionRequest
+        {
             public string SuggestionDesc { get; set; }
         }
     }

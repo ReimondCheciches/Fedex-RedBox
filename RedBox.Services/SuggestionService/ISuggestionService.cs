@@ -10,6 +10,6 @@ namespace RedBox.Services.SuggestionService
         void AddSuggestion(string suggestionDesc);
         void RemoveSuggestion(int id);
         void Vote(int suggestionId, bool upVote, string userId);
-        bool UserhasVoted(string userId);
+        bool UserHasVoted(string userId, int suggestionId);
     }
 }
