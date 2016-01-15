@@ -24,6 +24,10 @@
                 $scope.currentEom = response;
             });
 
+            eomService.getCurrentNumberOfVotes().then(function (response) {
+                $scope.currentNumberOfVotes = response;
+            });
+
         })(this);
 
         $scope.querySearch = function (query) {

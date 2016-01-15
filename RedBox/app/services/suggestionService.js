@@ -95,8 +95,7 @@
             getSuggestions: getSuggestions,
             submitSuggestion: submitSuggestion,
             vote: vote,
-            archiveSuggestion: archiveSuggestion
-            vote: vote,
+            archiveSuggestion: archiveSuggestion,
             getSuggestionForCurrentWeek: getSuggestionForCurrentWeek,
             getSuggestionForCurrentMonth: getSuggestionForCurrentMonth,
             getArchivedSuggestions: getArchivedSuggestions

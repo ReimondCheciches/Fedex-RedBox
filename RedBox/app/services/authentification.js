@@ -59,7 +59,7 @@
             _authentification.isAuth = false;
             _authentification.userName = '';
 
-            window.location = "http://192.168.1.57:2016/Account/LogOut.aspx";
+            window.location = "http://localhost:58902/Account/LogOut.aspx";
         };
 
         var _fillAuthData = function () {

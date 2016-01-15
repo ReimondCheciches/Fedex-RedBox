@@ -58,5 +58,6 @@
                 </md-card-content>
             </md-toolbar>
         </md-toolbar>
+        <md-button class="" ng-if="!event.archived" ng-click="archiveEvent(event.id)"><span class="fa fa-fire"></span> Archive</md-button>
     </md-card>
 </div>
