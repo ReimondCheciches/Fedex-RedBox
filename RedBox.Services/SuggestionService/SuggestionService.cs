@@ -20,11 +20,6 @@ namespace RedBox.Services.SuggestionService
             return _repository.GetEntities<Suggestion>().ToList();
         }
 
-        public List<Suggestion> GetArchivedSuggestions()
-        {
-            return _repository.GetEntities<Suggestion>().Where(s => (bool) !s.Archived).ToList();
-        }
-
         public void AddSuggestion(string suggestionDesc)
         {
 
