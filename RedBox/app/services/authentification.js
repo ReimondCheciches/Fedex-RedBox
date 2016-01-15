@@ -31,15 +31,16 @@
 
                 localStorageService.set('authorizationData', { token: response.access_token, userName: loginData.Username });
 
-                $http.get('api/Account/UserInfo').then(function (userInfoResponse) {
+                $http.get('api/User/UserInfo').then(function (userInfoResponse) {
                     _authentification.isAuth = true;
                     _authentification.userName = userInfoResponse.data.Email;
+                    _authentification.fullName = userInfoResponse.data.fullName;
 
                     localStorageService.remove('authorizationData');
 
                     var email = angular.copy(userInfoResponse.data.email);
 
-                    localStorageService.set('authorizationData', { token: response.access_token, userName: email });
+                    localStorageService.set('authorizationData', { token: response.access_token, userName: email, fullName: userInfoResponse.data.fullName });
 
                     deferred.resolve(response);
                 });
@@ -59,7 +60,7 @@
             _authentification.isAuth = false;
             _authentification.userName = '';
 
-            window.location = "http://192.168.1.57:2016/Account/LogOut.aspx";
+            window.location = "http://localhost:58902/Account/LogOut.aspx";
         };
 
         var _fillAuthData = function () {
@@ -68,12 +69,14 @@
             if (authData) {
                 _authentification.isAuth = true;
                 _authentification.userName = authData.userName;
+                _authentification.fullName = authData.fullName;
             }
 
-            if (authData && authData.userName == null) {
-                $http.get('api/Account/UserInfo').then(function (userInfoResponse) {
+            if (authData && (authData.userName == null || _authentification.fullName == null)) {
+                $http.get('api/User/UserInfo').then(function (userInfoResponse) {
                     _authentification.isAuth = true;
                     _authentification.userName = userInfoResponse.data.email;
+                    _authentification.fullName = userInfoResponse.data.fullName;
                 });
             }
         };

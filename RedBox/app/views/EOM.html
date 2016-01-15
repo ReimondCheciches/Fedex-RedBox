@@ -1,7 +1,8 @@
 ﻿<div class="container">
 	<div layout-gt-sm="columns">
 	    <div flex-gt-sm="40">
-            <button ng-click="stopVote()">STOP VOTE!</button>
+	        <!--<span class="fa fa-thumbs-up"></span>{{currentNumberOfVotes}}-->
+	        <button ng-click="stopVote()">STOP VOTE!</button>
 	        <md-card ng-hide="hasVoted">
 	            <md-card-content layout-align="top left">
 	                <h2>{{currentEom.date | date : 'MMMM yyyy'}}</h2>

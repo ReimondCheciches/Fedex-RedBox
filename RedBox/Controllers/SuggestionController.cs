@@ -7,6 +7,7 @@ using Microsoft.AspNet.Identity;
 using RedBox.Services.Models;
 using System;
 using System.Globalization;
+using System.Linq;
 
 namespace RedBox.Web.Controllers
 {
@@ -22,6 +23,8 @@ namespace RedBox.Web.Controllers
         [HttpGet]
         public IEnumerable<SuggestionModel> GetSuggestions()
         {
+            var userId = User.Identity.GetUserId();
+
             var suggestions = new List<SuggestionModel>();
             _suggestionService.GetSuggestions().ForEach(p => suggestions.Add(new SuggestionModel()
             {
@@ -30,7 +33,8 @@ namespace RedBox.Web.Controllers
                 Date = p.Date,
                 UpVote = p.UpVotes,
                 DownVote = p.DownVotes,
-                Archived = (p.Archived != null && p.Archived == true) ? true : false
+                Archived = (p.Archived != null && p.Archived == true),
+                HasVoted = p.SuggestionVotes.Any(v => v.UserId == userId)
             }));
 
             return suggestions;
@@ -109,8 +113,15 @@ namespace RedBox.Web.Controllers
             _suggestionService.Vote(vote.SuggestionId, vote.UpVote, userId);
         }
 
+        [HttpPost]
+        public void ArchiveSuggestion(SuggestionRequest SuggestionRequest)
+        {
+            _suggestionService.ArhiveSuggestion(SuggestionRequest.Id);
+        }
+
         public class SuggestionRequest
         {
+            public int Id { get; set; }
             public string SuggestionDesc { get; set; }
         }
 

@@ -13,6 +13,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
+using RedBox.Services.UserServices;
 using RedBox.Web.Models;
 using RedBox.Web.Providers;
 
@@ -29,11 +30,16 @@ namespace RedBox.Web.Controllers
         {
         }
 
-        public AccountController(ApplicationUserManager userManager,
-            ISecureDataFormat<AuthenticationTicket> accessTokenFormat)
+        //public AccountController(ApplicationUserManager userManager,
+        //    ISecureDataFormat<AuthenticationTicket> accessTokenFormat)
+        //{
+        //    UserManager = userManager;
+        //    AccessTokenFormat = accessTokenFormat;
+        //}
+
+        public string Test()
         {
-            UserManager = userManager;
-            AccessTokenFormat = accessTokenFormat;
+            return "asfljkaslkjasfjlkasf;lk";
         }
 
         public ApplicationUserManager UserManager
@@ -56,6 +62,9 @@ namespace RedBox.Web.Controllers
         public UserInfoViewModel GetUserInfo()
         {
             ExternalLoginData externalLogin = ExternalLoginData.FromIdentity(User.Identity as ClaimsIdentity);
+
+            var container = UnityConfig.GetConfiguredContainer();
+
 
             return new UserInfoViewModel
             {
