@@ -43,6 +43,19 @@
             return deferred.promise;
         };
 
+        var archiveSuggestion = function (id) {
+
+            var deferred = $q.defer();
+
+            $http.post('/api/suggestion/ArchiveSuggestion', { 'Id': id }).success(function (response) {
+                deferred.resolve(response);
+
+            }).error(function (err) {
+                deferred.reject(err);
+            });
+
+            return deferred.promise;
+        };
         var getSuggestionForCurrentWeek = function () {
             var deferred = $q.defer();
             $http.get('/api/suggestion/GetSuggestionsCurrentWeek').success(function (response) {
@@ -82,6 +95,7 @@
             getSuggestions: getSuggestions,
             submitSuggestion: submitSuggestion,
             vote: vote,
+            archiveSuggestion: archiveSuggestion,
             getSuggestionForCurrentWeek: getSuggestionForCurrentWeek,
             getSuggestionForCurrentMonth: getSuggestionForCurrentMonth,
             getArchivedSuggestions: getArchivedSuggestions

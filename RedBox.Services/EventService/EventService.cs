@@ -66,5 +66,18 @@ namespace RedBox.Services.EventService
             _repository.SaveChanges();
 
         }
+
+        public void ArchiveEvent(int eventId)
+        {
+            var e = _repository.GetEntities<Event>().FirstOrDefault(p => p.Id == eventId);
+
+            if (e != null)
+            {
+                e.Archived = true;
+
+                _repository.Update(e);
+            }
+            _repository.SaveChanges();
+        }
     }
 }

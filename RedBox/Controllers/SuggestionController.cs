@@ -113,8 +113,15 @@ namespace RedBox.Web.Controllers
             _suggestionService.Vote(vote.SuggestionId, vote.UpVote, userId);
         }
 
+        [HttpPost]
+        public void ArchiveSuggestion(SuggestionRequest SuggestionRequest)
+        {
+            _suggestionService.ArhiveSuggestion(SuggestionRequest.Id);
+        }
+
         public class SuggestionRequest
         {
+            public int Id { get; set; }
             public string SuggestionDesc { get; set; }
         }
 

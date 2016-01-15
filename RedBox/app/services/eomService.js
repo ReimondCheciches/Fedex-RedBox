@@ -20,7 +20,19 @@
         var hasVoted = function() {
             var deferred = $q.defer();
 
-            $http.get('/api/eom/hasVoted').success(function (response) {
+            $http.get('/api/eom/hasVoted').success(function(response) {
+                deferred.resolve(response);
+            }).error(function(err, status) {
+                deferred.reject(err);
+            });
+
+            return deferred.promise;
+        };
+
+        var getCurrentNumberOfVotes = function () {
+            var deferred = $q.defer();
+
+            $http.get('/api/eom/getNumberOfCurrentEOMVotes').success(function (response) {
                 deferred.resolve(response);
             }).error(function (err, status) {
                 deferred.reject(err);
@@ -71,7 +83,8 @@
             hasVoted: hasVoted,
             getAllEoms: getAllEoms,
             getCurrentEom: getCurrentEom,
-            stopVote: stopVote
+            stopVote: stopVote,
+            getCurrentNumberOfVotes: getCurrentNumberOfVotes
         }
 
     }]);

@@ -43,11 +43,25 @@
             return deferred.promise;
         };
 
+        var archiveEvent = function (id) {
+
+            var deferred = $q.defer();
+
+            $http.post('/api/event/ArchiveEvent', { 'Id': id }).success(function (response) {
+                deferred.resolve(response);
+
+            }).error(function (err) {
+                deferred.reject(err);
+            });
+
+            return deferred.promise;
+        };
 
         return {
             submitEvent: submitEvent,
             respondToEvent: respondToEvent,
-            getEvents: getEvents
+            getEvents: getEvents,
+            archiveEvent: archiveEvent
         };
 
     }]);

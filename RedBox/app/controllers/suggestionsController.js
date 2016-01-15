@@ -28,6 +28,12 @@
             });
         }
 
+        $scope.archiveSuggestion = function (id) {
+            suggestionService.archiveSuggestion(id).then(function () {
+                controller.loadSuggestions();
+            });
+        }
+
         $scope.showSuggestionsForCurrentWeek = function () {
             suggestionService.getSuggestionForCurrentWeek().then(function (suggestions) {
                 $scope.suggestions = suggestions;
