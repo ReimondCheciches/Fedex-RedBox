@@ -22,9 +22,19 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
     -webkit-box-shadow: 0 0 0px 1000px white inset;
 }
 
+html {
+    background-color: #fafafa;
+    height: 100%;
+}
+
 body {
+    background-color: #fafafa;
     padding: 134px 0 64px 0;
     font-family: "Roboto";
+}
+
+.wrapper {
+    padding-bottom: 64px;
 }
 
 .login {
@@ -339,10 +349,6 @@ h1 {
 .centered {
     margin: auto;
     display: table;
-}
-
-body {
-    background-color: #fafafa;
 }
 
 .md-toolbar.md-default-theme {
