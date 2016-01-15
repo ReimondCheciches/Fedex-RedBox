@@ -23,6 +23,7 @@ namespace RedBox.DataAccess
             this.EOMVotes = new HashSet<EOMVote>();
             this.SuggestionVotes = new HashSet<SuggestionVote>();
             this.AspNetRoles = new HashSet<AspNetRole>();
+            this.UserEvents = new HashSet<UserEvent>();
         }
     
         public string Id { get; set; }
@@ -46,5 +47,6 @@ namespace RedBox.DataAccess
         public virtual ICollection<SuggestionVote> SuggestionVotes { get; set; }
         public virtual UserInfo UserInfo { get; set; }
         public virtual ICollection<AspNetRole> AspNetRoles { get; set; }
+        public virtual ICollection<UserEvent> UserEvents { get; set; }
     }
 }

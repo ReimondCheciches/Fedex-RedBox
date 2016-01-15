@@ -41,11 +41,16 @@
   <ItemGroup>
     <Compile Include="EOMService\EOMService.cs" />
     <Compile Include="EOMService\IEOMService.cs" />
+    <Compile Include="EventService\EventService.cs" />
+    <Compile Include="EventService\IEventService.cs" />
     <Compile Include="Models\EOMModel.cs" />
     <Compile Include="Models\EOMUserVotesModel.cs" />
     <Compile Include="Models\EOMVotesModel.cs" />
+    <Compile Include="Models\EventModel.cs" />
+    <Compile Include="Models\EventResponse.cs" />
     <Compile Include="Models\SuggestionModel.cs" />
     <Compile Include="Models\SuggestionVoteModel.cs" />
+    <Compile Include="Models\UserEventModel.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SuggestionService\ISuggestionService.cs" />

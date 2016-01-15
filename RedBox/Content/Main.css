@@ -130,6 +130,7 @@ h1 {
 }
 
 .nav-tabs > li {
+    margin-bottom: 0;
     float: none;
     display: inline-block;
 }
@@ -1160,6 +1161,13 @@ dd {
         line-height: 40px;
         margin: 16px 0 8px 0;
     }
+
+    .changer ul {
+        position: fixed;
+        top: 51px;
+        bottom: -10px;
+        overflow: auto;
+    }
 }
 
 @media screen and (max-width: 600px) {
@@ -1182,10 +1190,6 @@ dd {
         padding-right: 8px;
     }
 
-    .md-btn-group:not([layout-xs="columns"]) .fa {
-        display: none;
-    }
-
     .logged > span {
         display: none;
     }
@@ -1194,9 +1198,4 @@ dd {
         padding-left: 0;
     }
 
-    .changer ul {
-        position: fixed;
-        bottom: -10px;
-        overflow: auto;
-    }
 }
