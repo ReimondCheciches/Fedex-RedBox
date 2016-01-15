@@ -6,7 +6,7 @@
                 <textarea ng-model="suggestionDesc" columns="1" maxlength="100" md-maxlength="100"></textarea>
             </md-input-container>
             <md-card-actions layout="row" layout-align="center center">
-                <md-button class="md-raised md-primary" ng-disabled="suggestionDesc===null" ng-click="submitSuggestion(suggestionDesc)"><span class="fa fa-lightbulb-o"></span> Submit</md-button>
+                <md-button class="md-raised md-primary" ng-disabled="suggestionDesc&&suggestionDesc.length>10 " ng-click="submitSuggestion(suggestionDesc)"><span class="fa fa-lightbulb-o"></span> Submit</md-button>
             </md-card-actions>
         </md-card>
     </div>
@@ -15,14 +15,14 @@
 <div class="container">
     <div layout-gt-sm="row">
         <md-toolbar class="md-whiteframe-3dp md-btn-group md-accent" flex layout-xs="columns" layout-sm="row" layout-gt-sm="row" layout-margin layout-align="left top">
-            <md-button class="md-raised md-button" ng-click="orderNewest()"><span class="fa fa-certificate"></span> New</md-button>
-            <md-button class="" ng-click="orderHotest()"><span class="fa fa-fire"></span> Popular</md-button>
-            <md-button class="" ng-click="showArchived()"><span class="fa fa-archive"></span> Archived</md-button>
+            <md-button ng-class="{'md-raised md-ink-ripple':newest}" ng-disabled="newest" ng-click="orderNewest()"><span class="fa fa-certificate"></span> New</md-button>
+            <md-button ng-class="{'md-raised md-ink-ripple':hotest}" ng-disabled="hotest" ng-click="orderHotest()"><span class="fa fa-fire"></span> Popular</md-button>
+            <md-button ng-class="{'md-raised md-ink-ripple':archived}" ng-disabled="archived" ng-click="showArchived()"><span class="fa fa-archive"></span> Archived</md-button>
         </md-toolbar>
         <md-toolbar class="md-whiteframe-3dp md-btn-group md-accent" flex layout-xs="columns" layout-sm="row" layout-gt-sm="row" layout-margin layout-align="left top">
-            <md-button class="md-raised md-button" ng-click="showSuggestionsForCurrentWeek()"><span class="fa fa-calendar-o"></span> Week</md-button>
-            <md-button class="" ng-click="showSuggestionsForCurrentMonth()"><span class="fa fa-calendar-times-o"></span> Month</md-button>
-            <md-button class="" ng-click="showAll()"><span class="fa fa-calendar"></span> All-time</md-button>
+            <md-button ng-class="{'md-raised md-ink-ripple':currentWeek}" ng-disabled="currentWeek" ng-click="showSuggestionsForCurrentWeek()"><span class="fa fa-calendar-o"></span> Week</md-button>
+            <md-button ng-class="{'md-raised md-ink-ripple':currentMonth}" ng-disabled="currentMonth" ng-click=" showSuggestionsForCurrentMonth()"><span class="fa fa-calendar-times-o"></span> Month</md-button>
+            <md-button ng-class="{'md-raised md-ink-ripple':allTime}" ng-disabled="allTime" ng-click="showAllTime()"><span class="fa fa-calendar"></span> All-time</md-button>
         </md-toolbar>
     </div>
     <md-card layout-gt-sm="columns" ng-repeat="suggestion in suggestions">

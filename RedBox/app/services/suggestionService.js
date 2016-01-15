@@ -79,17 +79,6 @@
 
             return deferred.promise;
         };
-        var getArchivedSuggestions = function () {
-            var deferred = $q.defer();
-            $http.get('/api/suggestion/GetArchivedSuggestions').success(function (response) {
-                deferred.resolve(response);
-
-            }).error(function (err) {
-                deferred.reject(err);
-            });
-
-            return deferred.promise;
-        }
 
         return {
             getSuggestions: getSuggestions,
@@ -97,8 +86,7 @@
             vote: vote,
             archiveSuggestion: archiveSuggestion,
             getSuggestionForCurrentWeek: getSuggestionForCurrentWeek,
-            getSuggestionForCurrentMonth: getSuggestionForCurrentMonth,
-            getArchivedSuggestions: getArchivedSuggestions
+            getSuggestionForCurrentMonth: getSuggestionForCurrentMonth
         };
 
     }]);
