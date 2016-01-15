@@ -11,7 +11,7 @@
             $scope.errorMessage = response.message;
         });
 
-        $http.get('/api/Apprentice/GetCurrentPeriod').success(function (response) {
+        $http.get('/api/Apprentice/GetCurrentEOM').success(function (response) {
             $scope.evaluationPeriod = response;
         });
 

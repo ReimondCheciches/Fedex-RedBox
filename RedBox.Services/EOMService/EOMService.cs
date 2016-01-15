@@ -14,7 +14,7 @@ namespace RedBox.Services.EOMService
             _repository = repository;
         }
 
-        public EOM GetCurrentPeriod()
+        public EOM GetCurrentEOM()
         {
             var currentDate = DateTime.Now;
             var currentEOM =
@@ -38,15 +38,11 @@ namespace RedBox.Services.EOMService
             return _repository.GetEntities<EOM>().Where(p => !string.IsNullOrEmpty(p.WinnerId)).ToList();
         }
 
-        public void AddVote(EOMVote vote)
+        public void AddVote(EOMVote vote, EOMUserVote userVote)
         {
             _repository.Add(vote);
-            _repository.SaveChanges();
-        }
-
-        public void AddUserVote(EOMUserVote userVote)
-        {
             _repository.Add(userVote);
+
             _repository.SaveChanges();
         }
 
@@ -74,7 +70,7 @@ namespace RedBox.Services.EOMService
 
         }
 
-        public int GetNumberOfVotesCurrentPeriod()
+        public int GetNumberOfCurrentEOMVotes()
         {
             var currentDate = DateTime.Now;
             var currentEOM =
