@@ -231,12 +231,12 @@
     <Content Include="app\controllers\rolesController.js" />
     <Content Include="app\controllers\userController.js" />
     <Content Include="app\directives\toggleClass.js" />
-    <Content Include="app\external\underscoreModule.js" />
     <Content Include="app\services\appRouter.js" />
     <Content Include="app\services\authentification.js" />
     <Content Include="app\services\authInterceptorService.js" />
     <Content Include="app\services\eomService.js" />
     <Content Include="app\services\suggestionService.js" />
+    <Content Include="app\services\userService.js" />
     <Content Include="app\views\Apprentice.html" />
     <Content Include="app\views\ApprenticeDetail.html" />
     <Content Include="app\views\EOM.html" />
