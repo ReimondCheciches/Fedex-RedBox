@@ -4,7 +4,8 @@
     myApp.controller('mainController', function ($scope, $location, authService, $http) {
         var tabToUrlMapping = {
             "Suggestions": ["/", "Suggestions"],
-            "EOM": ["/EOM"]
+            "EOM": ["/EOM"],
+            "Events": ["/Events"]
         };
 
         $scope.isTabActive = function(tabName) {

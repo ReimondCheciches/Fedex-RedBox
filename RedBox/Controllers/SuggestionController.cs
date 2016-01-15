@@ -9,6 +9,11 @@ namespace RedBox.Web.Controllers
     public class SuggestionController : ApiController
     {
         private readonly ISuggestionService _suggestionService;
+
+        public SuggestionController()
+        {
+
+        }
         public SuggestionController(ISuggestionService suggestionService)
         {
             _suggestionService = suggestionService;
@@ -27,9 +32,9 @@ namespace RedBox.Web.Controllers
         }
 
         [HttpPost]
-        public void AddSuggestion(Suggestion suggestion)
+        public void AddSuggestion(SuggestionRequest SuggestionDesc)
         {
-            _suggestionService.AddSuggestion(suggestion);
+            _suggestionService.AddSuggestion(SuggestionDesc.SuggestionDesc);
         }
 
         [HttpPost]
@@ -44,6 +49,10 @@ namespace RedBox.Web.Controllers
             MembershipUser user = Membership.GetUser();
             if (!_suggestionService.UserhasVoted(user.ProviderUserKey.ToString())) return;
             _suggestionService.Vote(suggestionId, upVote, user.ProviderUserKey.ToString());
+        }
+
+        public class SuggestionRequest {
+            public string SuggestionDesc { get; set; }
         }
     }
 }

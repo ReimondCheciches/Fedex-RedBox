@@ -2,6 +2,7 @@
 using System.Linq;
 using RedBox.DataAccess;
 using RedBox.DataAccess.Repositories;
+using System;
 
 namespace RedBox.Services.SuggestionService
 {
@@ -24,12 +25,13 @@ namespace RedBox.Services.SuggestionService
             return _repository.GetEntities<Suggestion>().Where(s => (bool) !s.Archived).ToList();
         }
 
-        public void AddSuggestion(Suggestion suggestion)
+        public void AddSuggestion(string suggestionDesc)
         {
+
             _repository.Add(new Suggestion()
             {
-                Description = suggestion.Description,
-                Date = suggestion.Date
+                Description = suggestionDesc,
+                Date = DateTime.Now
             });
             _repository.SaveChanges();
         }
