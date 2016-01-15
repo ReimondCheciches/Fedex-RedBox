@@ -25,7 +25,6 @@
 
             if (authService.authentification.userName != "") {
                 $scope.currentUser = authService.authentification;
-                console.log('isLogged');
                 return true;
             }
 
