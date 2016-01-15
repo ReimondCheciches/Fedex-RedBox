@@ -60,8 +60,15 @@ namespace RedBox.Web.Controllers
             _eventService.RespondToEvent(respondToEventRequest);
         }
 
+        [HttpPost]
+        public void ArchiveEvent(EventRequest EventRequest)
+        {
+            _eventService.ArchiveEvent(EventRequest.Id);
+        }
+
         public class EventRequest
         {
+            public int Id { get; set; }
             public string EventDesc { get; set; }
         }
     }

@@ -26,5 +26,11 @@
                 controller.loadEvents();
             });
         }
+
+        $scope.archiveEvent = function (id) {
+            eventService.archiveEvent(id).then(function () {
+                controller.loadEvents();
+            });
+        }
     }]);
 }());

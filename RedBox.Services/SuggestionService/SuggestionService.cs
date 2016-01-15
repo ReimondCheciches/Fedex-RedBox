@@ -80,5 +80,18 @@ namespace RedBox.Services.SuggestionService
 
             return false;
         }
+
+        public void ArhiveSuggestion(int suggestionId)
+        {
+            var s = _repository.GetEntities<Suggestion>().FirstOrDefault(p => p.Id == suggestionId);
+
+            if (s != null)
+            {
+                s.Archived = true;
+
+                _repository.Update(s);
+            }
+            _repository.SaveChanges();
+        }
     }
 }

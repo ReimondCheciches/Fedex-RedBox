@@ -26,5 +26,11 @@
                 controller.loadSuggestions();
             });
         }
+
+        $scope.archiveSuggestion = function (id) {
+            suggestionService.archiveSuggestion(id).then(function () {
+                controller.loadSuggestions();
+            });
+        }
     }]);
 }());

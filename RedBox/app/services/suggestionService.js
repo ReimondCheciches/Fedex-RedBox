@@ -43,11 +43,25 @@
             return deferred.promise;
         };
 
+        var archiveSuggestion = function (id) {
+
+            var deferred = $q.defer();
+
+            $http.post('/api/suggestion/ArchiveSuggestion', { 'Id': id }).success(function (response) {
+                deferred.resolve(response);
+
+            }).error(function (err) {
+                deferred.reject(err);
+            });
+
+            return deferred.promise;
+        };
 
         return {
             getSuggestions: getSuggestions,
             submitSuggestion: submitSuggestion,
-            vote: vote
+            vote: vote,
+            archiveSuggestion: archiveSuggestion
         };
 
     }]);

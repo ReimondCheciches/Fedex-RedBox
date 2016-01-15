@@ -9,6 +9,6 @@ namespace RedBox.Services.EventService
         List<Event> GetEvents();
         void AddEvent(string eventDesc, string UserId);
         void RespondToEvent(RespondToEventRequest respondToEventRequest);
-
+        void ArchiveEvent(int eventId);
     }
 }
