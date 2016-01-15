@@ -6,7 +6,7 @@
                 <textarea ng-model="eventDesc" ng-model="user.biography" columns="1" maxlength="200" md-maxlength="200"></textarea>
             </md-input-container>
             <md-card-actions layout="row" layout-align="center center">
-                <md-button class="md-raised md-primary" ng-click="submitEvent(eventDesc)"><span class="fa fa-rocket"></span> Submit</md-button>
+                <md-button class="md-raised md-primary" ng-click="submitEvent(eventDesc)" ng-disabled="!eventDesc"><span class="fa fa-rocket"></span> Submit</md-button>
             </md-card-actions>
         </md-card>
     </div>

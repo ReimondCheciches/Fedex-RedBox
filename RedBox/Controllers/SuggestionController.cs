@@ -43,6 +43,7 @@ namespace RedBox.Web.Controllers
         [HttpGet]
         public IEnumerable<SuggestionModel> GetSuggestionsCurrentWeek()
         {
+            var userId = User.Identity.GetUserId();
             var suggestions = new List<SuggestionModel>();
             DateTime StartDay = GetFirstDayOfWeekForDay(DateTime.Today);
             DateTime EndDay = StartDay.AddDays(7);
@@ -58,7 +59,8 @@ namespace RedBox.Web.Controllers
                         Date = suggestion.Date,
                         UpVote = suggestion.UpVotes,
                         DownVote = suggestion.DownVotes,
-                        Archived = (suggestion.Archived != null && suggestion.Archived == true) ? true : false
+                        Archived = (suggestion.Archived != null && suggestion.Archived == true) ? true : false,
+                         HasVoted = suggestion.SuggestionVotes.Any(v => v.UserId == userId)
                     });
                 }
             }
@@ -69,6 +71,7 @@ namespace RedBox.Web.Controllers
         [HttpGet]
         public IEnumerable<SuggestionModel> GetSuggestionsCurrentMonth()
         {
+            var userId = User.Identity.GetUserId();
             var suggestions = new List<SuggestionModel>();
             DateTime StartDay = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
             DateTime EndDay = StartDay.AddMonths(1).AddDays(-1);
@@ -84,7 +87,8 @@ namespace RedBox.Web.Controllers
                         Date = suggestion.Date,
                         UpVote = suggestion.UpVotes,
                         DownVote = suggestion.DownVotes,
-                        Archived = (suggestion.Archived != null && suggestion.Archived == true) ? true : false
+                        Archived = (suggestion.Archived != null && suggestion.Archived == true) ? true : false,
+                         HasVoted = suggestion.SuggestionVotes.Any(v => v.UserId == userId)
                     });
                 }
             }
