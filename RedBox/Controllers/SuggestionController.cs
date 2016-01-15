@@ -43,7 +43,7 @@ namespace RedBox.Web.Controllers
         {
             MembershipUser user = Membership.GetUser();
             if (!_suggestionService.UserhasVoted(user.ProviderUserKey.ToString())) return;
-            _suggestionService.Vote(suggestionId, upVote, userId);
+            _suggestionService.Vote(suggestionId, upVote, user.ProviderUserKey.ToString());
         }
     }
 }
