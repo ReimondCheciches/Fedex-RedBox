@@ -6,7 +6,7 @@
         var controller = this;
         controller.loadEvents = function () {
             eventService.getEvents().then(function (events) {
-                $scope.events = events;
+                $scope.events = _.filter(events, function (item) { return item.archived != true; });
                 $scope.allEvents = events;
             });
         }
@@ -83,6 +83,7 @@
         }
 
         $scope.showArchived = function () {
+            $scope.events = $scope.allEvents;
             $scope.hotest = false;
             $scope.newest = false;
             $scope.archived = true;

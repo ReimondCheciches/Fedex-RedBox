@@ -9,7 +9,7 @@
                 suggestions = _.each(suggestions, function (suggestion) {
                     suggestion.progress = false;
                 });
-                $scope.suggestions = suggestions;
+                $scope.suggestions = _.filter(suggestions, function (item) { return item.archived != true; });
                 $scope.allSuggestions = suggestions;
             });
         }
@@ -93,6 +93,7 @@
         }
 
         $scope.showArchived = function () {
+            $scope.suggestions = $scope.allSuggestions;
             $scope.hotest = false;
             $scope.newest = false;
             $scope.archived = true;
