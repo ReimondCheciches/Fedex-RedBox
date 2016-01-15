@@ -31,6 +31,7 @@ namespace RedBox.Web.Models
         public bool HasRegistered { get; set; }
 
         public string LoginProvider { get; set; }
+        public string FullName { get; set; }
     }
 
     public class UserLoginInfoViewModel
