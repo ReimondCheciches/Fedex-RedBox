@@ -2,7 +2,7 @@
 (function () {
     var myApp = angular.module('myApp');
 
-    myApp.factory('authService', function ($http, $q, localStorageService) {
+    myApp.factory('authService', function ($http, $q, localStorageService, $rootScope) {
 
         var serviceBase = '/';
         var authServiceFactory = {};
@@ -70,7 +70,7 @@
                 _authentification.userName = authData.userName;
             }
 
-            if (authData.userName == null) {
+            if (authData && authData.userName == null) {
                 $http.get('api/Account/UserInfo').then(function (userInfoResponse) {
                     _authentification.isAuth = true;
                     _authentification.userName = userInfoResponse.data.email;

@@ -41,6 +41,7 @@
             if (!authService.authentification.isAuth) {
 
                 authService.login({ Username: "sso", Password: "sso" }).then(function () {
+                  authService.fillAuthData();
                     $location.path('/');
                 }, function () {
                     window.location = 'http://localhost:58902/Account/Login.aspx?ReturnUrl=' + encodeURIComponent($location.absUrl());

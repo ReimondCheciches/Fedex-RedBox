@@ -24,17 +24,16 @@
 
             if (authService.authentification.userName != "") {
                 $scope.currentUser = authService.authentification;
+                console.log('isLogged');
                 return true;
             }
 
-       
+       console.log('isNot');
             return false;
          };
 
          $scope.logOut = function () {
              authService.logOut();
-             $location.path('/Login');
-             $location.url($location.path());
          };
 
        
