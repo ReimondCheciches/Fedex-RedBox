@@ -2,6 +2,7 @@
 using System.Web.Http;
 using RedBox.DataAccess;
 using RedBox.Services.SuggestionService;
+using System.Web.Security;
 
 namespace RedBox.Web.Controllers
 {
@@ -25,23 +26,24 @@ namespace RedBox.Web.Controllers
             return _suggestionService.GetArchivedSuggestions();
         }
 
-        [HttpGet]
+        [HttpPost]
         public void AddSuggestion(Suggestion suggestion)
         {
             _suggestionService.AddSuggestion(suggestion);
         }
 
-        [HttpGet]
+        [HttpPost]
         public void RemoveSuggestion(int id)
         {
             _suggestionService.RemoveSuggestion(id);
         }
 
+        [HttpPost]
         public void Vote(int suggestionId, bool upVote)
         {
-            var userId="87022DBA-F137-49FF-9C9B-E1F216D53545";
-            if (!_suggestionService.UserhasVoted(userId)) return;
-            _suggestionService.Vote(suggestionId, upVote, userId);
+            MembershipUser user = Membership.GetUser();
+            if (!_suggestionService.UserhasVoted(user.ProviderUserKey.ToString())) return;
+            _suggestionService.Vote(suggestionId, upVote, user.ProviderUserKey.ToString());
         }
     }
 }

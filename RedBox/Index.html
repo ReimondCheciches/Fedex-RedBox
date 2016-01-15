@@ -19,6 +19,15 @@
 </head>
 
 <body ng-app="myApp" ng-cloak>
+
+
+    <div class="login-div checking" ng-hide="true" ng-class="{'change-password-div' : isResetNeeded}">
+        <div class="login-header md-toolbar md-default-theme">
+            <div class="logging-in">
+              <div class="indeterminate"><img src="Content/Images/login-bg.png"></div>
+            </div>
+        </div>
+    </div>
     <div class="wrapper" ng-controller="mainController">
         <header>
             <div class="header">
