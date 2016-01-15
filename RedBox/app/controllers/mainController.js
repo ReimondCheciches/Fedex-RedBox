@@ -20,7 +20,7 @@
 
         };
 
-         $scope.isLogged = function () {
+        $scope.isLogged = function () {
 
             if (authService.authentification.userName != "") {
                 $scope.currentUser = authService.authentification;
@@ -28,17 +28,16 @@
                 return true;
             }
 
-       console.log('isNot');
             return false;
-         };
+        };
 
-         $scope.logOut = function () {
-             authService.logOut();
-         };
+        $scope.logOut = function () {
+            authService.logOut();
+        };
 
-       
+
 
     });
 
-   
+
 }());
