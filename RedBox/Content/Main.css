@@ -993,7 +993,9 @@ dd {
 }
 
 
-
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak, .ng-hide:not(.ng-hide-animate) {
+    display: none !important;
+}
 
 
 
@@ -1021,7 +1023,7 @@ dd {
   height: 163px;
   display: block;
   width: 100%;
-  background-color: #ffcdd2;
+  background-color: #b2dfdb;
   border-radius: 2px;
   background-clip: padding-box;
   margin: 0;

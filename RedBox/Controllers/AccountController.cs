@@ -219,6 +219,8 @@ namespace RedBox.Web.Controllers
             return Ok();
         }
 
+
+
         // GET api/Account/ExternalLogin
         [OverrideAuthentication]
         [HostAuthentication(DefaultAuthenticationTypes.ExternalCookie)]
