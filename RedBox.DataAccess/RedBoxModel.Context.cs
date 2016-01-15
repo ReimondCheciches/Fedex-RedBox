@@ -36,5 +36,7 @@ namespace RedBox.DataAccess
         public virtual DbSet<Suggestion> Suggestions { get; set; }
         public virtual DbSet<SuggestionVote> SuggestionVotes { get; set; }
         public virtual DbSet<UserInfo> UserInfoes { get; set; }
+        public virtual DbSet<Event> Events { get; set; }
+        public virtual DbSet<UserEvent> UserEvents { get; set; }
     }
 }

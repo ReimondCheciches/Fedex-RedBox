@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="RedBoxModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="RedBoxModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="__MigrationHistory">
           <Key>
             <PropertyRef Name="MigrationId" />
@@ -91,6 +91,15 @@
           <Property Name="Reason" Type="nvarchar" MaxLength="256" Nullable="false" />
           <Property Name="EOMid" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="Events">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="Archived" Type="bit" Nullable="false" />
+        </EntityType>
         <EntityType Name="Suggestions">
           <Key>
             <PropertyRef Name="Id" />
@@ -109,6 +118,15 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="SuggestionId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserEvents">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="EventId" Type="int" Nullable="false" />
+          <Property Name="Response" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="UserInfo">
           <Key>
@@ -258,6 +276,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_UserEvents_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="UserEvents" Type="Self.UserEvents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserEvents">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserEvents_Events">
+          <End Role="Events" Type="Self.Events" Multiplicity="1" />
+          <End Role="UserEvents" Type="Self.UserEvents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Events">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserEvents">
+              <PropertyRef Name="EventId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_UserInfo_AspNetUsers">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
           <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="0..1" />
@@ -280,8 +322,10 @@
           <EntitySet Name="EOM" EntityType="Self.EOM" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EOMUserVotes" EntityType="Self.EOMUserVotes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EOMVotes" EntityType="Self.EOMVotes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Events" EntityType="Self.Events" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Suggestions" EntityType="Self.Suggestions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SuggestionVotes" EntityType="Self.SuggestionVotes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserEvents" EntityType="Self.UserEvents" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserInfo" EntityType="Self.UserInfo" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
@@ -327,13 +371,20 @@
             <End Role="Suggestions" EntitySet="Suggestions" />
             <End Role="SuggestionVotes" EntitySet="SuggestionVotes" />
           </AssociationSet>
+          <AssociationSet Name="FK_UserEvents_AspNetUsers" Association="Self.FK_UserEvents_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="UserEvents" EntitySet="UserEvents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserEvents_Events" Association="Self.FK_UserEvents_Events">
+            <End Role="Events" EntitySet="Events" />
+            <End Role="UserEvents" EntitySet="UserEvents" />
+          </AssociationSet>
           <AssociationSet Name="FK_UserInfo_AspNetUsers" Association="Self.FK_UserInfo_AspNetUsers">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="UserInfo" EntitySet="UserInfo" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="RedBoxModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -400,6 +451,7 @@
           <NavigationProperty Name="SuggestionVotes" Relationship="Self.FK_SuggestionVotes_AspNetUsers" FromRole="AspNetUsers" ToRole="SuggestionVotes" />
           <NavigationProperty Name="UserInfo" Relationship="Self.FK_UserInfo_AspNetUsers" FromRole="AspNetUsers" ToRole="UserInfo" />
           <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
+          <NavigationProperty Name="UserEvents" Relationship="RedBoxModel.FK_UserEvents_AspNetUsers" FromRole="AspNetUser" ToRole="UserEvent" />
         </EntityType>
         <EntityType Name="EOM">
           <Key>
@@ -648,7 +700,62 @@
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
+          <EntitySet Name="Events" EntityType="RedBoxModel.Event" />
+          <EntitySet Name="UserEvents" EntityType="RedBoxModel.UserEvent" />
+          <AssociationSet Name="FK_UserEvents_AspNetUsers" Association="RedBoxModel.FK_UserEvents_AspNetUsers">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="UserEvent" EntitySet="UserEvents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserEvents_Events" Association="RedBoxModel.FK_UserEvents_Events">
+            <End Role="Event" EntitySet="Events" />
+            <End Role="UserEvent" EntitySet="UserEvents" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Event">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="UserEvents" Relationship="RedBoxModel.FK_UserEvents_Events" FromRole="Event" ToRole="UserEvent" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Archived" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserEvent">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="EventId" Type="Int32" Nullable="false" />
+          <Property Name="Response" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="RedBoxModel.FK_UserEvents_AspNetUsers" FromRole="UserEvent" ToRole="AspNetUser" />
+          <NavigationProperty Name="Event" Relationship="RedBoxModel.FK_UserEvents_Events" FromRole="UserEvent" ToRole="Event" />
+        </EntityType>
+        <Association Name="FK_UserEvents_AspNetUsers">
+          <End Type="RedBoxModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+          <End Type="RedBoxModel.UserEvent" Role="UserEvent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserEvent">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserEvents_Events">
+          <End Type="RedBoxModel.Event" Role="Event" Multiplicity="1" />
+          <End Type="RedBoxModel.UserEvent" Role="UserEvent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Event">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserEvent">
+              <PropertyRef Name="EventId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -776,6 +883,26 @@
               <ScalarProperty Name="Id" ColumnName="UserId" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="Events">
+            <EntityTypeMapping TypeName="RedBoxModel.Event">
+              <MappingFragment StoreEntitySet="Events">
+                <ScalarProperty Name="Archived" ColumnName="Archived" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserEvents">
+            <EntityTypeMapping TypeName="RedBoxModel.UserEvent">
+              <MappingFragment StoreEntitySet="UserEvents">
+                <ScalarProperty Name="Response" ColumnName="Response" />
+                <ScalarProperty Name="EventId" ColumnName="EventId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
