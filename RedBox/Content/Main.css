@@ -123,6 +123,17 @@ h1 {
     font: 300 34px/40px Roboto,sans-serif;
 }
 
+.nav-tabs {
+    white-space: nowrap;
+    overflow: auto;
+    font-size: 0;
+}
+
+.nav-tabs > li {
+    float: none;
+    display: inline-block;
+}
+
 .nav-tabs > li.active > a,
 .nav-tabs > li > a:hover,
 /*.nav-tabs > li > a:focus,*/
@@ -890,7 +901,7 @@ md-toolbar:not(.md-menu-toolbar).md-dark {
     float: left;
     padding-left: 16px;
     padding-right: 16px;
-    margin: 0;
+    margin: 0 !important;
     border-radius: 0 !important;
 }
 
@@ -1115,9 +1126,14 @@ dd {
 
 
 
-
-
-
+.user-status {
+    display: none;
+    cursor: default;
+    line-height: 56px;
+    text-indent: 16px;
+    background: rgba(0,0,0,.12);
+    border-bottom: 2px solid rgba(0,0,0,.24);
+}
 
 @media screen and (max-width: 767px) {
     .callout-box .md-block {
@@ -1147,6 +1163,11 @@ dd {
 }
 
 @media screen and (max-width: 600px) {
+
+    .user-status {
+        display: block;
+    }
+
     .claim {
         font-size: 16px;
     }
@@ -1161,7 +1182,21 @@ dd {
         padding-right: 8px;
     }
 
-    .md-btn-group .fa {
+    .md-btn-group:not([layout-xs="columns"]) .fa {
         display: none;
+    }
+
+    .logged > span {
+        display: none;
+    }
+
+    .nav-tabs {
+        padding-left: 0;
+    }
+
+    .changer ul {
+        position: fixed;
+        bottom: -10px;
+        overflow: auto;
     }
 }

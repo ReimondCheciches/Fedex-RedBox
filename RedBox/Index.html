@@ -14,7 +14,7 @@
     <link href="Content/angular-toastr.min.css" rel="stylesheet" />
     <link rel="icon" href="/favicon.png" type="image/png">
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,500,700,300,100' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <link href="Content/loader.css" rel="stylesheet" />
 </head>
 
@@ -31,7 +31,6 @@
             </div>
         </div>
     </div>
-<<<<<<< Updated upstream
     </div>
 
     <header ng-show="isLogged()" class="ng-hide" ng-cloak>
@@ -39,6 +38,7 @@
             <div class="changer">
                 <div></div>
                 <ul>
+                    <li class="user-status"><span>Welcome <strong>{{currentUser.userName}}</strong> !</li>
                     <li><a href="http://192.168.1.57:2016">Timesheet</a></li>
                     <li><a href="http://192.168.1.57:2017">Evaluation</a></li>
                     <li class="active"><a href="http://192.168.1.57:2018">Redbox</a></li>
@@ -56,7 +56,7 @@
         <nav>
             <ul class="nav nav-tabs" role="tablist">
                 <li role="presentation" ng-class="{'active': isTabActive('Suggestions')}" ng-hide="hideSelfEvaluation"><a href="#Suggestions">Suggestions</a></li>
-                <li role="presentation" ng-class="{'active': isTabActive('Events')}"><a href="#Events">Events</a></li>
+                <li role="presentation" ng-class="{'active': isTabActive('Events')}"><a href="#Events">Gatherings</a></li>
                 <li role="presentation" ng-class="{'active': isTabActive('EOM')}"><a href="#EOM">EOM</a></li>
             </ul>
         </nav>
