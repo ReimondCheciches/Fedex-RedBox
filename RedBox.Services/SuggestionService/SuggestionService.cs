@@ -43,10 +43,8 @@ namespace RedBox.Services.SuggestionService
         }
 
 
-        public void Vote(int suggestionId, bool upVote)
-        {
-            var userId = "87022DBA-F137-49FF-9C9B-E1F216D53545";
-            
+        public void Vote(int suggestionId, bool upVote, string userId)
+        {                      
             var suggestion = _repository.GetEntities<Suggestion>().FirstOrDefault(p => p.Id == suggestionId);
             if (suggestion == null) return;
             
