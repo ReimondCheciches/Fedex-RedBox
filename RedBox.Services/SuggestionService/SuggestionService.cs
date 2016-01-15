@@ -42,25 +42,31 @@ namespace RedBox.Services.SuggestionService
             _repository.SaveChanges();
         }
 
+        static object LockObject = new object();
+
 
         public void Vote(int suggestionId, bool upVote, string userId)
-        {                      
-            var suggestion = _repository.GetEntities<Suggestion>().FirstOrDefault(p => p.Id == suggestionId);
-            if (suggestion == null) return;
-            
-            if(upVote)
-                suggestion.UpVotes++;
-            else
-                suggestion.DownVotes++;
-
-            _repository.Update(suggestion);
-            _repository.Add(new SuggestionVote()
+        {
+            lock (LockObject)
             {
-                UserId = userId,
-                SuggestionId = suggestionId
-            });
+                var suggestion = _repository.GetEntities<Suggestion>().FirstOrDefault(p => p.Id == suggestionId);
+                if (suggestion == null) return;
 
-            _repository.SaveChanges();
+                if (upVote)
+                    suggestion.UpVotes++;
+                else
+                    suggestion.DownVotes++;
+
+                _repository.Update(suggestion);
+                _repository.Add(new SuggestionVote()
+                {
+                    UserId = userId,
+                    SuggestionId = suggestionId
+                });
+
+                _repository.SaveChanges();
+            }
+        
         }
 
         public bool UserhasVoted(string userId)

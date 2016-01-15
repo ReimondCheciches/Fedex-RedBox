@@ -21,74 +21,80 @@
 <body ng-app="myApp" ng-cloak>
 
 
-    <div class="login-div checking" ng-hide="true" ng-class="{'change-password-div' : isResetNeeded}">
+
+<div class="wrapper" ng-controller="mainController">
+    <div class="login" ng-hide="isLogged()">
+    <div class="login-div checking"   ng-cloak>
         <div class="login-header md-toolbar md-default-theme">
             <div class="logging-in">
-              <div class="indeterminate"><img src="Content/Images/login-bg.png"></div>
+                <div class="indeterminate"><img src="Content/Images/login-bg.png"></div>
             </div>
         </div>
     </div>
-    <div class="wrapper" ng-controller="mainController">
-        <header>
-            <div class="header">
-                <div class="changer">
-                    <div></div>
-                    <ul>
-                        <li><a href="http://localhost:58902/">Timesheet</a></li>
-                        <li><a href="http://localhost:61503">Evaluation</a></li>
-                        <li class="active"><a href="http://www2.techromix.com:85">Redbox</a></li>
-                        <li><a href="http://blog.techromix.com">Blog</a></li>
-                        <li><a target="_blank" href="https://sites.google.com/a/techromix.com/internal-site/">Google Site <span class="fa fa-external-link"></span></a></li>
-                        <li><a target="_blank" href="https://sites.google.com/a/techromix.com/dev/">Dev Team <span class="fa fa-external-link"></span></a></li>
-                        <li><a target="_blank" href="https://sites.google.com/a/techromix.com/tmx-qa-team/home/">QA Team <span class="fa fa-external-link"></span></a></li>
-                    </ul>
-                </div>
-                <h1>Redbox</h1>
-                <div class="col-md-8 no-padding text-right logged" ng-show="isLogged()">
-                    <span>Welcome <strong>{{currentUser.userName}}</strong> !</span>&nbsp;<a ng-click="logOut()">logout</a>
-                </div>
-            </div>
-            <nav>
-                <ul class="nav nav-tabs" role="tablist">
-                    <li role="presentation" ng-class="{'active': isTabActive('Suggestions')}" ng-hide="hideSelfEvaluation"><a href="#Suggestions">Suggestions</a></li>
-                    <li role="presentation" ng-class="{'active': isTabActive('EOM')}"><a href="#EOM">EOM</a></li>
-                </ul>
-            </nav>
-        </header>
-        <div ng-view></div>
-        <script src="Scripts/jquery-2.2.0.min.js"></script>
-        <script src="Scripts/angular.js"></script>
-        <script src="Scripts/angular-sanitize.js"></script>
-       
-        <script src="Scripts/angular-route.js"></script>
-        <script src="Scripts/angular-animate.js"></script>
-        <script src="Scripts/angular-aria.js"></script>
-        <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js"></script>
-        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js"></script>
-
-        <script src="Scripts/angular-local-storage.js"></script>
-        <script src="Scripts/angular-ui/ui-bootstrap-tpls.min.js"></script>
-        <!--<script src="Scripts/angular-toastr.tpls.min.js"></script>
-        <script src="Scripts/select.js"></script>-->
-        <script src="Scripts/underscore.min.js"></script>
-        <!--<script src="Scripts/ngDraggable.js"></script>
-        <script src="Scripts/clickoutside.directive.js"></script>-->
-        <script src="app/external/underscoreModule.js"></script>
-        <script src="app/services/appRouter.js"></script>
-        <script src="app/services/authentification.js"></script>
-        <script src="app/controllers/mainController.js"></script>
-        <script src="app/controllers/suggestionsController.js"></script>
-        <script src="app/controllers/eomController.js"></script>
-
-        <script>
-            $(".changer").mouseenter(function () {
-                $(this).addClass("open");
-            });
-            $(".changer").mouseleave(function () {
-                $(this).removeClass("open");
-            });
-        </script>
-
     </div>
+
+    <header ng-show="isLogged()" class="ng-hide" ng-cloak>
+        <div class="header">
+            <div class="changer">
+                <div></div>
+                <ul>
+                    <li><a href="http://localhost:58902/">Timesheet</a></li>
+                    <li><a href="http://localhost:61503">Evaluation</a></li>
+                    <li class="active"><a href="http://www2.techromix.com:85">Redbox</a></li>
+                    <li><a href="http://blog.techromix.com">Blog</a></li>
+                    <li><a target="_blank" href="https://sites.google.com/a/techromix.com/internal-site/">Google Site <span class="fa fa-external-link"></span></a></li>
+                    <li><a target="_blank" href="https://sites.google.com/a/techromix.com/dev/">Dev Team <span class="fa fa-external-link"></span></a></li>
+                    <li><a target="_blank" href="https://sites.google.com/a/techromix.com/tmx-qa-team/home/">QA Team <span class="fa fa-external-link"></span></a></li>
+                </ul>
+            </div>
+            <h1>Redbox</h1>
+            <div class="col-md-8 no-padding text-right logged" ng-show="isLogged()">
+                <span>Welcome <strong>{{currentUser.userName}}</strong> !</span>&nbsp;<a ng-click="logOut()">logout</a>
+            </div>
+        </div>
+        <nav>
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" ng-class="{'active': isTabActive('Suggestions')}" ng-hide="hideSelfEvaluation"><a href="#Suggestions">Suggestions</a></li>
+                <li role="presentation" ng-class="{'active': isTabActive('EOM')}"><a href="#EOM">EOM</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div ng-show="isLogged()" ng-cloak ng-view></div>
+    <script src="Scripts/jquery-2.2.0.min.js"></script>
+    <script src="Scripts/angular.js"></script>
+    <script src="Scripts/angular-sanitize.js"></script>
+
+    <script src="Scripts/angular-route.js"></script>
+    <script src="Scripts/angular-animate.js"></script>
+    <script src="Scripts/angular-aria.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js"></script>
+
+    <script src="Scripts/angular-local-storage.js"></script>
+    <script src="Scripts/angular-ui/ui-bootstrap-tpls.min.js"></script>
+    <!--<script src="Scripts/angular-toastr.tpls.min.js"></script>
+    <script src="Scripts/select.js"></script>-->
+    <script src="Scripts/underscore.min.js"></script>
+    <!--<script src="Scripts/ngDraggable.js"></script>
+    <script src="Scripts/clickoutside.directive.js"></script>-->
+    <script src="app/external/underscoreModule.js"></script>
+    <script src="app/services/appRouter.js"></script>
+    <script src="app/services/authInterceptorService.js"></script>
+    <script src="app/services/authentification.js"></script>
+    <script src="app/controllers/mainController.js"></script>
+    <script src="app/controllers/suggestionsController.js"></script>
+    <script src="app/controllers/eomController.js"></script>
+
+    <script>
+        $(".changer").mouseenter(function() {
+            $(this).addClass("open");
+        });
+        $(".changer").mouseleave(function() {
+            $(this).removeClass("open");
+        });
+    </script>
+
+</div>
 </body>
 </html>

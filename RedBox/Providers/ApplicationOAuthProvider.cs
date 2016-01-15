@@ -46,11 +46,13 @@ namespace RedBox.Web.Providers
                     }
                 }
 
+                webRequest.AllowAutoRedirect = false;
+
                 var response = (HttpWebResponse)webRequest.GetResponse();
 
                 var status = response.StatusCode;
 
-                if (status != HttpStatusCode.OK && string.IsNullOrEmpty(userName))
+                if (status != HttpStatusCode.OK || string.IsNullOrEmpty(userName))
                 {
                     context.SetError("invalid_grant", "The user name or password is incorrect.");
                     return;
