@@ -6,6 +6,9 @@
         var controller = this;
         controller.loadSuggestions = function () {
             suggestionService.getSuggestions().then(function (suggestions) {
+                suggestions = _.each(suggestions, function (suggestion) {
+                    suggestion.progress = false;
+                });
                 $scope.suggestions = suggestions;
                 $scope.allSuggestions = suggestions;
             });
@@ -22,8 +25,9 @@
             });
         }
 
-        $scope.vote = function (suggestionId, upVote) {
-            suggestionService.vote(suggestionId, upVote).then(function () {
+        $scope.vote = function (suggestion, upVote) {
+            suggestionService.vote(suggestion.id, upVote).then(function () {
+                suggestion.progress = true;
                 controller.loadSuggestions();
             });
         }

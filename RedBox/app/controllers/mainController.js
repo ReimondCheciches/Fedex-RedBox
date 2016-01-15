@@ -23,7 +23,7 @@
 
         $scope.isLogged = function () {
 
-            if (authService.authentification.userName != "") {
+            if (authService.authentification.fullName != "") {
                 $scope.currentUser = authService.authentification;
                 return true;
             }

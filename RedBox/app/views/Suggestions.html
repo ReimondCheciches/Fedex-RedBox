@@ -36,10 +36,10 @@
         </md-toolbar>
         <md-toolbar flex-gt-sm="50" layout-align="center stretch" class="md-dark text-center">
             <div class="score"><span>{{(suggestion.upVote - suggestion.downVote)>-1?suggestion.upVote - suggestion.downVote:0}}</span></div>
-            <md-card-actions layout="row" layout-align="center center" ng-if="!suggestion.hasVoted">
-                <md-button class="md-raised md-accent" ng-click="vote(suggestion.id, true)"><span class="fa fa-thumbs-up"></span> Up</md-button>
-                <md-button class="md-raised md-primary" ng-click="vote(suggestion.id, false)"><span class="fa fa-thumbs-down"></span> Down</md-button>
-                <md-progress-linear class="md-accent" md-mode="indeterminate"></md-progress-linear>
+            <md-card-actions layout="row" layout-align="center center" ng-if="!suggestion.hasVoted && !suggestion.archived">
+                <md-button class="md-raised md-accent" ng-click="vote(suggestion, true)"><span class="fa fa-thumbs-up"></span> Up</md-button>
+                <md-button class="md-raised md-primary" ng-click="vote(suggestion, false)"><span class="fa fa-thumbs-down"></span> Down</md-button>
+                <md-progress-linear ng-if="suggestion.progress" class="md-accent" md-mode="indeterminate"></md-progress-linear>
             </md-card-actions>
         </md-toolbar>
     </md-card>
