@@ -3,34 +3,34 @@
         <md-card layout-sm="columns" layout-gt-sm="columns" layout-padding>
             <md-input-container class="md-block" flex>
                     <label>Call out people to a place or event</label>
-                    <textarea ng-model="user.biography" columns="1" maxlength="200" md-maxlength="200"></textarea>
+                <textarea ng-model="eventDesc" ng-model="user.biography" columns="1" maxlength="200" md-maxlength="200"></textarea>
             </md-input-container>
             <md-card-actions layout="row" layout-align="center center">
-              <md-button class="md-raised md-primary"><span class="fa fa-rocket"></span> Submit</md-button>
+                <md-button class="md-raised md-primary" ng-click="submitEvent(eventDesc)"><span class="fa fa-rocket"></span> Submit</md-button>
             </md-card-actions>
         </md-card>
     </div>
 </div>
 <div class="container">
-    <md-card>
+    <md-card ng-repeat="event in events">
         <md-toolbar class="md-primary">
-            <md-card-content layout="row" class="layout-align-space-between-center" flex layout-align="left center" >
+            <md-card-content layout="row" class="layout-align-space-between-center" flex layout-align="left center">
                 <div>
-                    <strong>Roxana Plaian</strong>
+                    <strong>{{event.userName}}</strong>
                     <br>
-                    <p>We should like totally go to the mall cuz it's like the awesome thing to do.</p>
+                    <p>{{event.description}}</p>
                 </div>
             </md-card-content>
             <md-card-actions layout-padding layout-gt-sm="row" layout-align="center center" class="layout-align-space-between-center text-center">
                 <md-toolbar class="md-whiteframe-3dp md-btn-group md-accent" layout-xs="columns" layout-sm="row" layout-gt-sm="row" layout-margin layout-align="left top">
-                    <md-button class="md-raised md-button" ng-disabled="true"><span class="fa fa-play-circle"></span> Going</md-button>
-                    <md-button class=""><span class="fa fa-pause-circle"></span> Tentative</md-button>
-                    <md-button class=""><span class="fa fa-stop-circle"></span> Not Now</md-button>
+                    <md-button ng-class="{'md-raised md-button':event.going}" ng-click="respondToEvent(event.id, 'Going')" ng-disabled="event.going"><span class="fa fa-play-circle"></span> Going</md-button>
+                    <md-button ng-class="{'md-raised md-button':event.tentative}" ng-click="respondToEvent(event.id, 'Tentative')" ng-disabled="event.tentative"><span class="fa fa-pause-circle"></span> Tentative</md-button>
+                    <md-button ng-class="{'md-raised md-button':event.notNow}" ng-click="respondToEvent(event.id, 'NotNow')" ng-disabled="event.notNow"><span class="fa fa-stop-circle"></span> Not Now</md-button>
                 </md-toolbar>
                 <md-button ng-click="hideDetails = !hideDetails"><span ng-show="!hideDetails" class="fa fa-chevron-down"></span><span ng-show="hideDetails" class="fa fa-chevron-up"></span> Details</md-button>
             </md-card-actions>
             <md-toolbar ng-show="hideDetails" class="md-dark animate-show animate-hide">
-                <md-card-content layout-gt-sm="row" flex layout-align="left center" >
+                <md-card-content layout-gt-sm="row" flex layout-align="left center">
                     <dl flex>
                         <dt>Going</dt>
                         <dd>

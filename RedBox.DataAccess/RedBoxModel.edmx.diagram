@@ -31,6 +31,7 @@
         <EntityTypeShape EntityType="RedBoxModel.UserEvent" Width="1.5" PointX="10.25" PointY="8.375" />
         <AssociationConnector Association="RedBoxModel.FK_UserEvents_AspNetUsers" />
         <AssociationConnector Association="RedBoxModel.FK_UserEvents_Events" />
+        <AssociationConnector Association="RedBoxModel.FK__Events__UserId__300424B4" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
