@@ -5,6 +5,8 @@ using RedBox.Services.SuggestionService;
 using System.Web.Security;
 using Microsoft.AspNet.Identity;
 using RedBox.Services.Models;
+using System;
+using System.Globalization;
 
 namespace RedBox.Web.Controllers
 {
@@ -20,32 +22,72 @@ namespace RedBox.Web.Controllers
         [HttpGet]
         public IEnumerable<SuggestionModel> GetSuggestions()
         {
-            var suggestions=new List<SuggestionModel>();
-            _suggestionService.GetSuggestions().ForEach(p => suggestions.Add(new SuggestionModel() { 
-                Description = p.Description, 
-                Id = p.Id,
-                UpVote = p.UpVotes, 
-                DownVote = p.DownVotes, 
-                Archived = p.Archived??true }));
-            
-            return suggestions;
-        }
-
-        [HttpGet]
-        public IEnumerable<SuggestionModel> GetArchivedSuggestions()
-        {
             var suggestions = new List<SuggestionModel>();
-            _suggestionService.GetArchivedSuggestions().ForEach(p => suggestions.Add(new SuggestionModel()
+            _suggestionService.GetSuggestions().ForEach(p => suggestions.Add(new SuggestionModel()
             {
-                Description = p.Description,
                 Id = p.Id,
+                Description = p.Description,
+                Date = p.Date,
                 UpVote = p.UpVotes,
                 DownVote = p.DownVotes,
-                Archived = p.Archived ?? true
+                Archived = (p.Archived != null && p.Archived == true) ? true : false
             }));
 
             return suggestions;
         }
+
+        [HttpGet]
+        public IEnumerable<SuggestionModel> GetSuggestionsCurrentWeek()
+        {
+            var suggestions = new List<SuggestionModel>();
+            DateTime StartDay = GetFirstDayOfWeekForDay(DateTime.Today);
+            DateTime EndDay = StartDay.AddDays(7);
+            var allSuggestions = _suggestionService.GetSuggestions();
+            foreach (var suggestion in allSuggestions)
+            {
+                if (suggestion.Date.Date.CompareTo(StartDay.Date) >= 0 && suggestion.Date.Date.CompareTo(EndDay.Date) <= 0)
+                {
+                    suggestions.Add(new SuggestionModel()
+                    {
+                        Id = suggestion.Id,
+                        Description = suggestion.Description,
+                        Date = suggestion.Date,
+                        UpVote = suggestion.UpVotes,
+                        DownVote = suggestion.DownVotes,
+                        Archived = (suggestion.Archived != null && suggestion.Archived == true) ? true : false
+                    });
+                }
+            }
+            return suggestions;
+        }
+
+
+        [HttpGet]
+        public IEnumerable<SuggestionModel> GetSuggestionsCurrentMonth()
+        {
+            var suggestions = new List<SuggestionModel>();
+            DateTime StartDay = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
+            DateTime EndDay = StartDay.AddMonths(1).AddDays(-1);
+            var allSuggestions = _suggestionService.GetSuggestions();
+            foreach (var suggestion in allSuggestions)
+            {
+                if ((suggestion.Date.Date.CompareTo(StartDay.Date) >= 0 && suggestion.Date.Date.CompareTo(EndDay.Date) <= 0))
+                {
+                    suggestions.Add(new SuggestionModel()
+                    {
+                        Id = suggestion.Id,
+                        Description = suggestion.Description,
+                        Date = suggestion.Date,
+                        UpVote = suggestion.UpVotes,
+                        DownVote = suggestion.DownVotes,
+                        Archived = (suggestion.Archived != null && suggestion.Archived == true) ? true : false
+                    });
+                }
+            }
+            return suggestions;
+        }
+
+
 
         [HttpPost]
         public void AddSuggestion(SuggestionRequest SuggestionReq)
@@ -70,6 +112,22 @@ namespace RedBox.Web.Controllers
         public class SuggestionRequest
         {
             public string SuggestionDesc { get; set; }
+        }
+
+        private DateTime GetFirstDayOfWeekForDay(DateTime dayInWeek)
+        {
+            CultureInfo defaultCultureInfo = CultureInfo.CurrentCulture;
+            return GetFirstDayOfWeek(dayInWeek, defaultCultureInfo);
+        }
+
+        private DateTime GetFirstDayOfWeek(DateTime dayInWeek, CultureInfo cultureInfo)
+        {
+            DayOfWeek firstDay = cultureInfo.DateTimeFormat.FirstDayOfWeek;
+            DateTime firstDayInWeek = dayInWeek.Date;
+            while (firstDayInWeek.DayOfWeek != firstDay)
+                firstDayInWeek = firstDayInWeek.AddDays(-1);
+
+            return firstDayInWeek;
         }
     }
 }

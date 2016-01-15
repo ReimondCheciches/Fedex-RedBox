@@ -43,11 +43,48 @@
             return deferred.promise;
         };
 
+        var getSuggestionForCurrentWeek = function () {
+            var deferred = $q.defer();
+            $http.get('/api/suggestion/GetSuggestionsCurrentWeek').success(function (response) {
+                deferred.resolve(response);
+
+            }).error(function (err) {
+                deferred.reject(err);
+            });
+
+            return deferred.promise;
+        };
+
+        var getSuggestionForCurrentMonth = function () {
+            var deferred = $q.defer();
+            $http.get('/api/suggestion/GetSuggestionsCurrentMonth').success(function (response) {
+                deferred.resolve(response);
+
+            }).error(function (err) {
+                deferred.reject(err);
+            });
+
+            return deferred.promise;
+        };
+        var getArchivedSuggestions = function () {
+            var deferred = $q.defer();
+            $http.get('/api/suggestion/GetArchivedSuggestions').success(function (response) {
+                deferred.resolve(response);
+
+            }).error(function (err) {
+                deferred.reject(err);
+            });
+
+            return deferred.promise;
+        }
 
         return {
             getSuggestions: getSuggestions,
             submitSuggestion: submitSuggestion,
-            vote: vote
+            vote: vote,
+            getSuggestionForCurrentWeek: getSuggestionForCurrentWeek,
+            getSuggestionForCurrentMonth: getSuggestionForCurrentMonth,
+            getArchivedSuggestions: getArchivedSuggestions
         };
 
     }]);
