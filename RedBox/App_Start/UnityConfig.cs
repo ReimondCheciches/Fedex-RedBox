@@ -2,6 +2,7 @@
 using RedBox.Services.SuggestionService;
 using System;
 using System.Web.Http;
+using RedBox.Services.UserServices;
 using Unity.WebApi;
 using Microsoft.Practices.Unity.Configuration;
 using RedBox.DataAccess.Repositories;
@@ -34,6 +35,7 @@ namespace RedBox.Web
             // TODO: Register your types here
             container.RegisterType<IRepository, Repository>();
             container.RegisterType<ISuggestionService, SuggestionService>();
+            container.RegisterType<IUserService, UserService>();
             GlobalConfiguration.Configuration.DependencyResolver = new UnityDependencyResolver(container);
         }
         public static void RegisterComponents()
@@ -46,6 +48,7 @@ namespace RedBox.Web
             // it is NOT necessary to register your controllers
             container.RegisterType<IRepository, Repository>();
             container.RegisterType<ISuggestionService, SuggestionService>();
+            container.RegisterType<IUserService, UserService>();
             // e.g. container.RegisterType<ITestService, TestService>();
 
             GlobalConfiguration.Configuration.DependencyResolver = new UnityDependencyResolver(container);

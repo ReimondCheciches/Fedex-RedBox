@@ -8,7 +8,7 @@
         var loadUsers = function () {
             var deferred = $q.defer();
 
-            $http.get('/api/user/getUsers').success(function (users) {
+            $http.get('/api/user/GetUsers').success(function (users) {
                 deferred.resolve(users);
             }).error(function (err, status) {
                 deferred.reject(err);
