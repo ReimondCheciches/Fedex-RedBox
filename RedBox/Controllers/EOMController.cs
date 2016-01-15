@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Web.Http;
+using Microsoft.AspNet.Identity;
 using RedBox.DataAccess;
 using RedBox.Services.EOMService;
 using RedBox.Services.SuggestionService;
@@ -15,27 +16,35 @@ namespace RedBox.Web.Controllers
         }
 
         [HttpGet]
-        public EOM GetCurrentEOM()
+        public EomResponse GetCurrentEOM()
         {
             return _eomService.GetCurrentEOM();
         }
 
         [HttpGet]
-        public List<EOM> GetAllEOMs()
+        public List<EomHistoryResponse> GetAllEOMs()
         {
             return _eomService.GetAllEOMs();
         }
 
-        [HttpGet]
-        public void AddVote(EOMVote vote, EOMUserVote userVote)
+        [HttpPost]
+        public void AddVote(EomVoteRequest request)
         {
-            _eomService.AddVote(vote, userVote);
+            var userId = User.Identity.GetUserId();
+            _eomService.AddVote(request, userId);
         }
 
         [HttpGet]
-        public void EndVote(int eomId)
+        public bool HasVoted()
         {
-            _eomService.EndVote(eomId);
+            var userId = User.Identity.GetUserId();
+            return _eomService.HasVoted(userId);
+        }
+
+        [HttpGet]
+        public void EndVote()
+        {
+            _eomService.EndVote();
         }
 
         [HttpGet]
@@ -44,4 +53,6 @@ namespace RedBox.Web.Controllers
             return _eomService.GetNumberOfCurrentEOMVotes();
         }
     }
+
+   
 }
