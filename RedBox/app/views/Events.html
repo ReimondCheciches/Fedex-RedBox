@@ -21,16 +21,19 @@
                     <p>{{event.description}}</p>
                 </div>
             </md-card-content>
-            <md-card-actions layout-padding layout-gt-sm="row" layout-align="center center" class="layout-align-space-between-center text-center">
+            <md-card-actions layout-padding layout-gt-sm="row" layout-align="end center" class="layout-align-space-between-center text-center">
+                <div flex layout="end center">
+                    <md-button ng-click="hideDetails = !hideDetails"><span ng-show="!hideDetails" class="fa fa-chevron-down"></span><span ng-show="hideDetails" class="fa fa-chevron-up"></span> Details</md-button>
+                    <md-button ng-if="!event.archived"  ng-click="archiveEvent(event.id)" ><span class="fa fa-archive"></span> Archive</md-button>
+                </div>
                 <md-toolbar class="md-whiteframe-3dp md-btn-group md-accent" layout-xs="columns" layout-sm="row" layout-gt-sm="row" layout-margin layout-align="left top" ng-if="!event.archived">
                     <md-button ng-class="{'md-raised md-button':event.going}" ng-click="respondToEvent(event.id, 'Going')" ng-disabled="event.going"><span class="fa fa-play-circle"></span> Going</md-button>
                     <md-button ng-class="{'md-raised md-button':event.tentative}" ng-click="respondToEvent(event.id, 'Tentative')" ng-disabled="event.tentative"><span class="fa fa-pause-circle"></span> Tentative</md-button>
                     <md-button ng-class="{'md-raised md-button':event.notNow}" ng-click="respondToEvent(event.id, 'NotNow')" ng-disabled="event.notNow"><span class="fa fa-stop-circle"></span> Not Now</md-button>
                 </md-toolbar>
-                <md-button ng-click="hideDetails = !hideDetails"><span ng-show="!hideDetails" class="fa fa-chevron-down"></span><span ng-show="hideDetails" class="fa fa-chevron-up"></span> Details</md-button>
             </md-card-actions>
             <md-toolbar ng-show="hideDetails" class="md-dark animate-show animate-hide">
-                <md-card-content layout-gt-sm="row" flex layout-align="left center">
+                <md-card-content layout-gt-sm="row" flex layout-align="left top">
                     <dl flex>
                         <dt>Going</dt>
                         <dd>
@@ -58,6 +61,5 @@
                 </md-card-content>
             </md-toolbar>
         </md-toolbar>
-        <md-button class="" ng-if="!event.archived" ng-click="archiveEvent(event.id)"><span class="fa fa-fire"></span> Archive</md-button>
     </md-card>
 </div>
