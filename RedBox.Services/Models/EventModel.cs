@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace RedBox.Services.Models
 {
@@ -12,5 +13,8 @@ namespace RedBox.Services.Models
         public bool Going { get; set; }
         public bool Tentative { get; set; }
         public bool NotNow { get; set; }
+        public List<UserModel> GoingUsers { get; set; }
+        public List<UserModel> TentativeUsers { get; set; }
+        public List<UserModel> NotNowUsers { get; set; }
     }
 }

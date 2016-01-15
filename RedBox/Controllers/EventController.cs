@@ -35,7 +35,10 @@ namespace RedBox.Web.Controllers
                                                            UserName = p.AspNetUser.UserInfo.FullName,
                                                            Going = firstOrDefault != null && firstOrDefault.Response.Equals(EventResponse.Going.ToString()),
                                                            Tentative = firstOrDefault != null && firstOrDefault.Response.Equals(EventResponse.Tentative.ToString()),
-                                                           NotNow = firstOrDefault != null && firstOrDefault.Response.Equals(EventResponse.NotNow.ToString())
+                                                           NotNow = firstOrDefault != null && firstOrDefault.Response.Equals(EventResponse.NotNow.ToString()),
+                                                           GoingUsers = p.UserEvents.Where(x => x.Response.Equals(EventResponse.Going.ToString())).Select(u => new UserModel(){ FullName = u.AspNetUser.UserInfo.FullName}).ToList(),
+                                                           TentativeUsers = p.UserEvents.Where(x => x.Response.Equals(EventResponse.Tentative.ToString())).Select(u=> new UserModel() { FullName = u.AspNetUser.UserInfo.FullName }).ToList(),
+                                                           NotNowUsers = p.UserEvents.Where(x => x.Response.Equals(EventResponse.NotNow.ToString())).Select(u => new UserModel() { FullName = u.AspNetUser.UserInfo.FullName }).ToList()
                                                        });
             });
 

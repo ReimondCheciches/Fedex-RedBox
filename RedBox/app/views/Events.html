@@ -34,36 +34,24 @@
                     <dl flex>
                         <dt>Going</dt>
                         <dd>
-                            <ol>
-                                <li>Roxana Plaian</li>
-                                <li>Roxana Plaian</li>
-                                <li>Roxana Plaian</li>
-                                <li>Roxana Plaian</li>
-                                <li>Roxana Plaian</li>
+                            <ol ng-repeat="guser in event.goingUsers">
+                                <li>{{guser.fullName}}</li>
                             </ol>
                         </dd>
                     </dl>
                     <dl flex>
                         <dt>Tentative</dt>
                         <dd>
-                            <ol>
-                                <li>Roxana Plaian</li>
-                                <li>Roxana Plaian</li>
-                                <li>Roxana Plaian</li>
-                                <li>Roxana Plaian</li>
-                                <li>Roxana Plaian</li>
+                            <ol ng-repeat="tuser in event.tentativeUsers">
+                                <li>{{tuser.fullName}}</li>
                             </ol>
                         </dd>
                     </dl>
                     <dl flex>
                         <dt>Not Now</dt>
                         <dd>
-                            <ol>
-                                <li>Roxana Plaian</li>
-                                <li>Roxana Plaian</li>
-                                <li>Roxana Plaian</li>
-                                <li>Roxana Plaian</li>
-                                <li>Roxana Plaian</li>
+                            <ol ng-repeat="nuser in event.notNowUsers">
+                                <li>{{nuser.fullName}}</li>
                             </ol>
                         </dd>
                     </dl>
