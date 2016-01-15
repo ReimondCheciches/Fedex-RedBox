@@ -5,11 +5,11 @@
 
     myApp.service('eomService', ['$http', '$q', function ($http, $q) {
 
-        var vote = function() {
+        var vote = function (userId, reason) {
             var deferred = $q.defer();
 
-            $http.post('/api/eom/addVote').success(function () {
-                deferred.resolve(users);
+            $http.post('/api/eom/addVote', {userId : userId, reason : reason}).success(function () {
+                deferred.resolve();
             }).error(function (err, status) {
                 deferred.reject(err);
             });
@@ -17,8 +17,61 @@
             return deferred.promise;
         };
 
+        var hasVoted = function() {
+            var deferred = $q.defer();
+
+            $http.get('/api/eom/hasVoted').success(function (response) {
+                deferred.resolve(response);
+            }).error(function (err, status) {
+                deferred.reject(err);
+            });
+
+            return deferred.promise;
+        }
+
+        var getAllEoms = function() {
+            var deferred = $q.defer();
+
+            $http.get('/api/eom/GetAllEOMs').success(function (response) {
+                deferred.resolve(response);
+            }).error(function (err, status) {
+                deferred.reject(err);
+            });
+
+            return deferred.promise;
+        }
+
+        var getCurrentEom = function() {
+            var deferred = $q.defer();
+
+            $http.get('/api/eom/GetCurrentEOM').success(function (response) {
+                deferred.resolve(response);
+            }).error(function (err, status) {
+                deferred.reject(err);
+            });
+
+            return deferred.promise;
+        }
+
+
+        var stopVote = function() {
+            var deferred = $q.defer();
+
+            $http.get('/api/eom/endVote').success(function (response) {
+                deferred.resolve(response);
+            }).error(function (err, status) {
+                deferred.reject(err);
+            });
+
+            return deferred.promise;
+        }
+
         return {
-            vote : vote
+            vote: vote,
+            hasVoted: hasVoted,
+            getAllEoms: getAllEoms,
+            getCurrentEom: getCurrentEom,
+            stopVote: stopVote
         }
 
     }]);

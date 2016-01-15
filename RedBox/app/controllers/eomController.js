@@ -11,6 +11,19 @@
                 $scope.users = users;
             });
 
+            eomService.hasVoted().then(function(hasVoted) {
+                $scope.hasVoted = hasVoted;;
+            });
+
+            eomService.getAllEoms().then(function(response) {
+                $scope.eoms = response;
+                console.log(response);
+            });
+
+            eomService.getCurrentEom().then(function (response) {
+                $scope.currentEom = response;
+            });
+
         })(this);
 
         $scope.querySearch = function (query) {
@@ -27,9 +40,13 @@
         
         $scope.vote = function () {
             eomService.vote($scope.selectedItem.id, $scope.reason).then(function() {
-                
+                $scope.hasVoted = true;
             });
-             
+        }
+
+        $scope.stopVote = function() {
+            eomService.stopVote().then(function () {
+            });
         }
 
     }]);

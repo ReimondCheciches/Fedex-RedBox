@@ -99,6 +99,7 @@
           <Property Name="Description" Type="nvarchar" MaxLength="256" Nullable="false" />
           <Property Name="Date" Type="datetime" Nullable="false" />
           <Property Name="Archived" Type="bit" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
         </EntityType>
         <EntityType Name="Suggestions">
           <Key>
@@ -136,6 +137,18 @@
           <Property Name="FullName" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="IsEmployed" Type="bit" />
         </EntityType>
+        <Association Name="FK__Events__UserId__300424B4">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="Events" Type="Self.Events" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Events">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -327,6 +340,10 @@
           <EntitySet Name="SuggestionVotes" EntityType="Self.SuggestionVotes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserEvents" EntityType="Self.UserEvents" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserInfo" EntityType="Self.UserInfo" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Events__UserId__300424B4" Association="Self.FK__Events__UserId__300424B4">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Events" EntitySet="Events" />
+          </AssociationSet>
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
@@ -452,6 +469,7 @@
           <NavigationProperty Name="UserInfo" Relationship="Self.FK_UserInfo_AspNetUsers" FromRole="AspNetUsers" ToRole="UserInfo" />
           <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
           <NavigationProperty Name="UserEvents" Relationship="RedBoxModel.FK_UserEvents_AspNetUsers" FromRole="AspNetUser" ToRole="UserEvent" />
+          <NavigationProperty Name="Events" Relationship="RedBoxModel.FK__Events__UserId__300424B4" FromRole="AspNetUser" ToRole="Event" />
         </EntityType>
         <EntityType Name="EOM">
           <Key>
@@ -710,6 +728,10 @@
             <End Role="Event" EntitySet="Events" />
             <End Role="UserEvent" EntitySet="UserEvents" />
           </AssociationSet>
+          <AssociationSet Name="FK__Events__UserId__300424B4" Association="RedBoxModel.FK__Events__UserId__300424B4">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="Event" EntitySet="Events" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Event">
           <Key>
@@ -720,6 +742,8 @@
           <NavigationProperty Name="UserEvents" Relationship="RedBoxModel.FK_UserEvents_Events" FromRole="Event" ToRole="UserEvent" />
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Archived" Type="Boolean" Nullable="false" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="RedBoxModel.FK__Events__UserId__300424B4" FromRole="Event" ToRole="AspNetUser" />
         </EntityType>
         <EntityType Name="UserEvent">
           <Key>
@@ -753,6 +777,18 @@
             </Principal>
             <Dependent Role="UserEvent">
               <PropertyRef Name="EventId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Events__UserId__300424B4">
+          <End Type="RedBoxModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+          <End Type="RedBoxModel.Event" Role="Event" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Event">
+              <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -886,6 +922,7 @@
           <EntitySetMapping Name="Events">
             <EntityTypeMapping TypeName="RedBoxModel.Event">
               <MappingFragment StoreEntitySet="Events">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="Archived" ColumnName="Archived" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="Description" ColumnName="Description" />

@@ -12,3 +12,4 @@ namespace RedBox.Services.SuggestionService
         bool UserHasVoted(string userId, int suggestionId);
     }
 }
+ 
