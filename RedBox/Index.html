@@ -20,12 +20,9 @@
 </head>
 
 <body ng-app="myApp" ng-cloak>
-
-
-
 <div class="wrapper" ng-controller="mainController">
     <div class="login" ng-hide="isLogged()">
-    <div class="login-div checking"   ng-cloak>
+            <div class="login-div checking" ng-cloak>
         <div class="login-header md-toolbar md-default-theme">
             <div class="logging-in">
               <div class="indeterminate"><img src="Content/Images/login-bg.png"></div>
@@ -62,8 +59,10 @@
             </ul>
         </nav>
     </header>
+        <div ng-show="isLogged()" ng-cloak ng-view></div>
+    </div>
+    <div class="clearfix"></div>
 
-    <div ng-show="isLogged()" ng-cloak ng-view></div>
         <script src="Scripts/jquery-2.2.0.min.js"></script>
         <script src="Scripts/angular.js"></script>
         <script src="Scripts/angular-sanitize.js"></script>
@@ -93,7 +92,7 @@
         <script src="app/controllers/mainController.js"></script>
         <script src="app/controllers/suggestionsController.js"></script>
         <script src="app/controllers/eomController.js"></script>
-        <script src="app/controllers/eventsController.js"></script>
+    <script src="app/controllers/eventsController.js"></script>
 
         <script>
         $(".changer").mouseenter(function() {
@@ -103,7 +102,5 @@
                 $(this).removeClass("open");
             });
         </script>
-
-    </div>
 </body>
 </html>

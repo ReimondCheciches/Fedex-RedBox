@@ -41,7 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EOMService\EomHistoryResponse.cs" />
     <Compile Include="EOMService\EOMService.cs" />
+    <Compile Include="EOMService\EomVoteRequest.cs" />
     <Compile Include="EOMService\IEOMService.cs" />
     <Compile Include="EventService\EventService.cs" />
     <Compile Include="EventService\IEventService.cs" />

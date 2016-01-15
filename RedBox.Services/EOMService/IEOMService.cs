@@ -5,12 +5,14 @@ namespace RedBox.Services.EOMService
 {
     public interface IEOMService
     {
-        EOM GetCurrentEOM();
-        List<EOM> GetAllEOMs();
+        EomResponse GetCurrentEOM();
+        List<EomHistoryResponse> GetAllEOMs();
         void AddVote(EOMVote vote, EOMUserVote userVote);
         void RemoveUserVote(int eomId, string userId);
-        void EndVote(int eomId);
+        void EndVote();
         int GetNumberOfCurrentEOMVotes();
 
+        void AddVote(EomVoteRequest request, string UserId);
+        bool HasVoted(string userId);
     }
 }

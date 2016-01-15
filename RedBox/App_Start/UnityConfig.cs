@@ -7,6 +7,7 @@ using RedBox.Services.UserServices;
 using Unity.WebApi;
 using Microsoft.Practices.Unity.Configuration;
 using RedBox.DataAccess.Repositories;
+using RedBox.Services.EOMService;
 
 namespace RedBox.Web
 {
@@ -37,6 +38,7 @@ namespace RedBox.Web
             container.RegisterType<IRepository, Repository>();
             container.RegisterType<ISuggestionService, SuggestionService>();
             container.RegisterType<IUserService, UserService>();
+            container.RegisterType<IEOMService, EOMService>();
             container.RegisterType<IEventService, EventService>();
             GlobalConfiguration.Configuration.DependencyResolver = new UnityDependencyResolver(container);
         }
@@ -51,6 +53,7 @@ namespace RedBox.Web
             container.RegisterType<IRepository, Repository>();
             container.RegisterType<ISuggestionService, SuggestionService>();
             container.RegisterType<IUserService, UserService>();
+            container.RegisterType<IEOMService, EOMService>();
             container.RegisterType<IEventService, EventService>();
             // e.g. container.RegisterType<ITestService, TestService>();
 
