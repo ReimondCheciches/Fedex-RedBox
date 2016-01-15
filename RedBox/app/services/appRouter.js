@@ -24,6 +24,11 @@
                 controller: 'eomController',
                 authorize: true
             })
+            .when('/Events', {
+                templateUrl: 'app/views/Events.html',
+                controller: 'eventsController',
+                authorize: true
+            })
             .otherwise({ redirectTo: '/' });
 
         $httpProvider.interceptors.push('authInterceptorService');
@@ -44,7 +49,7 @@
                   authService.fillAuthData();
                     $location.path('/');
                 }, function () {
-                    window.location = 'http://localhost:58902/Account/Login.aspx?ReturnUrl=' + encodeURIComponent($location.absUrl());
+                    window.location = 'http://192.168.1.57:2016/Account/Login.aspx?ReturnUrl=' + encodeURIComponent($location.absUrl());
                 });
 
                 //event.preventDefault();
