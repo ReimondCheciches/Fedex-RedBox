@@ -2,7 +2,7 @@
 	<div layout-gt-sm="columns">
 	    <div flex-gt-sm="40">
 	        <!--<span class="fa fa-thumbs-up"></span>{{currentNumberOfVotes}}-->
-	        <button ng-click="stopVote()">STOP VOTE!</button>
+	        <md-button class="md-raised md-primary" ng-click="stopVote()"><span class="fa fa-flag"></span> END VOTING</md-button class="md-primary">
 	        <md-card ng-hide="hasVoted">
 	            <md-card-content layout-align="top left">
 	                <h2>{{currentEom.date | date : 'MMMM yyyy'}}</h2>
@@ -45,7 +45,7 @@
 	        </md-card>
 	    </div>
 	    <div flex>
-	        <md-card ng-repeat="eom in eoms">
+	        <md-card ng-repeat="eom in eoms track by $index">
 	            <md-toolbar class="md-primary">
 	                <md-card-content layout="row" class="layout-align-space-between-center" flex layout-align="left center">
 	                    <div>
@@ -64,7 +64,7 @@
 	                            <dt>{{votes.userFullName}} <span class="fa fa-thumbs-up"></span>{{votes.votes}}</dt>
 	                            <dd>
 	                                <ul >
-	                                    <li ng-repeat="r in votes.reasons">{{r}}</li>
+	                                    <li ng-repeat="r in votes.reasons track by $index">{{r}}</li>
 	                                </ul>
 	                            </dd>
 	                        </dl>

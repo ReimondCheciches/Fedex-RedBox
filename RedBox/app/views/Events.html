@@ -47,7 +47,7 @@
             <md-toolbar ng-show="hideDetails" class="md-dark animate-show animate-hide">
                 <md-card-content layout-gt-sm="row" flex layout-align="left top">
                     <dl flex>
-                        <dt>Going</dt>
+                        <dt><span class="fa fa-play-circle"></span> Going</dt>
                         <dd>
                             <ol ng-repeat="guser in event.goingUsers">
                                 <li>{{guser.fullName}}</li>
@@ -55,7 +55,7 @@
                         </dd>
                     </dl>
                     <dl flex>
-                        <dt>Tentative</dt>
+                        <dt><span class="fa fa-pause-circle"></span> Tentative</dt>
                         <dd>
                             <ol ng-repeat="tuser in event.tentativeUsers">
                                 <li>{{tuser.fullName}}</li>
@@ -63,7 +63,7 @@
                         </dd>
                     </dl>
                     <dl flex>
-                        <dt>Not Now</dt>
+                        <dt><span class="fa fa-stop-circle"></span> Not Now</dt>
                         <dd>
                             <ol ng-repeat="nuser in event.notNowUsers">
                                 <li>{{nuser.fullName}}</li>

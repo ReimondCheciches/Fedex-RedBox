@@ -31,14 +31,14 @@ namespace RedBox.Web.Providers
             try
             {
                 string userName = null;
-                var webRequest = WebRequest.Create("http://localhost:58902/Pages/SSO.aspx") as HttpWebRequest;
+                var webRequest = WebRequest.Create("http://192.168.1.57:2016/Pages/SSO.aspx") as HttpWebRequest;
                 webRequest.CookieContainer = new CookieContainer();
 
                 foreach (var cookieFromRequest in context.Request.Cookies.ToList())
                 {
                     var cookie = new Cookie(cookieFromRequest.Key, cookieFromRequest.Value);
 
-                    webRequest.CookieContainer.Add(new Uri("http://localhost:58902"), cookie);
+                    webRequest.CookieContainer.Add(new Uri("http://192.168.1.57:2016"), cookie);
 
                     if (cookieFromRequest.Key == "userInfo")
                     {
