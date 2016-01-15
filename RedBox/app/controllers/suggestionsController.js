@@ -105,10 +105,12 @@
             $scope.currentMonth = false;
 
             $scope.suggestions = $scope.allSuggestions;
-            if ($scope.newest)
-            { $scope.orderNewest($scope.suggestions); return; }
-            if ($scope.hotest)
-            { $scope.orderHotest($scope.suggestions); return; }
+            if ($scope.newest) {
+                 $scope.orderNewest($scope.suggestions); return;
+            }
+            if ($scope.hotest) {
+                 $scope.orderHotest($scope.suggestions); return;
+            }
             $scope.showArchived($scope.suggestions);
 
         }
