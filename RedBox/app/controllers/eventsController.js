@@ -6,7 +6,9 @@
         var controller = this;
         controller.loadEvents = function () {
             eventService.getEvents().then(function (events) {
-                $scope.events = _.filter(events, function (item) { return item.archived != true; });
+                $scope.events = _.filter(events, function (item) {
+                    return item.archived != true;
+                });
                 $scope.allEvents = events;
 
                 $scope.hotest = false;
@@ -15,7 +17,7 @@
 
                 $scope.showEventsForCurrentMonth();
             });
-        }
+        };
 
         var init = function (controller) {
             $scope.allTime = false;
@@ -32,13 +34,13 @@
             eventService.submitEvent(event).then(function () {
                 controller.loadEvents();
             });
-        }
+        };
 
         $scope.respondToEvent = function (eventId, responseToEvent) {
             eventService.respondToEvent(eventId, responseToEvent).then(function () {
                 controller.loadEvents();
             });
-        }
+        };
 
         $scope.showEventsForCurrentWeek = function () {
             $scope.allTime = false;
@@ -47,14 +49,16 @@
             eventService.getEventsForCurrentWeek().then(function (events) {
                 $scope.events = events;
                 if ($scope.newest) {
-                     $scope.orderNewest($scope.events); return;
+                    $scope.orderNewest($scope.events);
+                    return;
                 }
                 if ($scope.hotest) {
-                     $scope.orderHotest($scope.events); return;
+                    $scope.orderHotest($scope.events);
+                    return;
                 }
                 $scope.showArchived($scope.events);
             });
-        }
+        };
 
         $scope.showEventsForCurrentMonth = function () {
             $scope.allTime = false;
@@ -63,14 +67,16 @@
             eventService.getEventsForCurrentMonth().then(function (events) {
                 $scope.events = events;
                 if ($scope.newest) {
-                     $scope.orderNewest($scope.events); return;
+                    $scope.orderNewest($scope.events);
+                    return;
                 }
                 if ($scope.hotest) {
-                     $scope.orderHotest($scope.events); return;
+                    $scope.orderHotest($scope.events);
+                    return;
                 }
                 $scope.showArchived($scope.events);
             });
-        }
+        };
 
         $scope.orderNewest = function () {
             if ($scope.archived)
@@ -81,7 +87,7 @@
             $scope.events = _.sortBy($scope.events, function (e) {
                 return -new Date(e.date);
             });
-        }
+        };
 
         $scope.orderHotest = function () {
             if ($scope.archived)
@@ -93,7 +99,7 @@
                 return item.goingUsers.length * 3 + item.tentativeUsers.length - item.notNowUsers.length * 2;
             });
             $scope.events = $scope.events.reverse();
-        }
+        };
 
         $scope.showArchived = function () {
             //$scope.events = $scope.allEvents;
@@ -106,7 +112,7 @@
                 return item.archived === true;
             });
 
-        }
+        };
 
         $scope.showAllTime = function () {
             $scope.allTime = true;
@@ -120,13 +126,13 @@
             }
 
             if ($scope.newest) {
-                $scope.orderNewest($scope.events); return;
+                $scope.orderNewest($scope.events);
+                return;
             }
             if ($scope.hotest) {
-                $scope.orderHotest($scope.events); return;
+                $scope.orderHotest($scope.events);
             }
-
-
         }
+
     }]);
 }());
