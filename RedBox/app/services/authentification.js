@@ -10,7 +10,7 @@
         var _authentification = {
             isAuth: false,
             userName: '',
-            isCoach: false
+            isAdmin: false
 
         };
 
@@ -35,12 +35,13 @@
                     _authentification.isAuth = true;
                     _authentification.userName = userInfoResponse.data.Email;
                     _authentification.fullName = userInfoResponse.data.fullName;
+                    _authentification.isAdmin = userInfoResponse.data.isAdmin;
 
                     localStorageService.remove('authorizationData');
 
                     var email = angular.copy(userInfoResponse.data.email);
 
-                    localStorageService.set('authorizationData', { token: response.access_token, userName: email, fullName: userInfoResponse.data.fullName });
+                    localStorageService.set('authorizationData', { token: response.access_token, userName: email, fullName: userInfoResponse.data.fullName, isAdmin: userInfoResponse.data.isAdmin });
 
                     deferred.resolve(response);
                 });
@@ -60,7 +61,7 @@
             _authentification.isAuth = false;
             _authentification.userName = '';
 
-            window.location = "http://192.168.1.57:2016/Account/LogOut.aspx";
+            window.location = window.ssoLogoutUrl;
         };
 
         var _fillAuthData = function () {
@@ -70,6 +71,7 @@
                 _authentification.isAuth = true;
                 _authentification.userName = authData.userName;
                 _authentification.fullName = authData.fullName;
+                _authentification.isAdmin = authData.isAdmin;
             }
 
             if (authData && (authData.userName == null || _authentification.fullName == null)) {
@@ -77,6 +79,7 @@
                     _authentification.isAuth = true;
                     _authentification.userName = userInfoResponse.data.email;
                     _authentification.fullName = userInfoResponse.data.fullName;
+                    _authentification.isAdmin = userInfoResponse.data.isAdmin;
                 });
             }
         };

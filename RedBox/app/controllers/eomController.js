@@ -1,7 +1,7 @@
 ﻿(function () {
     var myApp = angular.module('myApp');
 
-    myApp.controller('eomController', ['$scope', 'eomService', 'userService', function ($scope, eomService, userService) {
+    myApp.controller('eomController', ['$scope', '$rootScope', 'eomService', 'userService', function ($scope, $rootScope, eomService, userService) {
 
         (function init(controller) {
 
@@ -11,22 +11,27 @@
                 $scope.users = users;
             });
 
-            eomService.hasVoted().then(function(hasVoted) {
+            eomService.hasVoted().then(function (hasVoted) {
                 $scope.hasVoted = hasVoted;;
             });
 
-            eomService.getAllEoms().then(function(response) {
-                $scope.eoms = response;
-                console.log(response);
+            eomService.getAllEoms().then(function (response) {
+                $scope.eoms = _.sortBy(response, function (eom) {
+                    return -new Date(eom.date);
+                });
+
+                console.log($scope.eoms);
             });
 
             eomService.getCurrentEom().then(function (response) {
                 $scope.currentEom = response;
             });
 
-            eomService.getCurrentNumberOfVotes().then(function (response) {
-                $scope.currentNumberOfVotes = response;
-            });
+            if ($rootScope.currentUser.isAdmin) {
+                eomService.getCurrentNumberOfVotes().then(function (response) {
+                    $scope.currentNumberOfVotes = response;
+                });
+            }
 
         })(this);
 
@@ -34,21 +39,27 @@
             if (!query)
                 return $scope.users;
 
-            var search = _.filter($scope.users, function(u) {
+            var search = _.filter($scope.users, function (u) {
                 return u.fullName.toLowerCase().indexOf(query.toLowerCase()) !== -1;
             });
 
             return search;
         }
 
-        
+
         $scope.vote = function () {
-            eomService.vote($scope.selectedItem.id, $scope.reason).then(function() {
+            eomService.vote($scope.selectedItem.id, $scope.reason).then(function () {
                 $scope.hasVoted = true;
+
+                if ($rootScope.currentUser.isAdmin) {
+                    eomService.getCurrentNumberOfVotes().then(function (response) {
+                        $scope.currentNumberOfVotes = response;
+                    });
+                }
             });
         }
 
-        $scope.stopVote = function() {
+        $scope.stopVote = function () {
             eomService.stopVote().then(function () {
             });
         }

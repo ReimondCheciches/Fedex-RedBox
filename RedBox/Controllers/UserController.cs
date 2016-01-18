@@ -47,7 +47,8 @@ namespace RedBox.Web.Controllers
             return new UserInfoViewModel
             {
                 Email = user.Email,
-                FullName = user.UserInfo.FullName
+                FullName = user.UserInfo.FullName,
+                IsAdmin = User.IsInRole("Admin")
             };
         }
     }

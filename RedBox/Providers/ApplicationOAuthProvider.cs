@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Net;
 using System.Security.Claims;
@@ -31,14 +32,17 @@ namespace RedBox.Web.Providers
             try
             {
                 string userName = null;
-                var webRequest = WebRequest.Create("http://192.168.1.57:2016/Pages/SSO.aspx") as HttpWebRequest;
+
+                var ssoBaseUrl = ConfigurationManager.AppSettings["ssoBaseUrl"];
+
+                var webRequest = WebRequest.Create(ssoBaseUrl + "/Pages/SSO.aspx") as HttpWebRequest;
                 webRequest.CookieContainer = new CookieContainer();
 
                 foreach (var cookieFromRequest in context.Request.Cookies.ToList())
                 {
                     var cookie = new Cookie(cookieFromRequest.Key, cookieFromRequest.Value);
 
-                    webRequest.CookieContainer.Add(new Uri("http://192.168.1.57:2016"), cookie);
+                    webRequest.CookieContainer.Add(new Uri(ssoBaseUrl), cookie);
 
                     if (cookieFromRequest.Key == "userInfo")
                     {

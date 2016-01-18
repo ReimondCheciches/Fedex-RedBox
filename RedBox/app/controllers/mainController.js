@@ -1,7 +1,7 @@
 ﻿(function () {
     var myApp = angular.module('myApp');
 
-    myApp.controller('mainController', function ($scope, $location, authService, $http) {
+    myApp.controller('mainController', function ($scope, $rootScope, $location, authService, $http) {
         var tabToUrlMapping = {
             "Suggestions": ["/", "Suggestions"],
             "EOM": ["/EOM"],
@@ -24,7 +24,7 @@
         $scope.isLogged = function () {
 
             if (authService.authentification.fullName != "") {
-                $scope.currentUser = authService.authentification;
+                $rootScope.currentUser = authService.authentification;
                 return true;
             }
 

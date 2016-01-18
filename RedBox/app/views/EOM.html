@@ -1,8 +1,13 @@
 ﻿<div class="container">
 	<div layout-gt-sm="columns">
 	    <div flex-gt-sm="40">
-	        <!--<span class="fa fa-thumbs-up"></span>{{currentNumberOfVotes}}-->
-	        <md-button class="md-raised md-primary" ng-click="stopVote()"><span class="fa fa-flag"></span> END VOTING</md-button class="md-primary">
+
+            <md-button class="md-fab md-primary md-accent" aria-label="Use Android">
+                <span class="fa fa-thumbs-up"></span>{{currentNumberOfVotes}}
+            </md-button>
+
+	       
+	        <md-button class="md-raised md-primary" ng-if="currentUser.isAdmin" ng-click="stopVote()"><span class="fa fa-flag"></span> END VOTING</md-button>
 	        <md-card ng-hide="hasVoted">
 	            <md-card-content layout-align="top left">
 	                <h2>{{currentEom.date | date : 'MMMM yyyy'}}</h2>
@@ -45,7 +50,7 @@
 	        </md-card>
 	    </div>
 	    <div flex>
-	        <md-card ng-repeat="eom in eoms track by $index | orderBy : 'date' : true">
+	        <md-card ng-repeat="eom in eoms track by $index">
 	            <md-toolbar class="md-primary">
 	                <md-card-content layout="row" class="layout-align-space-between-center" flex layout-align="left center">
 	                    <div>

@@ -118,6 +118,7 @@ namespace RedBox.Web.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public void ArchiveSuggestion(SuggestionRequest SuggestionRequest)
         {
             _suggestionService.ArhiveSuggestion(SuggestionRequest.Id);

@@ -32,6 +32,7 @@ namespace RedBox.Web.Models
 
         public string LoginProvider { get; set; }
         public string FullName { get; set; }
+        public bool IsAdmin { get; set; }
     }
 
     public class UserLoginInfoViewModel

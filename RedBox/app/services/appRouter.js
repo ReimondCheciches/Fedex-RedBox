@@ -49,7 +49,7 @@
                   authService.fillAuthData();
                     $location.path('/');
                 }, function () {
-                    window.location = 'http://192.168.1.57:2016/Account/Login.aspx?ReturnUrl=' + encodeURIComponent($location.absUrl());
+                    window.location = window.ssoLoginUrl + encodeURIComponent($location.absUrl());
                 });
 
                 //event.preventDefault();

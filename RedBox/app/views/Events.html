@@ -27,7 +27,7 @@
     <md-card ng-repeat="event in events">
         <md-toolbar class="md-primary">
             <md-card-content layout="row" class="layout-align-space-between-center" flex layout-align="left center">
-                <div>
+                <div> 
                     <strong>{{event.userName}}</strong>
                     <br>
                     <p>{{event.description}}</p>
@@ -36,7 +36,7 @@
             <md-card-actions layout-padding layout-gt-sm="row" layout-align="end center" class="layout-align-space-between-center text-center">
                 <div flex layout="end center">
                     <md-button ng-click="hideDetails = !hideDetails"><span ng-show="!hideDetails" class="fa fa-chevron-down"></span><span ng-show="hideDetails" class="fa fa-chevron-up"></span> Details</md-button>
-                    <md-button ng-if="!event.archived"  ng-click="archiveEvent(event.id)" ><span class="fa fa-archive"></span> Archive</md-button>
+                    <md-button ng-if="!event.archived && currentUser.isAdmin"  ng-click="archiveEvent(event.id)" ><span class="fa fa-archive"></span> Archive</md-button>
                 </div>
                 <md-toolbar class="md-whiteframe-3dp md-btn-group md-accent" layout-xs="columns" layout-sm="row" layout-gt-sm="row" layout-margin layout-align="left top" ng-if="!event.archived">
                     <md-button ng-class="{'md-raised md-button':event.going}" ng-click="respondToEvent(event.id, 'Going')" ng-disabled="event.going"><span class="fa fa-play-circle"></span> Going</md-button>

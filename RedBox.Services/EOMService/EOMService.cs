@@ -17,27 +17,12 @@ namespace RedBox.Services.EOMService
 
         public EomResponse GetCurrentEOM()
         {
-            var currentDate = DateTime.Now;
-            var currentEOM =
-                _repository.GetEntities<EOM>()
-                    .FirstOrDefault(p => p.Date.Year == currentDate.Year && p.Date.Month == currentDate.Month);
-            if (currentEOM != null)
-                return new EomResponse()
-                {
-                    Date = currentEOM.Date
-                };
+            var currentDate = _repository.GetEntities<EOM>().Max(p => p.Date);
 
-            _repository.Add(new EOM()
+            return _repository.GetEntities<EOM>().Where(p => p.Date == currentDate).Select(s => new EomResponse()
             {
-                Date = currentDate
-            });
-            _repository.SaveChanges();
-
-            return _repository.GetEntities<EOM>()
-                    .Where(p => p.Date.Year == currentDate.Year && p.Date.Month == currentDate.Month).Select(s => new EomResponse()
-                    {
-                        Date = s.Date
-                    }).FirstOrDefault();
+                Date = s.Date
+            }).FirstOrDefault();
         }
 
         public List<EomHistoryResponse> GetAllEOMs()
@@ -63,7 +48,7 @@ namespace RedBox.Services.EOMService
             _repository.SaveChanges();
         }
 
-       
+
 
         public void RemoveUserVote(int eomId, string userId)
         {
@@ -78,46 +63,49 @@ namespace RedBox.Services.EOMService
 
         public void EndVote()
         {
-            var current = _repository.GetEntities<EOM>().FirstOrDefault(v => v.WinnerId == null);
+            var currentEomDate = _repository.GetEntities<EOM>().Max(v => v.Date);
+
+            var current = _repository.GetEntities<EOM>().FirstOrDefault(v => v.Date == currentEomDate);
 
             if (current == null) return;
 
-            var userId = _repository.GetEntities<EOMVote>().Where(p => p.EOMid == current.Id).ToList().GroupBy(p => p.NominatedUserId).Max();
-            var eom = _repository.GetEntities<EOM>().FirstOrDefault(p => p.Id == current.Id);
-            if (eom != null)
-            {
-                eom.WinnerId = userId.Key;
-                _repository.Update(eom);
-                _repository.SaveChanges();
-            }
+            var winnerId = _repository.GetEntities<EOMVote>().Where(p => p.EOMid == current.Id).ToList().GroupBy(p => p.NominatedUserId).Max(p => p.Key);
 
+            if (winnerId == null)
+                return;
+
+            var eom = _repository.GetEntities<EOM>().FirstOrDefault(p => p.Id == current.Id);
+
+            if (eom == null) return;
+
+            eom.WinnerId = winnerId;
+            _repository.Update(eom);
+
+            var newEom = new EOM()
+            {
+                Date = DateTime.Now,
+            };
+            _repository.Add(newEom);
+
+            _repository.SaveChanges();
         }
 
         public int GetNumberOfCurrentEOMVotes()
         {
-            var currentDate = DateTime.Now;
-            var currentEOM =
-                _repository.GetEntities<EOM>()
-                    .FirstOrDefault(p => p.Date.Year == currentDate.Year && p.Date.Month == currentDate.Month);
+            var currentEOMDate = _repository.GetEntities<EOM>().Max(p => p.Date);
 
-            return currentEOM != null ? currentEOM.EOMVotes.Count : 0;
+            var currentEom = _repository.GetEntities<EOM>().FirstOrDefault(e => e.Date == currentEOMDate);
+
+
+
+            return currentEom == null ? 0 : currentEom.EOMUserVotes.Count;
         }
 
         public void AddVote(EomVoteRequest request, string UserId)
         {
-            var currentEom = _repository.GetEntities<EOM>().OrderByDescending(v => v.Id).FirstOrDefault();
+            var currentDate = _repository.GetEntities<EOM>().Max(p => p.Date);
 
-            if (currentEom == null)
-            {
-                currentEom = new EOM()
-                {
-                    Date = DateTime.Now,
-                };
-
-                _repository.Add(currentEom);
-
-                _repository.SaveChanges();
-            };
+            var currentEom = _repository.GetEntities<EOM>().FirstOrDefault(p => p.Date == currentDate);
 
             var hasVoted =
                 _repository.GetEntities<EOMUserVote>().Any(v => v.UserId == UserId && v.EOMid == currentEom.Id);
@@ -148,12 +136,14 @@ namespace RedBox.Services.EOMService
         public bool HasVoted(string userId)
         {
 
-            var currentEom = _repository.GetEntities<EOM>().OrderByDescending(v => v.Id).FirstOrDefault();
+            var currentDate = _repository.GetEntities<EOM>().Max(p => p.Date);
+
+            var currentEom = _repository.GetEntities<EOM>().FirstOrDefault(p => p.Date == currentDate);
 
             if (currentEom == null)
                 return false;
 
-            return  _repository.GetEntities<EOMUserVote>().Any(v => v.UserId == userId && v.EOMid == currentEom.Id);
+            return _repository.GetEntities<EOMUserVote>().Any(v => v.UserId == userId && v.EOMid == currentEom.Id);
         }
     }
 

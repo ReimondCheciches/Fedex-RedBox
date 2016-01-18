@@ -8,6 +8,12 @@
             eventService.getEvents().then(function (events) {
                 $scope.events = _.filter(events, function (item) { return item.archived != true; });
                 $scope.allEvents = events;
+
+                $scope.hotest = false;
+                $scope.newest = true;
+                $scope.archived = false;
+
+                $scope.showEventsForCurrentMonth();
             });
         }
 
@@ -40,10 +46,12 @@
             $scope.currentMonth = false;
             eventService.getEventsForCurrentWeek().then(function (events) {
                 $scope.events = events;
-                if ($scope.newest)
-                { $scope.orderNewest($scope.events); return; }
-                if ($scope.hotest)
-                { $scope.orderHotest($scope.events); return; }
+                if ($scope.newest) {
+                     $scope.orderNewest($scope.events); return;
+                }
+                if ($scope.hotest) {
+                     $scope.orderHotest($scope.events); return;
+                }
                 $scope.showArchived($scope.events);
             });
         }
@@ -54,10 +62,12 @@
             $scope.currentMonth = true;
             eventService.getEventsForCurrentMonth().then(function (events) {
                 $scope.events = events;
-                if ($scope.newest)
-                { $scope.orderNewest($scope.events); return; }
-                if ($scope.hotest)
-                { $scope.orderHotest($scope.events); return; }
+                if ($scope.newest) {
+                     $scope.orderNewest($scope.events); return;
+                }
+                if ($scope.hotest) {
+                     $scope.orderHotest($scope.events); return;
+                }
                 $scope.showArchived($scope.events);
             });
         }
@@ -68,8 +78,9 @@
             $scope.hotest = false;
             $scope.newest = true;
             $scope.archived = false;
-            $scope.events = _.sortBy($scope.events, 'date');
-            $scope.events = $scope.events.reverse();
+            $scope.events = _.sortBy($scope.events, function (e) {
+                return -new Date(e.date);
+            });
         }
 
         $scope.orderHotest = function () {
@@ -78,16 +89,23 @@
             $scope.hotest = true;
             $scope.newest = false;
             $scope.archived = false;
-            $scope.events = _.sortBy($scope.events, function (item) { return item.upVote - item.downVote; });
+            $scope.events = _.sortBy($scope.events, function (item) {
+                return item.goingUsers.length * 3 + item.tentativeUsers.length - item.notNowUsers.length * 2;
+            });
             $scope.events = $scope.events.reverse();
         }
 
         $scope.showArchived = function () {
-            $scope.events = $scope.allEvents;
+            //$scope.events = $scope.allEvents;
+
             $scope.hotest = false;
             $scope.newest = false;
             $scope.archived = true;
-            $scope.events = _.filter($scope.events, function (item) { return item.archived === true; });
+
+            $scope.events = _.filter($scope.events, function (item) {
+                return item.archived === true;
+            });
+
         }
 
         $scope.showAllTime = function () {
@@ -95,12 +113,19 @@
             $scope.currentWeek = false;
             $scope.currentMonth = false;
 
-            $scope.events = $scope.allEvents;
-            if ($scope.newest)
-            { $scope.orderNewest($scope.events); return; }
-            if ($scope.hotest)
-            { $scope.orderHotest($scope.events); return; }
-            $scope.showArchived($scope.events);
+            //$scope.events = $scope.allEvents;
+
+            if ($scope.archived) {
+                $scope.showArchived();
+            }
+
+            if ($scope.newest) {
+                $scope.orderNewest($scope.events); return;
+            }
+            if ($scope.hotest) {
+                $scope.orderHotest($scope.events); return;
+            }
+
 
         }
     }]);
