@@ -9,6 +9,7 @@
 
             var deferred = $q.defer();
 
+
             $http.post('/api/suggestion/AddSuggestion', { 'SuggestionDesc': suggestionDesc }).success(function (response) {
                 deferred.resolve(response);
 

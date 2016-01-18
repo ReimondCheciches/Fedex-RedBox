@@ -6,7 +6,9 @@
                 <textarea ng-model="suggestionDesc" columns="1" maxlength="100" md-maxlength="100"></textarea>
             </md-input-container>
             <md-card-actions layout="row" layout-align="center center">
-                <md-button class="md-raised md-primary" ng-disabled="!suggestionDesc" ng-click="submitSuggestion(suggestionDesc)"><span class="fa fa-lightbulb-o"></span> Submit</md-button>
+                <md-button class="md-raised md-primary" ng-disabled="!suggestionDesc"
+                           ng-click="submitSuggestion(suggestionDesc)"><span class="fa fa-lightbulb-o"></span> Submit
+                </md-button>
             </md-card-actions>
         </md-card>
     </div>
@@ -14,32 +16,54 @@
 
 <div class="container">
     <div layout-gt-sm="row">
-        <md-toolbar class="md-whiteframe-3dp md-btn-group md-accent" flex layout-xs="columns" layout-sm="row" layout-gt-sm="row" layout-margin layout-align="left top">
-            <md-button ng-class="{'md-raised md-ink-ripple':newest}" ng-disabled="newest" ng-click="orderNewest()"><span class="fa fa-certificate"></span> New</md-button>
-            <md-button ng-class="{'md-raised md-ink-ripple':hotest}" ng-disabled="hotest" ng-click="orderHotest()"><span class="fa fa-fire"></span> Popular</md-button>
-            <md-button ng-class="{'md-raised md-ink-ripple':archived}" ng-disabled="archived" ng-click="showArchived()"><span class="fa fa-archive"></span> Archived</md-button>
+        <md-toolbar class="md-whiteframe-3dp md-btn-group md-accent" flex layout-xs="columns" layout-sm="row"
+                    layout-gt-sm="row" layout-margin layout-align="left top">
+            <md-button ng-class="{'md-raised md-ink-ripple':newest}" ng-disabled="newest" ng-click="orderNewest()"><span
+                    class="fa fa-certificate"></span> New
+            </md-button>
+            <md-button ng-class="{'md-raised md-ink-ripple':hotest}" ng-disabled="hotest" ng-click="orderHotest()"><span
+                    class="fa fa-fire"></span> Popular
+            </md-button>
+            <md-button ng-class="{'md-raised md-ink-ripple':archived}" ng-disabled="archived" ng-click="showArchived()">
+                <span class="fa fa-archive"></span> Archived
+            </md-button>
         </md-toolbar>
-        <md-toolbar class="md-whiteframe-3dp md-btn-group md-accent" flex layout-xs="columns" layout-sm="row" layout-gt-sm="row" layout-margin layout-align="left top">
-            <md-button ng-class="{'md-raised md-ink-ripple':currentWeek}" ng-disabled="currentWeek" ng-click="showSuggestionsForCurrentWeek()"><span class="fa fa-calendar-o"></span> Week</md-button>
-            <md-button ng-class="{'md-raised md-ink-ripple':currentMonth}" ng-disabled="currentMonth" ng-click=" showSuggestionsForCurrentMonth()"><span class="fa fa-calendar-times-o"></span> Month</md-button>
-            <md-button ng-class="{'md-raised md-ink-ripple':allTime}" ng-disabled="allTime" ng-click="showAllTime()"><span class="fa fa-calendar"></span> All-time</md-button>
+        <md-toolbar class="md-whiteframe-3dp md-btn-group md-accent" flex layout-xs="columns" layout-sm="row"
+                    layout-gt-sm="row" layout-margin layout-align="left top">
+            <md-button ng-class="{'md-raised md-ink-ripple':currentWeek}" ng-disabled="currentWeek"
+                       ng-click="showSuggestionsForCurrentWeek()"><span class="fa fa-calendar-o"></span> Week
+            </md-button>
+            <md-button ng-class="{'md-raised md-ink-ripple':currentMonth}" ng-disabled="currentMonth"
+                       ng-click=" showSuggestionsForCurrentMonth()"><span class="fa fa-calendar-times-o"></span> Month
+            </md-button>
+            <md-button ng-class="{'md-raised md-ink-ripple':allTime}" ng-disabled="allTime" ng-click="showAllTime()">
+                <span class="fa fa-calendar"></span> All-time
+            </md-button>
         </md-toolbar>
     </div>
     <md-card layout-gt-sm="columns" ng-repeat="suggestion in suggestions">
-        <md-toolbar>
+        <md-toolbar> 
             <md-card-content layout="row" flex layout-align="left center">
                 <span class="claim">{{suggestion.description}}</span>
             </md-card-content>
             <md-card-actions layout="row" layout-align="left center">
-                <md-button ng-if="!suggestion.archived && currentUser.isAdmin" ng-click="archiveSuggestion(suggestion.id)"><span class="fa fa-archive"></span> Archive</md-button>
+                <md-button ng-if="!suggestion.archived && currentUser.isAdmin"
+                           ng-click="archiveSuggestion(suggestion.id)"><span class="fa fa-archive"></span> Archive
+                </md-button>
             </md-card-actions>
         </md-toolbar>
         <md-toolbar flex-gt-sm="50" layout-align="center stretch" class="md-dark text-center">
-            <div class="score"><span>{{(suggestion.upVote - suggestion.downVote)>-1?suggestion.upVote - suggestion.downVote:0}}</span></div>
-            <md-card-actions layout="row" layout-align="center center" ng-if="!suggestion.hasVoted && !suggestion.archived">
-                <md-button class="md-raised md-accent" ng-click="vote(suggestion, true)"><span class="fa fa-thumbs-up"></span> Up</md-button>
-                <md-button class="md-raised md-primary" ng-click="vote(suggestion, false)"><span class="fa fa-thumbs-down"></span> Down</md-button>
-                <md-progress-linear ng-if="suggestion.progress" class="md-accent" md-mode="indeterminate"></md-progress-linear>
+            <div class="score"><span>{{(suggestion.upVote - suggestion.downVote)>-1?suggestion.upVote - suggestion.downVote:0}}</span>
+            </div>
+            <md-card-actions layout="row" layout-align="center center"
+                             ng-if="!suggestion.hasVoted && !suggestion.archived">
+                <md-button class="md-raised md-accent" ng-click="vote(suggestion, true)"><span
+                        class="fa fa-thumbs-up"></span> Up
+                </md-button>
+                <md-button class="md-raised md-primary" ng-click="vote(suggestion, false)"><span
+                        class="fa fa-thumbs-down"></span> Down
+                </md-button>
+
             </md-card-actions>
         </md-toolbar>
     </md-card>

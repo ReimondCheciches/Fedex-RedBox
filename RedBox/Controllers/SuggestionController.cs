@@ -98,9 +98,9 @@ namespace RedBox.Web.Controllers
 
 
         [HttpPost]
-        public void AddSuggestion(SuggestionRequest SuggestionReq)
+        public SuggestionModel AddSuggestion(SuggestionRequest SuggestionReq)
         {
-            _suggestionService.AddSuggestion(SuggestionReq.SuggestionDesc);
+            return _suggestionService.AddSuggestion(SuggestionReq.SuggestionDesc);
         }
 
         [HttpPost]

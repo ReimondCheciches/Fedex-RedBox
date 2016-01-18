@@ -3,6 +3,7 @@ using System.Linq;
 using RedBox.DataAccess;
 using RedBox.DataAccess.Repositories;
 using System;
+using RedBox.Services.Models;
 
 namespace RedBox.Services.SuggestionService
 {
@@ -20,15 +21,23 @@ namespace RedBox.Services.SuggestionService
             return _repository.GetEntities<Suggestion>().ToList();
         }
 
-        public void AddSuggestion(string suggestionDesc)
+        public SuggestionModel AddSuggestion(string suggestionDesc)
         {
-
-            _repository.Add(new Suggestion()
+            var suggestion = new Suggestion()
             {
                 Description = suggestionDesc,
                 Date = DateTime.Now
-            });
+            };
+
+            _repository.Add(suggestion);
             _repository.SaveChanges();
+
+            return new SuggestionModel
+            {
+                Date = suggestion.Date,
+                Description = suggestion.Description,
+                Id = suggestion.Id,
+            };
         }
 
         public void RemoveSuggestion(int id)
@@ -63,14 +72,14 @@ namespace RedBox.Services.SuggestionService
 
                 _repository.SaveChanges();
             }
-        
+
         }
 
         public bool UserHasVoted(string userId, int suggestionId)
         {
-            var votes= _repository.GetEntities<SuggestionVote>().Where(p => p.UserId == userId && p.SuggestionId == suggestionId).ToList();
+            var votes = _repository.GetEntities<SuggestionVote>().Where(p => p.UserId == userId && p.SuggestionId == suggestionId).ToList();
 
-            if (votes.Count > 0) 
+            if (votes.Count > 0)
                 return true;
 
             return false;
