@@ -31,6 +31,7 @@
         init(controller);
 
         $scope.submitEvent = function (event) {
+            $scope.eventDesc = null;
             eventService.submitEvent(event).then(function () {
                 controller.loadEvents();
             });

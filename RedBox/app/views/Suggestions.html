@@ -42,9 +42,9 @@
         </md-toolbar>
     </div>
     <md-card layout-gt-sm="columns" ng-repeat="suggestion in suggestions">
-        <md-toolbar> 
+        <md-toolbar>
             <md-card-content layout="row" flex layout-align="left center">
-                <span class="claim">{{suggestion.description}}</span>
+                <span class="claim">{{::suggestion.description}}</span>
             </md-card-content>
             <md-card-actions layout="row" layout-align="left center">
                 <md-button ng-if="!suggestion.archived && currentUser.isAdmin"
