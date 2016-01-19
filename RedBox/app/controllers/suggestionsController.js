@@ -17,10 +17,7 @@
                 suggestionService.getSuggestions().then(function (suggestions) {
 
                     suggestions = _.each(suggestions, function (suggestion) {
-
                         suggestion.date = new Date(suggestion.date);
-
-
                     });
 
                     allSuggestions = suggestions;
@@ -125,11 +122,11 @@
                 $scope.currentMonth = true;
 
                 loadSuggestions().then(function () {
-                    var weekDate = new Date();
-                    weekDate.setMonth(weekDate.getMonth() - 1);
+                    var monthDate = new Date();
+                    monthDate.setMonth(monthDate.getMonth() - 1);
 
                     var suggestions = _.filter(allSuggestions, function (s) {
-                        return s.date >= weekDate && (($scope.archived && s.archived) || (!$scope.archived && !s.archived));
+                        return s.date >= monthDate && (($scope.archived && s.archived) || (!$scope.archived && !s.archived));
                     });
 
                     if ($scope.archived || $scope.newest) {

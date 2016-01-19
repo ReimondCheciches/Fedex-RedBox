@@ -39,12 +39,13 @@
                     <md-button ng-if="!event.archived && currentUser.isAdmin"  ng-click="archiveEvent(event.id)" ><span class="fa fa-archive"></span> Archive</md-button>
                 </div>
                 <md-toolbar class="md-whiteframe-3dp md-btn-group md-accent" layout-xs="columns" layout-sm="row" layout-gt-sm="row" layout-margin layout-align="left top" ng-if="!event.archived">
-                    <md-button ng-class="{'md-raised md-button':event.going}" ng-click="respondToEvent(event.id, 'Going')" ng-disabled="event.going"><span class="fa fa-play-circle"></span> Going</md-button>
-                    <md-button ng-class="{'md-raised md-button':event.tentative}" ng-click="respondToEvent(event.id, 'Tentative')" ng-disabled="event.tentative"><span class="fa fa-pause-circle"></span> Tentative</md-button>
-                    <md-button ng-class="{'md-raised md-button':event.notNow}" ng-click="respondToEvent(event.id, 'NotNow')" ng-disabled="event.notNow"><span class="fa fa-stop-circle"></span> Not Now</md-button>
+                    <md-button ng-class="{'md-raised':event.going}" ng-click="respondToEvent(event.id, 'Going')" ng-disabled="event.going"><span class="fa fa-play-circle"></span> Going</md-button>
+                    <md-button ng-class="{'md-raised':event.tentative}" ng-click="respondToEvent(event.id, 'Tentative')" ng-disabled="event.tentative"><span class="fa fa-pause-circle"></span> Tentative</md-button>
+                    <md-button ng-class="{'md-raised':event.notNow}" ng-click="respondToEvent(event.id, 'NotNow')" ng-disabled="event.notNow"><span class="fa fa-stop-circle"></span> Not Now</md-button>
                 </md-toolbar>
             </md-card-actions>
             <md-toolbar ng-show="hideDetails" class="md-dark animate-show animate-hide">
+
                 <md-card-content layout-gt-sm="row" flex layout-align="left top">
                     <dl flex>
                         <dt><span class="fa fa-play-circle"></span> Going</dt>

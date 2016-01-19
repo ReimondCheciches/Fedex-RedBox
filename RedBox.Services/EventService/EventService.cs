@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using RedBox.DataAccess;
 using RedBox.DataAccess.Repositories;
@@ -21,24 +23,41 @@ namespace RedBox.Services.EventService
             return _repository.GetEntities<Event>().ToList();
         }
 
-        public void AddEvent(string eventDesc, string userId)
+        public EventModel AddEvent(string eventDesc, string userId)
         {
-            if (!string.IsNullOrEmpty(eventDesc))
+            if (string.IsNullOrEmpty(eventDesc)) return null;
+
+            var newEvent = new Event()
             {
-                var newEvent = new Event()
-                {
-                    Description = eventDesc,
-                    Date = DateTime.Now,
-                    UserId = userId
-                };
+                Description = eventDesc,
+                Date = DateTime.Now,
+                UserId = userId
+            };
 
-                _repository.Add(newEvent);
+            _repository.Add(newEvent);
 
-                _repository.SaveChanges();
-            }
+            _repository.SaveChanges();
+
+            var userFullName =
+                _repository.GetEntities<AspNetUser>()
+                    .Where(u => u.Id == userId)
+                    .Select(u => u.UserInfo.FullName)
+                    .FirstOrDefault();
+            if (userFullName == null) return null;
+
+            return new EventModel()
+            {
+                Id = newEvent.Id,
+                Date = newEvent.Date,
+                Description = newEvent.Description,
+                UserName = userFullName,
+                NotNowUsers = new List<UserModel>(),
+                GoingUsers = new List<UserModel>(),
+                TentativeUsers = new List<UserModel>()
+            };
         }
 
-        public void RespondToEvent(RespondToEventRequest respondToEventRequest)
+        public EventModel RespondToEvent(RespondToEventRequest respondToEventRequest)
         {
             var userEvent =
                 _repository.GetEntities<UserEvent>()
@@ -64,6 +83,39 @@ namespace RedBox.Services.EventService
             }
 
             _repository.SaveChanges();
+
+             userEvent =
+               _repository.GetEntities<UserEvent>()
+                   .FirstOrDefault(
+                       p => p.EventId == respondToEventRequest.EventId && p.UserId.Equals(respondToEventRequest.UserId));
+
+            var eventItem =
+                _repository.GetEntities<Event>()
+                    .Where(e => e.Id == userEvent.EventId)
+                    .Include(e => e.AspNetUser.UserInfo)
+                    .FirstOrDefault();
+
+            if (eventItem == null)
+                return null;
+
+            return new EventModel()
+            {
+                Going = userEvent != null && userEvent.Response.Equals(EventResponse.Going.ToString()),
+                Tentative = userEvent != null && userEvent.Response.Equals(EventResponse.Tentative.ToString()),
+                NotNow = userEvent != null && userEvent.Response.Equals(EventResponse.NotNow.ToString()),
+                GoingUsers =
+                    eventItem.UserEvents.Where(x => x.Response.Equals(EventResponse.Going.ToString()))
+                        .Select(u => new UserModel() {FullName = u.AspNetUser.UserInfo.FullName})
+                        .ToList(),
+                TentativeUsers =
+                    eventItem.UserEvents.Where(x => x.Response.Equals(EventResponse.Tentative.ToString()))
+                        .Select(u => new UserModel() {FullName = u.AspNetUser.UserInfo.FullName})
+                        .ToList(),
+                NotNowUsers =
+                    eventItem.UserEvents.Where(x => x.Response.Equals(EventResponse.NotNow.ToString()))
+                        .Select(u => new UserModel() {FullName = u.AspNetUser.UserInfo.FullName})
+                        .ToList()
+            };
 
         }
 

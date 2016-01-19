@@ -7,8 +7,8 @@ namespace RedBox.Services.EventService
     public interface IEventService
     {
         List<Event> GetEvents();
-        void AddEvent(string eventDesc, string UserId);
-        void RespondToEvent(RespondToEventRequest respondToEventRequest);
+        EventModel AddEvent(string eventDesc, string UserId);
+        EventModel RespondToEvent(RespondToEventRequest respondToEventRequest);
         void ArchiveEvent(int eventId);
     }
 }

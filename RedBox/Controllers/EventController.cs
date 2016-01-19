@@ -29,19 +29,19 @@ namespace RedBox.Web.Controllers
             {
                 var firstOrDefault = p.UserEvents.FirstOrDefault(u => u.UserId.Equals(userId));
                 events.Add(new EventModel()
-                                                       {
-                                                           Id = p.Id,
-                                                           Description = p.Description,
-                                                           Date = p.Date,
-                                                           Archived = p.Archived,
-                                                           UserName = p.AspNetUser.UserInfo.FullName,
-                                                           Going = firstOrDefault != null && firstOrDefault.Response.Equals(EventResponse.Going.ToString()),
-                                                           Tentative = firstOrDefault != null && firstOrDefault.Response.Equals(EventResponse.Tentative.ToString()),
-                                                           NotNow = firstOrDefault != null && firstOrDefault.Response.Equals(EventResponse.NotNow.ToString()),
-                                                           GoingUsers = p.UserEvents.Where(x => x.Response.Equals(EventResponse.Going.ToString())).Select(u => new UserModel(){ FullName = u.AspNetUser.UserInfo.FullName}).ToList(),
-                                                           TentativeUsers = p.UserEvents.Where(x => x.Response.Equals(EventResponse.Tentative.ToString())).Select(u=> new UserModel() { FullName = u.AspNetUser.UserInfo.FullName }).ToList(),
-                                                           NotNowUsers = p.UserEvents.Where(x => x.Response.Equals(EventResponse.NotNow.ToString())).Select(u => new UserModel() { FullName = u.AspNetUser.UserInfo.FullName }).ToList()
-                                                       });
+                {
+                    Id = p.Id,
+                    Description = p.Description,
+                    Date = p.Date,
+                    Archived = p.Archived,
+                    UserName = p.AspNetUser.UserInfo.FullName,
+                    Going = firstOrDefault != null && firstOrDefault.Response.Equals(EventResponse.Going.ToString()),
+                    Tentative = firstOrDefault != null && firstOrDefault.Response.Equals(EventResponse.Tentative.ToString()),
+                    NotNow = firstOrDefault != null && firstOrDefault.Response.Equals(EventResponse.NotNow.ToString()),
+                    GoingUsers = p.UserEvents.Where(x => x.Response.Equals(EventResponse.Going.ToString())).Select(u => new UserModel() { FullName = u.AspNetUser.UserInfo.FullName }).ToList(),
+                    TentativeUsers = p.UserEvents.Where(x => x.Response.Equals(EventResponse.Tentative.ToString())).Select(u => new UserModel() { FullName = u.AspNetUser.UserInfo.FullName }).ToList(),
+                    NotNowUsers = p.UserEvents.Where(x => x.Response.Equals(EventResponse.NotNow.ToString())).Select(u => new UserModel() { FullName = u.AspNetUser.UserInfo.FullName }).ToList()
+                });
             });
 
             return events;
@@ -89,7 +89,7 @@ namespace RedBox.Web.Controllers
             var events = new List<EventModel>();
             DateTime StartDay = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
             DateTime EndDay = StartDay.AddMonths(1).AddDays(-1);
-            var allEvents =_eventService.GetEvents();
+            var allEvents = _eventService.GetEvents();
 
             foreach (var eventItem in allEvents)
             {
@@ -116,18 +116,18 @@ namespace RedBox.Web.Controllers
         }
 
         [HttpPost]
-        public void AddEvent(EventRequest EventRequest)
+        public EventModel AddEvent(EventRequest EventRequest)
         {
             var userId = User.Identity.GetUserId();
 
-            _eventService.AddEvent(EventRequest.EventDesc, userId);
+            return _eventService.AddEvent(EventRequest.EventDesc, userId);
         }
 
         [HttpPost]
-        public void RespondToEvent(RespondToEventRequest respondToEventRequest)
+        public EventModel RespondToEvent(RespondToEventRequest respondToEventRequest)
         {
             respondToEventRequest.UserId = User.Identity.GetUserId();
-            _eventService.RespondToEvent(respondToEventRequest);
+            return _eventService.RespondToEvent(respondToEventRequest);
         }
 
         [HttpPost]
