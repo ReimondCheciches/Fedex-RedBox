@@ -1,7 +1,11 @@
 ﻿(function () {
     var myApp = angular.module('myApp');
 
-    myApp.controller('eomController', ['$scope', '$rootScope', 'eomService', 'userService', function ($scope, $rootScope, eomService, userService) {
+    myApp.controller('eomController', ['$scope', '$rootScope', 'eomService', 'userService', 'isAuth', function ($scope, $rootScope, eomService, userService, isAuth) {
+
+
+            if (!isAuth)
+                return;
 
         (function init(controller) {
 

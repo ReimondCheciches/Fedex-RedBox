@@ -238,19 +238,10 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="app\controllers\apprenticeController.js" />
-    <Content Include="app\controllers\apprenticeDetailController.js" />
     <Content Include="app\controllers\eomController.js" />
-    <Content Include="app\controllers\evaluationController.js" />
     <Content Include="app\controllers\eventsController.js" />
-    <Content Include="app\controllers\feedbackToPeersController.js" />
-    <Content Include="app\controllers\giveFeedbackController.js" />
     <Content Include="app\controllers\suggestionsController.js" />
     <Content Include="app\controllers\mainController.js" />
-    <Content Include="app\controllers\myEvaluationController.js" />
-    <Content Include="app\controllers\myEvaluationDetailController.js" />
-    <Content Include="app\controllers\registerController.js" />
-    <Content Include="app\controllers\rolesController.js" />
     <Content Include="app\controllers\userController.js" />
     <Content Include="app\directives\toggleClass.js" />
     <Content Include="app\services\appRouter.js" />

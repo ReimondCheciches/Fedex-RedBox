@@ -24,7 +24,7 @@
 
         };
 
-        $scope.isLogged = function () {
+        $rootScope.isLogged = function () {
 
             if (authService.authentification.fullName) {
                 $rootScope.currentUser = authService.authentification;

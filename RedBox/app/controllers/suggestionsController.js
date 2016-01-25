@@ -1,8 +1,11 @@
 ﻿(function () {
     var myApp = angular.module('myApp');
 
-    myApp.controller('suggestionsController', ['$scope', '$location', 'suggestionService', '$q',
-        function ($scope, $location, suggestionService, $q) {
+    myApp.controller('suggestionsController', ['$scope', '$location', 'suggestionService', '$q', 'isAuth',
+        function ($scope, $location, suggestionService, $q, isAuth) {
+
+            if (!isAuth)
+                return;
 
             var allSuggestions;
 

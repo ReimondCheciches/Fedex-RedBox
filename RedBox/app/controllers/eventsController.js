@@ -1,8 +1,11 @@
 ﻿(function () {
     var myApp = angular.module('myApp');
 
-    myApp.controller('eventsController', ['$scope', '$location', 'eventService', '$q',
-        function ($scope, $location, eventService, $q) {
+    myApp.controller('eventsController', ['$scope', '$location', 'eventService', '$q', 'isAuth',
+        function ($scope, $location, eventService, $q, isAuth) {
+
+            if (!isAuth)
+                return;
 
             var allEvents;
 

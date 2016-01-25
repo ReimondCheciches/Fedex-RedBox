@@ -17,17 +17,41 @@
             .when('/', {
                 templateUrl: 'app/views/Suggestions.html',
                 controller: 'suggestionsController',
-                authorize: true
+                resolve: {
+                    isAuth: function (authService) {
+                        if (authService.authentification.fullName) {
+                            return true;
+                        }
+
+                        return false;
+                    }
+                }
             })
             .when('/EOM', {
                 templateUrl: 'app/views/EOM.html',
                 controller: 'eomController',
-                authorize: true
+                resolve: {
+                    isAuth: function (authService) {
+                        if (authService.authentification.fullName) {
+                            return true;
+                        }
+
+                        return false;
+                    }
+                }
             })
             .when('/Events', {
                 templateUrl: 'app/views/Events.html',
                 controller: 'eventsController',
-                authorize: true
+                resolve: {
+                    isAuth: function (authService) {
+                        if (authService.authentification.fullName) {
+                            return true;
+                        }
+
+                        return false;
+                    }
+                }
             })
             .otherwise({ redirectTo: '/' });
 
