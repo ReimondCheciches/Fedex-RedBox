@@ -65,13 +65,14 @@
         //uiSelectConfig.appendToBody = true;
     });
 
-    myApp.run(function ($rootScope, authService, $location) {
+    myApp.run(function ($rootScope, authService, $location, $route) {
         $rootScope.$on('$routeChangeStart', function (event, currentRoute) {
             if (!authService.authentification.isAuth) {
 
                 authService.login({ Username: "sso", Password: "sso" }).then(function () {
                   authService.fillAuthData();
-                    $location.path('/');
+                  $location.path('/');
+                  $route.reload();
                 }, function () {
                     window.location = window.ssoLoginUrl + encodeURIComponent($location.absUrl());
                 });
