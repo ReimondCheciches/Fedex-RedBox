@@ -17,6 +17,7 @@ namespace RedBox.DataAccess
         public string UserId { get; set; }
         public string FullName { get; set; }
         public Nullable<bool> IsEmployed { get; set; }
+        public Nullable<bool> CanBeVotedEOM { get; set; }
     
         public virtual AspNetUser AspNetUser { get; set; }
     }

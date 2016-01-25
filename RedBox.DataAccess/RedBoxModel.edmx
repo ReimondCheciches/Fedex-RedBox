@@ -71,7 +71,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
           <Property Name="WinnerId" Type="nvarchar" MaxLength="128" />
         </EntityType>
         <EntityType Name="EOMUserVotes">
@@ -134,8 +134,9 @@
             <PropertyRef Name="UserId" />
           </Key>
           <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="FullName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="FullName" Type="varchar" MaxLength="100" />
           <Property Name="IsEmployed" Type="bit" />
+          <Property Name="CanBeVotedEOM" Type="bit" />
         </EntityType>
         <Association Name="FK__Events__UserId__300424B4">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
@@ -476,7 +477,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="WinnerId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="AspNetUser" Relationship="Self.FK_EOM_AspNetUsers" FromRole="EOM" ToRole="AspNetUsers" />
           <NavigationProperty Name="EOMUserVotes" Relationship="Self.FK_EOMUserVotes_EOM" FromRole="EOM" ToRole="EOMUserVotes" />
@@ -530,9 +531,10 @@
             <PropertyRef Name="UserId" />
           </Key>
           <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="FullName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FullName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="IsEmployed" Type="Boolean" />
           <NavigationProperty Name="AspNetUser" Relationship="Self.FK_UserInfo_AspNetUsers" FromRole="UserInfo" ToRole="AspNetUsers" />
+          <Property Name="CanBeVotedEOM" Type="Boolean" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
@@ -905,6 +907,7 @@
           <EntitySetMapping Name="UserInfoes">
             <EntityTypeMapping TypeName="RedBoxModel.UserInfo">
               <MappingFragment StoreEntitySet="UserInfo">
+                <ScalarProperty Name="CanBeVotedEOM" ColumnName="CanBeVotedEOM" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="FullName" ColumnName="FullName" />
                 <ScalarProperty Name="IsEmployed" ColumnName="IsEmployed" />

@@ -1,17 +1,23 @@
 ﻿(function () {
     var myApp = angular.module('myApp');
 
-    myApp.controller('eomController', ['$scope', '$rootScope', 'eomService', 'userService', 'isAuth', function ($scope, $rootScope, eomService, userService, isAuth) {
+    myApp.controller('eomController', ['$scope', '$rootScope', 'eomService', 'userService', 'isAuth', '$route', function ($scope, $rootScope, eomService, userService, isAuth, $route) {
 
 
             if (!isAuth)
                 return;
 
+
+
         (function init(controller) {
+
+            $scope.hasVoted = true;
 
             //load users
             userService.loadUsers().then(function (users) {
-                users = _.sortBy(users, 'user.userInfo.FullName');
+                users = _.sortBy(users, function (u) {
+                    return u.fullName;
+                });
                 $scope.users = users;
             });
 
@@ -47,8 +53,10 @@
                 return u.fullName.toLowerCase().indexOf(query.toLowerCase()) !== -1;
             });
 
-            return search;
-        }
+            return _.sortBy(search, function (u) {
+               return u.fullName;
+            });
+        };
 
 
         $scope.vote = function () {
@@ -61,10 +69,12 @@
                     });
                 }
             });
-        }
+        };
 
         $scope.stopVote = function () {
+            $scope.disableStopVote = true;
             eomService.stopVote().then(function () {
+                $route.reload();
             });
         }
 

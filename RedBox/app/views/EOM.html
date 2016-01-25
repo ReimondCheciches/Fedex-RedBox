@@ -7,8 +7,12 @@
             </md-button>
 
 	       
-	        <md-button class="md-raised md-primary" ng-if="currentUser.isAdmin" ng-click="stopVote()"><span class="fa fa-flag"></span> END VOTING</md-button>
-	        <md-card ng-hide="hasVoted">
+	        <md-button class="md-raised md-primary" ng-if="currentUser.isAdmin" ng-click="stopVote()" ng-disabled="disableStopVote"><span class="fa fa-flag"></span> END VOTING</md-button>
+			<div ng-show="!hasVoted" ng-clock>
+				VOTE HERE
+			</div>
+
+	        <md-card ng-show="!hasVoted" ng-clock>
 	            <md-card-content layout-align="top left">
 	                <h2>{{currentEom.date | date : 'MMMM yyyy'}}</h2>
 	                <form ng-submit="$event.preventDefault()">
@@ -38,10 +42,10 @@
 	                </form>
 	            </md-card-content>
 	            <div layout="row" layout-padding layout-align="right center">
-	                <md-button class="md-raised md-accent" ng-click="vote()"><span class="fa fa-thumbs-up"></span> Vote</md-button>
+	                <md-button class="md-raised md-accent" ng-click="vote()" ng-disabled="!reason || !selectedItem"><span class="fa fa-thumbs-up"></span> Vote</md-button>
 	            </div>
 	        </md-card>
-	        <md-card ng-show="hasVoted">
+	        <md-card ng-show="hasVoted" ng-clock>
 	            <md-toolbar layout-padding class="md-accent">
 	                <h1>Thank you for your vote!</h1>
 	                <p>Others are still deciding.<br>You will be announced when voting concludes.

@@ -56,7 +56,7 @@
             <div class="score"><span>{{(suggestion.upVote - suggestion.downVote)>-1?suggestion.upVote - suggestion.downVote:0}}</span>
             </div>
             <md-card-actions layout="row" layout-align="center center"
-                             ng-if="!suggestion.hasVoted && !suggestion.archived">
+                             ng-if="!suggestion.hasVoted && !suggestion.archived" ng-clock>
                 <md-button class="md-raised md-accent" ng-click="vote(suggestion, true)"><span
                         class="fa fa-thumbs-up"></span> Up
                 </md-button>

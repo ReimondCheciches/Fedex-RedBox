@@ -16,7 +16,7 @@ namespace RedBox.Services.UserServices
 
         public List<AspNetUser> GetUsers()
         {
-            return _repository.GetEntities<AspNetUser>().Where(u => u.UserInfo.IsEmployed == true).ToList();
+            return _repository.GetEntities<AspNetUser>().Where(u => u.UserInfo.IsEmployed == true && (u.UserInfo.CanBeVotedEOM.HasValue && u.UserInfo.CanBeVotedEOM.Value)).ToList();
         }
 
         public AspNetUser GetUserById(string id)
