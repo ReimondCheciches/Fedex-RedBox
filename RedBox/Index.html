@@ -20,59 +20,65 @@
 </head>
 
 <body ng-app="myApp" ng-cloak>
-<div class="wrapper" ng-controller="mainController">
-    
-    <div class="login" ng-hide="isLogged()">
-        <div class="login-div checking" ng-cloak>
-            <div class="login-header md-toolbar md-default-theme">
-                <div class="logging-in">
-                    <div class="indeterminate"><img src="Content/Images/login-bg.png">
+    <div class="wrapper" ng-controller="mainController">
+
+        <!--<md-progress-linear md-mode="indeterminate" ng-show="showLoading"></md-progress-linear>-->
+
+        <div class="login" ng-hide="isLogged()">
+            <div class="login-div checking" ng-cloak>
+                <div class="login-header md-toolbar md-default-theme">
+                    <div class="logging-in">
+                        <div class="indeterminate">
+                            <img src="Content/Images/login-bg.png">
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <header ng-show="isLogged()" class="ng-hide" ng-cloak>
-        <div class="header">
-            <div class="changer">
-                <div></div>
-                <ul>
-                    <li class="user-status"><span>Welcome <strong>{{currentUser.userName}}</strong> ! </span></li>
-                    <li><a href="http://www2.techromix.com:85/">Timesheet</a></li>
-                    <li class="active"><a href="http://www2.techromix.com:1007/">Redbox</a></li>
-                    <li ><a href="http://www2.techromix.com:1006/">Evaluation</a></li>
-                    <li><a href="http://blog.techromix.com">Blog</a></li>
-                    <li><a target="_blank" href="https://sites.google.com/a/techromix.com/internal-site/">Google Site <span class="fa fa-external-link"></span></a></li>
-                    <li><a target="_blank" href="https://sites.google.com/a/techromix.com/dev/">Dev Team <span class="fa fa-external-link"></span></a></li>
-                    <li><a target="_blank" href="https://sites.google.com/a/techromix.com/tmx-qa-team/home/">QA Team <span class="fa fa-external-link"></span></a></li>
-                </ul>
-            </div>
-            <h1>Redbox</h1>
-            <div class="col-md-8 no-padding text-right logged" ng-show="isLogged()">
-                <span>Welcome <strong>{{currentUser.fullName}}</strong> !</span>&nbsp;<a ng-click="logOut()">logout</a>
-            </div>
+        <div ng-show="isLogged()" class="ng-hide" ng-cloak>
+            <header>
+                <div class="header">
+                    <div class="changer">
+                        <div></div>
+                        <ul>
+                            <li class="user-status"><span>Welcome <strong>{{currentUser.userName}}</strong> ! </span></li>
+                            <li><a href="http://www2.techromix.com:85/">Timesheet</a></li>
+                            <li class="active"><a href="http://www2.techromix.com:1007/">Redbox</a></li>
+                            <li><a href="http://www2.techromix.com:1006/">Evaluation</a></li>
+                            <li><a href="http://blog.techromix.com">Blog</a></li>
+                            <li><a target="_blank" href="https://sites.google.com/a/techromix.com/internal-site/">Google Site <span class="fa fa-external-link"></span></a></li>
+                            <li><a target="_blank" href="https://sites.google.com/a/techromix.com/dev/">Dev Team <span class="fa fa-external-link"></span></a></li>
+                            <li><a target="_blank" href="https://sites.google.com/a/techromix.com/tmx-qa-team/home/">QA Team <span class="fa fa-external-link"></span></a></li>
+                        </ul>
+                    </div>
+                    <h1>Redbox</h1>
+                    <div class="col-md-8 no-padding text-right logged" ng-show="isLogged()">
+                        <span>Welcome <strong>{{currentUser.fullName}}</strong> !</span>&nbsp;<a ng-click="logOut()">logout</a>
+                    </div>
+                </div>
+                <nav>
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" ng-class="{'active': isTabActive('Suggestions')}" ng-hide="hideSelfEvaluation"><a href="#Suggestions">Suggestions</a></li>
+                        <li role="presentation" ng-class="{'active': isTabActive('Events')}"><a href="#Events">Gatherings</a></li>
+                        <li role="presentation" ng-class="{'active': isTabActive('EOM')}"><a href="#EOM">EOM</a></li>
+                    </ul>
+                </nav>
+            </header>
+
+            <div ng-view></div>
+
         </div>
-        <nav>
-            <ul class="nav nav-tabs" role="tablist">
-                <li role="presentation" ng-class="{'active': isTabActive('Suggestions')}" ng-hide="hideSelfEvaluation"><a href="#Suggestions">Suggestions</a></li>
-                <li role="presentation" ng-class="{'active': isTabActive('Events')}"><a href="#Events">Gatherings</a></li>
-                <li role="presentation" ng-class="{'active': isTabActive('EOM')}"><a href="#EOM">EOM</a></li>
-            </ul>
-        </nav>
-    </header>
-    <md-progress-linear md-mode="indeterminate" ng-show="showLoading"></md-progress-linear>
-    <div ng-show="isLogged()" ng-cloak ng-view></div>
-</div>
-<div class="clearfix"></div>
+    </div>
+    <div class="clearfix"></div>
 
-<script>
-    var ssoBaseUrl = "http://www2.techromix.com:85/";
-    window.ssoLoginUrl = ssoBaseUrl + '/Account/Login.aspx?ReturnUrl=';
-    window.ssoLogoutUrl = ssoBaseUrl + '/Account/LogOut.aspx'; 
-</script>
+    <script>
+        var ssoBaseUrl = "http://www2.techromix.com:85/";
+        window.ssoLoginUrl = ssoBaseUrl + '/Account/Login.aspx?ReturnUrl=';
+        window.ssoLogoutUrl = ssoBaseUrl + '/Account/LogOut.aspx';
+    </script>
 
-<script src="Scripts/jquery-2.2.0.min.js"></script>
+    <script src="Scripts/jquery-2.2.0.min.js"></script>
     <script src="Scripts/angular.js"></script>
     <script src="Scripts/angular-sanitize.js"></script>
 
@@ -103,14 +109,14 @@
     <script src="app/controllers/eomController.js"></script>
     <script src="app/controllers/eventsController.js"></script>
 
-<script>
-    $(".changer").mouseenter(function() {
-        $(this).addClass("open");
-    });
-    $(".changer").mouseleave(function() {
-        $(this).removeClass("open");
-    });
-</script>
+    <script>
+        $(".changer").mouseenter(function () {
+            $(this).addClass("open");
+        });
+        $(".changer").mouseleave(function () {
+            $(this).removeClass("open");
+        });
+    </script>
 
 </body>
 </html>
