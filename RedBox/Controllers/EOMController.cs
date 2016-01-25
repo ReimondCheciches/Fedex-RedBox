@@ -7,6 +7,7 @@ using RedBox.Services.SuggestionService;
 
 namespace RedBox.Web.Controllers
 {
+    [Authorize]
     public class EOMController : ApiController
     {
         private readonly IEOMService _eomService;

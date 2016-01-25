@@ -2,7 +2,7 @@
 	<div layout-gt-sm="columns">
 	    <div flex-gt-sm="40">
 
-            <md-button class="md-fab md-primary md-accent" aria-label="Use Android">
+            <md-button class="md-fab md-primary md-accent" aria-label="Use Android" ng-if="currentUser.isAdmin">
                 <span class="fa fa-thumbs-up"></span>{{currentNumberOfVotes}}
             </md-button>
 

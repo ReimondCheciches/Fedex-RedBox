@@ -10,6 +10,7 @@ using System.Globalization;
 
 namespace RedBox.Web.Controllers
 {
+    [Authorize]
     public class EventController : ApiController
     {
         private readonly IEventService _eventService;

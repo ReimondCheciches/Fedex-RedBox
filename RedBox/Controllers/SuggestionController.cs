@@ -11,6 +11,7 @@ using System.Linq;
 
 namespace RedBox.Web.Controllers
 {
+    [Authorize]
     public class SuggestionController : ApiController
     {
         private readonly ISuggestionService _suggestionService;
