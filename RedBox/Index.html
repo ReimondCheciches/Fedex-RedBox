@@ -24,7 +24,7 @@
 
         <!--<md-progress-linear md-mode="indeterminate" ng-show="showLoading"></md-progress-linear>-->
 
-        <div class="login" ng-hide="isLogged()">
+        <div class="login" ng-show="isLoaded && !isLogged()">
             <div class="login-div checking" ng-cloak>
                 <div class="login-header md-toolbar md-default-theme">
                     <div class="logging-in">
@@ -36,7 +36,7 @@
             </div>
         </div>
 
-        <div ng-show="isLogged()" class="ng-hide" ng-cloak>
+        <div ng-show="isLoaded && isLogged()" ng-cloak>
             <header>
                 <div class="header">
                     <div class="changer">
