@@ -36,8 +36,8 @@
         </md-toolbar>
     </div>
     <md-card ng-repeat="event in events">
-        <md-toolbar class="md-primary">
-            <md-card-content layout="row" class="layout-align-space-between-center" flex layout-align="left center">
+        <md-toolbar class="md-primary" layout="column" layout-align="start start">
+            <md-card-content layout="row" class="layout-align-space-between-center" flex layout-align="center start">
                 <div flex> 
                     <small>{{event.userName}}</small>
                     <br>
@@ -45,12 +45,12 @@
                     <p>{{event.location}}</p>
                     <p>{{event.when}} / {{event.at}}</p>
                 </div>
-                <md-toolbar class="md-whiteframe-3dp md-btn-group md-accent" layout-xs="columns" layout-sm="row" layout-gt-sm="row" layout-margin layout-align="left top" ng-if="!event.archived">
-                    <md-button ng-class="{'md-raised':event.tentative}" ng-click="respondToEvent(event.id, 'Tentative')" ng-disabled="event.tentative"><span class="fa fa-play-circle"></span> Active</md-button>
-                    <md-button ng-class="{'md-raised':event.notNow}" ng-click="respondToEvent(event.id, 'NotNow')" ng-disabled="event.notNow"><span class="fa fa-stop-circle"></span> Canceled</md-button>
-                </md-toolbar>
             </md-card-content>
-            <md-card-actions layout-padding layout-gt-sm="row" layout-align="end center" class="layout-align-space-between-center text-center">
+            <md-toolbar class="md-whiteframe-3dp md-btn-group md-accent" layout-xs="columns" layout-sm="row" layout-gt-sm="row" layout-margin layout-align="left top" ng-if="!event.archived">
+                <md-button ng-class="{'md-raised':event.tentative}" ng-click="respondToEvent(event.id, 'Tentative')" ng-disabled="event.tentative"><span class="fa fa-play-circle"></span> Active</md-button>
+                <md-button ng-class="{'md-raised':event.notNow}" ng-click="respondToEvent(event.id, 'NotNow')" ng-disabled="event.notNow"><span class="fa fa-stop-circle"></span> Canceled</md-button>
+            </md-toolbar>
+            <md-card-actions layout-gt-sm="row" layout-align="end center" class="layout-align-space-between-center text-center">
                 <div flex layout="end center">
                     <md-button ng-click="hideDetails = !hideDetails"><span ng-show="!hideDetails" class="fa fa-chevron-down"></span><span ng-show="hideDetails" class="fa fa-chevron-up"></span> Details</md-button>
                     <md-button ng-if="!event.archived && currentUser.isAdmin"  ng-click="archiveEvent(event.id)" ><span class="fa fa-archive"></span> Archive</md-button>
