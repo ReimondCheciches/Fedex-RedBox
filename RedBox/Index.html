@@ -42,8 +42,8 @@
                     <div class="changer">
                         <div></div>
                         <ul>
-                            <li class="user-status"><span>Welcome <strong>{{currentUser.userName}}</strong> ! </span></li>
-                            <li><a href="http://www2.techromix.com:85/">Timesheet</a></li>
+                            <li class="user-status"><span><strong>{{currentUser.fullName}}</strong></span></li>
+                            <li><a href="http://localhost:2016/">Timesheet</a></li>
                             <li class="active"><a href="http://www2.techromix.com:1007/">Redbox</a></li>
                             <li><a href="http://www2.techromix.com:1006/">Evaluation</a></li>
                             <li><a href="http://blog.techromix.com">Blog</a></li>
@@ -67,13 +67,14 @@
             </header>
 
             <div ng-view></div>
-
+            <footer>
+                Created at FedEx 2016
+            </footer>
         </div>
     </div>
     <div class="clearfix"></div>
-
     <script>
-        var ssoBaseUrl = "http://www2.techromix.com:85/";
+        var ssoBaseUrl = "http://localhost:2016/";
         window.ssoLoginUrl = ssoBaseUrl + '/Account/Login.aspx?ReturnUrl=';
         window.ssoLogoutUrl = ssoBaseUrl + '/Account/LogOut.aspx';
     </script>

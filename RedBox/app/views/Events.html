@@ -1,11 +1,22 @@
 ﻿<div class="callout-box">
     <div class="container">
-        <md-card layout-sm="columns" layout-gt-sm="columns" layout-padding>
-            <md-input-container class="md-block" flex>
-                    <label>Call out people to a place or event</label>
+        <md-card layout-padding>
+            <md-input-container class="md-block big" flex>
+                <label>Call out people to a place or event</label>
                 <textarea ng-model="eventDesc" ng-model="user.biography" columns="1" maxlength="200" md-maxlength="200"></textarea>
             </md-input-container>
-            <md-card-actions layout="row" layout-align="center center">
+                <div layout="row" layout-align="space-between top">
+                    <md-input-container>
+                        <label>Where?</label>
+                        <input>
+                    </md-input-container>
+                    <md-datepicker ng-model="myDate" md-placeholder="When?"></md-datepicker>
+                    <md-input-container>
+                        <label>At?</label>
+                        <input maxlength="8">
+                    </md-input-container>
+                </div>
+            <md-card-actions layout="column" layout-align="top start">
                 <md-button class="md-raised md-primary" ng-click="submitEvent(eventDesc)" ng-disabled="!eventDesc"><span class="fa fa-rocket"></span> Submit</md-button>
             </md-card-actions>
         </md-card>
@@ -27,11 +38,17 @@
     <md-card ng-repeat="event in events">
         <md-toolbar class="md-primary">
             <md-card-content layout="row" class="layout-align-space-between-center" flex layout-align="left center">
-                <div> 
+                <div flex> 
                     <strong>{{event.userName}}</strong>
                     <br>
                     <p>{{event.description}}</p>
+                    <p>{{event.location}}</p>
+                    <p>{{event.when}} / {{event.at}}</p>
                 </div>
+                <md-toolbar class="md-whiteframe-3dp md-btn-group md-accent" layout-xs="columns" layout-sm="row" layout-gt-sm="row" layout-margin layout-align="left top" ng-if="!event.archived">
+                    <md-button ng-class="{'md-raised':event.tentative}" ng-click="respondToEvent(event.id, 'Tentative')" ng-disabled="event.tentative"><span class="fa fa-play-circle"></span> Active</md-button>
+                    <md-button ng-class="{'md-raised':event.notNow}" ng-click="respondToEvent(event.id, 'NotNow')" ng-disabled="event.notNow"><span class="fa fa-stop-circle"></span> Canceled</md-button>
+                </md-toolbar>
             </md-card-content>
             <md-card-actions layout-padding layout-gt-sm="row" layout-align="end center" class="layout-align-space-between-center text-center">
                 <div flex layout="end center">
@@ -43,6 +60,7 @@
                     <md-button ng-class="{'md-raised':event.tentative}" ng-click="respondToEvent(event.id, 'Tentative')" ng-disabled="event.tentative"><span class="fa fa-pause-circle"></span> Tentative</md-button>
                     <md-button ng-class="{'md-raised':event.notNow}" ng-click="respondToEvent(event.id, 'NotNow')" ng-disabled="event.notNow"><span class="fa fa-stop-circle"></span> Not Now</md-button>
                 </md-toolbar>
+                <p>This even is currently canceled</p>
             </md-card-actions>
             <md-toolbar ng-show="hideDetails" class="md-dark animate-show animate-hide">
 

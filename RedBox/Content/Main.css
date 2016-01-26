@@ -876,18 +876,18 @@ md-toolbar:not(.md-menu-toolbar).md-dark {
     margin-bottom: 32px;
 }
 
-.callout-box .md-block {
+.callout-box .md-block.big {
     padding-top: 46px;
 }
 
-.callout-box .md-block label {
+.callout-box .md-block.big label {
     font-size: 24px;
     font-weight: normal;
     margin-bottom: -36px;
     margin-left: 8px;
 }
 
-.callout-box .md-block textarea {
+.callout-box .md-block.big textarea {
     font-size: 24px;
     font-weight: 400;
 }
@@ -1142,8 +1142,20 @@ dd {
     border-bottom: 2px solid rgba(0,0,0,.24);
 }
 
+body [layout-align*="top"] md-input-container {
+    margin: 5px 0;
+}
+
+footer {
+    font-family: "Roboto";
+    margin-top: 30px;
+    text-align: center;
+    color: #ccc;
+    text-shadow: 0 1px 0 rgba(255,255,255,1), 0 -1px 0 rgba(0,0,0,.3);
+}
+
 @media screen and (max-width: 767px) {
-    .callout-box .md-block {
+    .callout-box .md-block.big {
          padding-top: 32px;
          margin-bottom: 0;
          margin-top: 0;
@@ -1153,12 +1165,12 @@ dd {
         float: left;
     }
 
-    .callout-box .md-block label {
+    .callout-box .md-block.big label {
         font-size: 16px;
         margin-bottom: -24px;
     }
 
-    .callout-box .md-block textarea {
+    .callout-box .md-block.big textarea {
         font-size: 20px;
     }
 
