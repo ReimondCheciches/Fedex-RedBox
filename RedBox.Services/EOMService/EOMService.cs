@@ -69,7 +69,16 @@ namespace RedBox.Services.EOMService
 
             if (current == null) return;
 
-            var winnerId = _repository.GetEntities<EOMVote>().Where(p => p.EOMid == current.Id).ToList().GroupBy(p => p.NominatedUserId).Max(p => p.Key);
+            var userGroups =
+                _repository.GetEntities<EOMVote>()
+                    .Where(p => p.EOMid == current.Id)
+                    .ToList()
+                    .GroupBy(p => p.NominatedUserId).ToList();
+
+            var maxVotes = userGroups.Max(m => m.Count());
+
+            // TODO: what happens if equal vote for winner
+            var winnerId = userGroups.FirstOrDefault(g => g.Count() == maxVotes);
 
             if (winnerId == null)
                 return;
