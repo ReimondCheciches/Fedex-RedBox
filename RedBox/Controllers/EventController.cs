@@ -34,8 +34,11 @@ namespace RedBox.Web.Controllers
                     Id = p.Id,
                     Description = p.Description,
                     Date = p.Date,
+                    Location = p.Location,
+                    Time = p.Time,
                     Archived = p.Archived,
-                    UserName = p.AspNetUser.UserInfo.FullName,
+                    UserName = p.AspNetUser.Email,
+                    FullName = p.AspNetUser.UserInfo.FullName,
                     Going = firstOrDefault != null && firstOrDefault.Response.Equals(EventResponse.Going.ToString()),
                     Tentative = firstOrDefault != null && firstOrDefault.Response.Equals(EventResponse.Tentative.ToString()),
                     NotNow = firstOrDefault != null && firstOrDefault.Response.Equals(EventResponse.NotNow.ToString()),
@@ -121,7 +124,7 @@ namespace RedBox.Web.Controllers
         {
             var userId = UserId;
 
-            return _eventService.AddEvent(EventRequest.EventDesc, userId);
+            return _eventService.AddEvent(EventRequest, userId);
         }
 
         [HttpPost]
@@ -137,11 +140,7 @@ namespace RedBox.Web.Controllers
             _eventService.ArchiveEvent(EventRequest.Id);
         }
 
-        public class EventRequest
-        {
-            public int Id { get; set; }
-            public string EventDesc { get; set; }
-        }
+       
 
         private DateTime GetFirstDayOfWeekForDay(DateTime dayInWeek)
         {

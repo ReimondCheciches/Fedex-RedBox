@@ -16,5 +16,8 @@ namespace RedBox.Services.Models
         public List<UserModel> GoingUsers { get; set; }
         public List<UserModel> TentativeUsers { get; set; }
         public List<UserModel> NotNowUsers { get; set; }
+        public string Location { get; set; }
+        public string Time { get; set; }
+        public string FullName { get; set; }
     }
 }

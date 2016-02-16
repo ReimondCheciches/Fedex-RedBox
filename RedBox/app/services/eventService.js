@@ -5,11 +5,17 @@
 
     module.service('eventService', ['$http', '$q', function ($http, $q) {
 
-        var submitEvent = function (eventDesc) {
+        var submitEvent = function (event) {
 
             var deferred = $q.defer();
 
-            $http.post('/api/event/AddEvent', { 'EventDesc': eventDesc }).success(function (response) {
+            var request = {
+                Description: event.description,
+                Location: event.location,
+                Time: event.time
+            };
+
+            $http.post('/api/event/AddEvent', request).success(function (response) {
                 deferred.resolve(response);
 
             }).error(function (err) {
@@ -21,7 +27,10 @@
 
         var respondToEvent = function (eventId, eventResponse) {
             var deferred = $q.defer();
-            $http.post('/api/event/RespondToEvent', { 'EventId': eventId, 'EventResponse': eventResponse }).success(function (response) {
+            $http.post('/api/event/RespondToEvent', {
+                'EventId': eventId,
+                'EventResponse': eventResponse
+            }).success(function (response) {
                 deferred.resolve(response);
 
             }).error(function (err) {
@@ -58,7 +67,7 @@
 
             var deferred = $q.defer();
 
-            $http.post('/api/event/ArchiveEvent', { 'Id': id }).success(function (response) {
+            $http.post('/api/event/ArchiveEvent', {'Id': id}).success(function (response) {
                 deferred.resolve(response);
 
             }).error(function (err) {

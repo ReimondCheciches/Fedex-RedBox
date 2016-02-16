@@ -23,13 +23,15 @@ namespace RedBox.Services.EventService
             return _repository.GetEntities<Event>().ToList();
         }
 
-        public EventModel AddEvent(string eventDesc, string userId)
+        public EventModel AddEvent(EventRequest eventRequest, string userId)
         {
-            if (string.IsNullOrEmpty(eventDesc)) return null;
+            if (string.IsNullOrEmpty(eventRequest.Description)) return null;
 
             var newEvent = new Event()
             {
-                Description = eventDesc,
+                Description = eventRequest.Description,
+                Time = eventRequest.Time,
+                Location = eventRequest.Location,
                 Date = DateTime.Now,
                 UserId = userId
             };

@@ -24,6 +24,8 @@ namespace RedBox.DataAccess
         public System.DateTime Date { get; set; }
         public bool Archived { get; set; }
         public string UserId { get; set; }
+        public string Location { get; set; }
+        public string Time { get; set; }
     
         public virtual ICollection<UserEvent> UserEvents { get; set; }
         public virtual AspNetUser AspNetUser { get; set; }

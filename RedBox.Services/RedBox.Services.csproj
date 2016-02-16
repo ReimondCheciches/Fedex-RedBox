@@ -55,6 +55,7 @@
     <Compile Include="Models\EOMUserVotesModel.cs" />
     <Compile Include="Models\EOMVotesModel.cs" />
     <Compile Include="Models\EventModel.cs" />
+    <Compile Include="Models\EventRequest.cs" />
     <Compile Include="Models\EventResponse.cs" />
     <Compile Include="Models\RespondToEventRequest.cs" />
     <Compile Include="Models\SuggestionModel.cs" />

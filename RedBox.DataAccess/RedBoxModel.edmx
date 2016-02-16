@@ -100,6 +100,8 @@
           <Property Name="Date" Type="datetime" Nullable="false" />
           <Property Name="Archived" Type="bit" Nullable="false" />
           <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Location" Type="nvarchar" MaxLength="256" />
+          <Property Name="Time" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Suggestions">
           <Key>
@@ -746,6 +748,8 @@
           <Property Name="Archived" Type="Boolean" Nullable="false" />
           <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="AspNetUser" Relationship="RedBoxModel.FK__Events__UserId__300424B4" FromRole="Event" ToRole="AspNetUser" />
+          <Property Name="Location" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Time" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="UserEvent">
           <Key>
@@ -925,6 +929,8 @@
           <EntitySetMapping Name="Events">
             <EntityTypeMapping TypeName="RedBoxModel.Event">
               <MappingFragment StoreEntitySet="Events">
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="Archived" ColumnName="Archived" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
