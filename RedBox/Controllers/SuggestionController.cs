@@ -12,7 +12,7 @@ using System.Linq;
 namespace RedBox.Web.Controllers
 {
     [Authorize]
-    public class SuggestionController : ApiController
+    public class SuggestionController : BaseController
     {
         private readonly ISuggestionService _suggestionService;
 
@@ -24,7 +24,7 @@ namespace RedBox.Web.Controllers
         [HttpGet]
         public IEnumerable<SuggestionModel> GetSuggestions()
         {
-            var userId = User.Identity.GetUserId();
+            var userId = UserId;
 
             var suggestions = new List<SuggestionModel>();
             _suggestionService.GetSuggestions().ForEach(p => suggestions.Add(new SuggestionModel()
@@ -44,7 +44,7 @@ namespace RedBox.Web.Controllers
         [HttpGet]
         public IEnumerable<SuggestionModel> GetSuggestionsCurrentWeek()
         {
-            var userId = User.Identity.GetUserId();
+            var userId = UserId;
             var suggestions = new List<SuggestionModel>();
             DateTime StartDay = GetFirstDayOfWeekForDay(DateTime.Today);
             DateTime EndDay = StartDay.AddDays(7);
@@ -72,7 +72,7 @@ namespace RedBox.Web.Controllers
         [HttpGet]
         public IEnumerable<SuggestionModel> GetSuggestionsCurrentMonth()
         {
-            var userId = User.Identity.GetUserId();
+            var userId = UserId;
             var suggestions = new List<SuggestionModel>();
             DateTime StartDay = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
             DateTime EndDay = StartDay.AddMonths(1).AddDays(-1);
@@ -113,7 +113,7 @@ namespace RedBox.Web.Controllers
         [HttpPost]
         public void Vote(SuggestionVoteModel vote)
         {
-            var userId = User.Identity.GetUserId();
+            var userId = UserId;
             if (_suggestionService.UserHasVoted(userId, vote.SuggestionId)) return;
             _suggestionService.Vote(vote.SuggestionId, vote.UpVote, userId);
         }

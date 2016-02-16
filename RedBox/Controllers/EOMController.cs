@@ -8,7 +8,7 @@ using RedBox.Services.SuggestionService;
 namespace RedBox.Web.Controllers
 {
     [Authorize]
-    public class EOMController : ApiController
+    public class EOMController : BaseController
     {
         private readonly IEOMService _eomService;
         public EOMController(IEOMService eomService)
@@ -31,14 +31,14 @@ namespace RedBox.Web.Controllers
         [HttpPost]
         public void AddVote(EomVoteRequest request)
         {
-            var userId = User.Identity.GetUserId();
+            var userId = UserId;
             _eomService.AddVote(request, userId);
         }
 
         [HttpGet]
         public bool HasVoted()
         {
-            var userId = User.Identity.GetUserId();
+            var userId = UserId;
             return _eomService.HasVoted(userId);
         }
 

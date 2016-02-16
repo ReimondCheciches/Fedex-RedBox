@@ -1,7 +1,7 @@
 ﻿'use strict';
 (function() {
     var myApp = angular.module('myApp');
-    myApp.factory('authInterceptorService', function($q, $location, localStorageService) {
+    myApp.factory('authInterceptorService', function ($q, $location, localStorageService) {
 
         var authInterceptorServiceFactory = {};
 
@@ -19,7 +19,8 @@
 
         var _responseError = function(rejection) {
             if (rejection.status === 401) {
-                $location.path('/');
+                localStorageService.remove('authorizationData');
+                window.location = window.ssoLogoutUrl;
             }
             return $q.reject(rejection);
         };

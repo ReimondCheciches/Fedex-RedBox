@@ -87,7 +87,7 @@ namespace RedBox.Services.EOMService
 
             if (eom == null) return;
 
-            eom.WinnerId = winnerId;
+            eom.WinnerId = winnerId.Key;
             _repository.Update(eom);
 
             var newEom = new EOM()

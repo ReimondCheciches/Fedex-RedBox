@@ -11,7 +11,7 @@ using System.Globalization;
 namespace RedBox.Web.Controllers
 {
     [Authorize]
-    public class EventController : ApiController
+    public class EventController : BaseController
     {
         private readonly IEventService _eventService;
 
@@ -23,7 +23,7 @@ namespace RedBox.Web.Controllers
         [HttpGet]
         public IEnumerable<EventModel> GetEvents()
         {
-            var userId = User.Identity.GetUserId();
+            var userId = UserId;
 
             var events = new List<EventModel>();
             _eventService.GetEvents().ForEach(p =>
@@ -51,7 +51,7 @@ namespace RedBox.Web.Controllers
         [HttpGet]
         public IEnumerable<EventModel> GetEventsForCurrentWeek()
         {
-            var userId = User.Identity.GetUserId();
+            var userId = UserId;
 
             var events = new List<EventModel>();
             DateTime StartDay = GetFirstDayOfWeekForDay(DateTime.Today);
@@ -85,7 +85,7 @@ namespace RedBox.Web.Controllers
         [HttpGet]
         public IEnumerable<EventModel> GetEventsForCurrentMonth()
         {
-            var userId = User.Identity.GetUserId();
+            var userId = UserId;
 
             var events = new List<EventModel>();
             DateTime StartDay = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
@@ -119,7 +119,7 @@ namespace RedBox.Web.Controllers
         [HttpPost]
         public EventModel AddEvent(EventRequest EventRequest)
         {
-            var userId = User.Identity.GetUserId();
+            var userId = UserId;
 
             return _eventService.AddEvent(EventRequest.EventDesc, userId);
         }
@@ -127,7 +127,7 @@ namespace RedBox.Web.Controllers
         [HttpPost]
         public EventModel RespondToEvent(RespondToEventRequest respondToEventRequest)
         {
-            respondToEventRequest.UserId = User.Identity.GetUserId();
+            respondToEventRequest.UserId = UserId;
             return _eventService.RespondToEvent(respondToEventRequest);
         }
 

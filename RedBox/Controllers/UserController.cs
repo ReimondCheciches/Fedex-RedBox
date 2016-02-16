@@ -9,7 +9,7 @@ using RedBox.Web.Models;
 
 namespace RedBox.Web.Controllers
 {
-    public class UserController : ApiController
+    public class UserController : BaseController
     {
         private readonly IUserService _userService;
 
@@ -42,7 +42,7 @@ namespace RedBox.Web.Controllers
         [Authorize]
         public UserInfoViewModel UserInfo()
         {
-            var user = _userService.GetUserById(User.Identity.GetUserId());
+            var user = _userService.GetUserById(UserId);
 
             return new UserInfoViewModel
             {
