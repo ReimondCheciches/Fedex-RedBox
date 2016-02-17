@@ -1015,7 +1015,14 @@ dd {
     display: none !important;
 }
 
+.ng-scope.warning {
+    font-size: 16px;
+    margin: 0 10px 0 0;
+}
 
+.event-details {
+    font-size: 16px;
+}
 
 /* Login thingy */
 

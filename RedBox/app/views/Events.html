@@ -42,19 +42,13 @@
                     <small>{{event.fullName}}</small>
                     <br>
                     <p><strong>{{event.description}}</strong></p>
-                    <p>{{event.location}} / {{event.time}}</p>
+                    <p class="event-details"><strong>{{event.location}} / {{event.time}} / {{event.date | date}}</strong></p>
                 </div>
             </md-card-content>
-            <md-toolbar class="md-whiteframe-3dp md-btn-group md-accent" layout-xs="columns" layout-sm="row" layout-gt-sm="row" layout-margin layout-align="left top" ng-if="!event.archived">
-                <!--<md-button ng-class="{'md-raised':event.tentative}" ng-click="respondToEvent(event.id, 'Tentative')" ng-disabled="event.tentative"><span class="fa fa-play-circle"></span> Active</md-button>-->
-
-                <!--<md-button ng-class="{'md-raised':event.notNow}" ng-if="currentUser.userName === event.userName" ng-click="respondToEvent(event.id, 'NotNow')" ng-disabled="event.notNow"><span class="fa fa-stop-circle"></span> Cancel</md-button>-->
-
-            </md-toolbar>
             <md-card-actions layout-gt-sm="row" layout-align="end center" class="layout-align-space-between-center text-center">
                 <div flex layout="end center">
                     <md-button ng-click="hideDetails = !hideDetails"><span ng-show="!hideDetails" class="fa fa-chevron-down"></span><span ng-show="hideDetails" class="fa fa-chevron-up"></span> Details</md-button>
-                    <md-button ng-class="{'md-raised':event.notNow}" ng-if="currentUser.userName === event.userName" ng-click="respondToEvent(event.id, 'NotNow')" ng-disabled="event.notNow"><span class="fa fa-stop-circle"></span> Cancel</md-button>
+                    <md-button ng-class="{'md-raised':event.notNow}" ng-if="currentUser.userName === event.userName && !event.archived" ng-click="respondToEvent(event.id, 'NotNow')" ng-disabled="event.notNow"><span class="fa fa-stop-circle"></span> Cancel</md-button>
                     <md-button ng-if="!event.archived && currentUser.isAdmin"  ng-click="archiveEvent(event.id)" ><span class="fa fa-archive"></span> Archive</md-button>
                 </div>
                 <md-toolbar class="md-whiteframe-3dp md-btn-group md-accent" layout-xs="columns" layout-sm="row" layout-gt-sm="row" layout-margin layout-align="left top" ng-if="!event.archived">
@@ -62,7 +56,7 @@
                     <md-button ng-class="{'md-raised':event.tentative}" ng-click="respondToEvent(event.id, 'Tentative')" ng-disabled="event.tentative"><span class="fa fa-pause-circle"></span> Tentative</md-button>
                     <md-button ng-class="{'md-raised':event.notNow}" ng-click="respondToEvent(event.id, 'NotNow')" ng-disabled="event.notNow"><span class="fa fa-stop-circle"></span> Not Now</md-button>
                 </md-toolbar>
-                <p>This even is currently canceled</p>
+                <p ng-if="event.archived" class="warning">This even is currently canceled</p>
             </md-card-actions>
             <md-toolbar ng-show="hideDetails" class="md-dark animate-show animate-hide">
 
