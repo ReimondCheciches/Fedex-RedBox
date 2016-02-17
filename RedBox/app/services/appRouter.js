@@ -1,5 +1,5 @@
 ﻿(function () {
-    var myApp = angular.module('myApp', ['ngRoute' ,'ngMaterial', 'LocalStorageModule']);
+    var myApp = angular.module('myApp', ['ngRoute' ,'ngMaterial', 'LocalStorageModule', 'toastr', 'ngAnimate']);
 
     myApp.config(function($mdThemingProvider) {
       $mdThemingProvider.theme('default')

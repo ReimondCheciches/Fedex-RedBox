@@ -7,6 +7,8 @@
             if (!isAuth)
                 return;
 
+            $scope.event = {};
+
             var allEvents;
 
             var loadEvents = function () {
