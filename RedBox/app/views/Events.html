@@ -47,12 +47,13 @@
                 </div>
             </md-card-content>
             <md-toolbar class="md-whiteframe-3dp md-btn-group md-accent" layout-xs="columns" layout-sm="row" layout-gt-sm="row" layout-margin layout-align="left top" ng-if="!event.archived">
-                <md-button ng-class="{'md-raised':event.tentative}" ng-click="respondToEvent(event.id, 'Tentative')" ng-disabled="event.tentative"><span class="fa fa-play-circle"></span> Active</md-button>
-                <md-button ng-class="{'md-raised':event.notNow}" ng-click="respondToEvent(event.id, 'NotNow')" ng-disabled="event.notNow"><span class="fa fa-stop-circle"></span> Canceled</md-button>
+                <!--<md-button ng-class="{'md-raised':event.tentative}" ng-click="respondToEvent(event.id, 'Tentative')" ng-disabled="event.tentative"><span class="fa fa-play-circle"></span> Active</md-button>-->
+                <!--<md-button ng-class="{'md-raised':event.notNow}" ng-click="respondToEvent(event.id, 'NotNow')" ng-disabled="event.notNow"><span class="fa fa-stop-circle"></span> Canceled</md-button>-->
             </md-toolbar>
             <md-card-actions layout-gt-sm="row" layout-align="end center" class="layout-align-space-between-center text-center">
                 <div flex layout="end center">
                     <md-button ng-click="hideDetails = !hideDetails"><span ng-show="!hideDetails" class="fa fa-chevron-down"></span><span ng-show="hideDetails" class="fa fa-chevron-up"></span> Details</md-button>
+                    <md-button ng-class="{'md-raised':event.notNow}" ng-click="respondToEvent(event.id, 'NotNow')" ng-disabled="event.notNow"><span class="fa fa-stop-circle"></span> Cancel</md-button>
                     <md-button ng-if="!event.archived && currentUser.isAdmin"  ng-click="archiveEvent(event.id)" ><span class="fa fa-archive"></span> Archive</md-button>
                 </div>
                 <md-toolbar class="md-whiteframe-3dp md-btn-group md-accent" layout-xs="columns" layout-sm="row" layout-gt-sm="row" layout-margin layout-align="left top" ng-if="!event.archived">
