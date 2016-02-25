@@ -33,36 +33,35 @@ namespace RedBox.Web.Providers
             {
                 string userName = null;
 
-                userName = "alexandru.mahu";
 
-                //var ssoBaseUrl = ConfigurationManager.AppSettings["ssoBaseUrl"];
+                var ssoBaseUrl = ConfigurationManager.AppSettings["ssoBaseUrl"];
 
-                //var webRequest = WebRequest.Create(ssoBaseUrl + "/Pages/SSO.aspx") as HttpWebRequest;
-                //webRequest.CookieContainer = new CookieContainer();
+                var webRequest = WebRequest.Create(ssoBaseUrl + "/Pages/SSO.aspx") as HttpWebRequest;
+                webRequest.CookieContainer = new CookieContainer();
 
-                //foreach (var cookieFromRequest in context.Request.Cookies.ToList())
-                //{
-                //    var cookie = new Cookie(cookieFromRequest.Key, cookieFromRequest.Value);
+                foreach (var cookieFromRequest in context.Request.Cookies.ToList())
+                {
+                    var cookie = new Cookie(cookieFromRequest.Key, cookieFromRequest.Value);
 
-                //    webRequest.CookieContainer.Add(new Uri(ssoBaseUrl), cookie);
+                    webRequest.CookieContainer.Add(new Uri(ssoBaseUrl), cookie);
 
-                //    if (cookieFromRequest.Key == "userInfo")
-                //    {
-                //        userName = cookieFromRequest.Value.Split('=')[1];
-                //    }
-                //}
+                    if (cookieFromRequest.Key == "userInfo")
+                    {
+                        userName = cookieFromRequest.Value.Split('=')[1];
+                    }
+                }
 
-                //webRequest.AllowAutoRedirect = false;
+                webRequest.AllowAutoRedirect = false;
 
-                //var response = (HttpWebResponse)webRequest.GetResponse();
+                var response = (HttpWebResponse)webRequest.GetResponse();
 
-                //var status = response.StatusCode;
+                var status = response.StatusCode;
 
-                //if (status != HttpStatusCode.OK || string.IsNullOrEmpty(userName))
-                //{
-                //    context.SetError("invalid_grant", "The user name or password is incorrect.");
-                //    return;
-                //}
+                if (status != HttpStatusCode.OK || string.IsNullOrEmpty(userName))
+                {
+                    context.SetError("invalid_grant", "The user name or password is incorrect.");
+                    return;
+                }
 
 
 
