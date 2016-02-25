@@ -19,5 +19,7 @@ namespace RedBox.Services.Models
         public string Location { get; set; }
         public string Time { get; set; }
         public string FullName { get; set; }
+        public bool? IsCanceld { get; set; }
+        public DateTime? EventDate { get; set; }
     }
 }

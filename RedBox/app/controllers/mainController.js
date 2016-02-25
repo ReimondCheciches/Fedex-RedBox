@@ -39,7 +39,7 @@
         };
 
         eomService.hasVoted().then(function (hasVoted) {
-            if (hasVoted)
+            if (!hasVoted)
                 toastr.info('Please take your time to vote for EOM', null, {
                     onTap : function() {
                         $location.path('/EOM');

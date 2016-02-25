@@ -27,12 +27,12 @@
         <AssociationConnector Association="RedBoxModel.FK_EOMVotes_EOM" ManuallyRouted="false" />
         <AssociationConnector Association="RedBoxModel.FK_SuggestionVotes_Suggestions1" ManuallyRouted="false" />
         <AssociationConnector Association="RedBoxModel.AspNetUserRoles" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="RedBoxModel.Event" Width="1.5" PointX="8" PointY="14.625" />
         <EntityTypeShape EntityType="RedBoxModel.UserEvent" Width="1.5" PointX="10.25" PointY="8.375" />
         <AssociationConnector Association="RedBoxModel.FK_UserEvents_AspNetUsers" />
-        <AssociationConnector Association="RedBoxModel.FK_UserEvents_Events" />
+        <EntityTypeShape EntityType="RedBoxModel.Event" Width="1.5" PointX="5.25" PointY="18.875" />
         <AssociationConnector Association="RedBoxModel.FK__Events__UserId__300424B4" />
-      </Diagram>
+        <AssociationConnector Association="RedBoxModel.FK_UserEvents_Events" />
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

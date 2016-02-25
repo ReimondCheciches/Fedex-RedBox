@@ -33,7 +33,8 @@ namespace RedBox.Services.EventService
                 Time = eventRequest.Time,
                 Location = eventRequest.Location,
                 Date = DateTime.Now,
-                UserId = userId
+                EventDate = eventRequest.Date,
+                UserId = userId,
             };
 
             _repository.Add(newEvent);
@@ -53,6 +54,10 @@ namespace RedBox.Services.EventService
                 Date = newEvent.Date,
                 Description = newEvent.Description,
                 UserName = userFullName,
+                FullName = userFullName,
+                Time = newEvent.Time,
+                EventDate = newEvent.EventDate,
+                Location = newEvent.Location,
                 NotNowUsers = new List<UserModel>(),
                 GoingUsers = new List<UserModel>(),
                 TentativeUsers = new List<UserModel>()
@@ -131,6 +136,18 @@ namespace RedBox.Services.EventService
 
                 _repository.Update(e);
             }
+            _repository.SaveChanges();
+        }
+
+        public void CancelEvent(EventRequest eventRequest, string userId)
+        {
+            var eventObject = _repository.GetEntities<Event>() .FirstOrDefault(
+              p => p.Id == eventRequest.Id && p.UserId.Equals(userId));
+
+            if (eventObject == null) return;
+
+            eventObject.IsCanceld = true;
+
             _repository.SaveChanges();
         }
     }

@@ -102,6 +102,8 @@
           <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="Location" Type="nvarchar" MaxLength="256" />
           <Property Name="Time" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsCanceld" Type="bit" />
+          <Property Name="EventDate" Type="datetime" />
         </EntityType>
         <EntityType Name="Suggestions">
           <Key>
@@ -722,35 +724,21 @@
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
-          <EntitySet Name="Events" EntityType="RedBoxModel.Event" />
           <EntitySet Name="UserEvents" EntityType="RedBoxModel.UserEvent" />
           <AssociationSet Name="FK_UserEvents_AspNetUsers" Association="RedBoxModel.FK_UserEvents_AspNetUsers">
             <End Role="AspNetUser" EntitySet="AspNetUsers" />
             <End Role="UserEvent" EntitySet="UserEvents" />
           </AssociationSet>
-          <AssociationSet Name="FK_UserEvents_Events" Association="RedBoxModel.FK_UserEvents_Events">
-            <End Role="Event" EntitySet="Events" />
-            <End Role="UserEvent" EntitySet="UserEvents" />
-          </AssociationSet>
+          <EntitySet Name="Events" EntityType="RedBoxModel.Event" />
           <AssociationSet Name="FK__Events__UserId__300424B4" Association="RedBoxModel.FK__Events__UserId__300424B4">
             <End Role="AspNetUser" EntitySet="AspNetUsers" />
             <End Role="Event" EntitySet="Events" />
           </AssociationSet>
-        </EntityContainer>
-        <EntityType Name="Event">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Description" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="UserEvents" Relationship="RedBoxModel.FK_UserEvents_Events" FromRole="Event" ToRole="UserEvent" />
-          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Archived" Type="Boolean" Nullable="false" />
-          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="AspNetUser" Relationship="RedBoxModel.FK__Events__UserId__300424B4" FromRole="Event" ToRole="AspNetUser" />
-          <Property Name="Location" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Name="Time" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-        </EntityType>
+          <AssociationSet Name="FK_UserEvents_Events" Association="RedBoxModel.FK_UserEvents_Events">
+            <End Role="Event" EntitySet="Events" />
+            <End Role="UserEvent" EntitySet="UserEvents" />
+          </AssociationSet>
+          </EntityContainer>
         <EntityType Name="UserEvent">
           <Key>
             <PropertyRef Name="Id" />
@@ -774,18 +762,22 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_UserEvents_Events">
-          <End Type="RedBoxModel.Event" Role="Event" Multiplicity="1" />
-          <End Type="RedBoxModel.UserEvent" Role="UserEvent" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Event">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="UserEvent">
-              <PropertyRef Name="EventId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
+        <EntityType Name="Event">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Archived" Type="Boolean" Nullable="false" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Location" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Time" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsCanceld" Type="Boolean" />
+          <Property Name="EventDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="AspNetUser" Relationship="RedBoxModel.FK__Events__UserId__300424B4" FromRole="Event" ToRole="AspNetUser" />
+          <NavigationProperty Name="UserEvents" Relationship="RedBoxModel.FK_UserEvents_Events" FromRole="Event" ToRole="UserEvent" />
+        </EntityType>
         <Association Name="FK__Events__UserId__300424B4">
           <End Type="RedBoxModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
           <End Type="RedBoxModel.Event" Role="Event" Multiplicity="*" />
@@ -798,7 +790,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        <Association Name="FK_UserEvents_Events">
+          <End Type="RedBoxModel.Event" Role="Event" Multiplicity="1" />
+          <End Type="RedBoxModel.UserEvent" Role="UserEvent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Event">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserEvent">
+              <PropertyRef Name="EventId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -926,25 +930,27 @@
               <ScalarProperty Name="Id" ColumnName="UserId" />
             </EndProperty>
           </AssociationSetMapping>
-          <EntitySetMapping Name="Events">
-            <EntityTypeMapping TypeName="RedBoxModel.Event">
-              <MappingFragment StoreEntitySet="Events">
-                <ScalarProperty Name="Time" ColumnName="Time" />
-                <ScalarProperty Name="Location" ColumnName="Location" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="Archived" ColumnName="Archived" />
-                <ScalarProperty Name="Date" ColumnName="Date" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="UserEvents">
             <EntityTypeMapping TypeName="RedBoxModel.UserEvent">
               <MappingFragment StoreEntitySet="UserEvents">
                 <ScalarProperty Name="Response" ColumnName="Response" />
                 <ScalarProperty Name="EventId" ColumnName="EventId" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Events">
+            <EntityTypeMapping TypeName="RedBoxModel.Event">
+              <MappingFragment StoreEntitySet="Events">
+                <ScalarProperty Name="EventDate" ColumnName="EventDate" />
+                <ScalarProperty Name="IsCanceld" ColumnName="IsCanceld" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Archived" ColumnName="Archived" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

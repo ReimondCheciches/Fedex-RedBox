@@ -1,4 +1,6 @@
-﻿namespace RedBox.Services.Models
+﻿using System;
+
+namespace RedBox.Services.Models
 {
     public class EventRequest
     {
@@ -6,5 +8,6 @@
         public string Description { get; set; }
         public string Location { get; set; }
         public string Time { get; set; }
+        public DateTime? Date { get; set; }
     }
 }

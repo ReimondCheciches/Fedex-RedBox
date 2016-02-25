@@ -34,9 +34,11 @@ namespace RedBox.Web.Controllers
                     Id = p.Id,
                     Description = p.Description,
                     Date = p.Date,
+                    EventDate = p.EventDate,
                     Location = p.Location,
                     Time = p.Time,
-                    Archived = p.Archived,
+                    Archived = p.Archived || p.IsCanceld.GetValueOrDefault(),
+                    IsCanceld =  p.IsCanceld.GetValueOrDefault(),
                     UserName = p.AspNetUser.Email,
                     FullName = p.AspNetUser.UserInfo.FullName,
                     Going = firstOrDefault != null && firstOrDefault.Response.Equals(EventResponse.Going.ToString()),
@@ -125,6 +127,14 @@ namespace RedBox.Web.Controllers
             var userId = UserId;
 
             return _eventService.AddEvent(EventRequest, userId);
+        }
+
+        [HttpPost]
+        public void Cancel(EventRequest EventRequest)
+        {
+            var userId = UserId;
+
+            _eventService.CancelEvent(EventRequest, userId);
         }
 
         [HttpPost]

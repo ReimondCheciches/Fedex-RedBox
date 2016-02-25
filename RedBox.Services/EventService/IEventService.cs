@@ -10,5 +10,6 @@ namespace RedBox.Services.EventService
         EventModel AddEvent(EventRequest eventDesc, string UserId);
         EventModel RespondToEvent(RespondToEventRequest respondToEventRequest);
         void ArchiveEvent(int eventId);
+        void CancelEvent(EventRequest eventRequest, string userId);
     }
 }

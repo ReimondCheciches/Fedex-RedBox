@@ -14,7 +14,7 @@
             var loadEvents = function () {
                 var deferred = $q.defer();
 
-                if (allEvents){
+                if (allEvents) {
                     deferred.resolve();
                     return deferred.promise;
                 }
@@ -76,6 +76,13 @@
 
                     console.log(event);
                     console.log(response);
+                });
+            };
+
+            $scope.cancelEvent = function (event) {
+                eventService.cancelEvent(event.id).then(function () {
+                    event.isCanceld = true;
+                    event.archived = true;
                 });
             };
 
@@ -255,9 +262,6 @@
 
 
             $scope.orderNewest();
-
-
-
 
 
         }]);

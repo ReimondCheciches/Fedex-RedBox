@@ -12,7 +12,8 @@
             var request = {
                 Description: event.description,
                 Location: event.location,
-                Time: event.time
+                Time: event.time,
+                Date: event.date
             };
 
             $http.post('/api/event/AddEvent', request).success(function (response) {
@@ -89,13 +90,28 @@
             return deferred.promise;
         };
 
+
+        var cancelEvent = function (eventId) {
+            var request = {
+                Id: eventId
+            };
+
+            return $http.post('/api/event/cancel', request).then(function (data) {
+                    return data.data;
+                })
+                .catch(function (error) {
+                    return $q.reject(error);
+                });
+        };
+
         return {
             submitEvent: submitEvent,
             respondToEvent: respondToEvent,
             getEvents: getEvents,
             archiveEvent: archiveEvent,
             getEventsForCurrentMonth: getEventsForCurrentMonth,
-            getEventsForCurrentWeek: getEventsForCurrentWeek
+            getEventsForCurrentWeek: getEventsForCurrentWeek,
+            cancelEvent: cancelEvent
         };
 
     }]);
