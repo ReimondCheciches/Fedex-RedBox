@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Security.Claims;
@@ -31,58 +32,31 @@ namespace RedBox.Web.Providers
         {
             try
             {
-                string userName = null;
+                var userName = GetUsernameViaSSO(context);
 
-
-                var ssoBaseUrl = ConfigurationManager.AppSettings["ssoBaseUrl"];
-
-                var webRequest = WebRequest.Create(ssoBaseUrl + "/Pages/SSO.aspx") as HttpWebRequest;
-                webRequest.CookieContainer = new CookieContainer();
-
-                foreach (var cookieFromRequest in context.Request.Cookies.ToList())
+                if (string.IsNullOrWhiteSpace(userName))
                 {
-                    var cookie = new Cookie(cookieFromRequest.Key, cookieFromRequest.Value);
-
-                    webRequest.CookieContainer.Add(new Uri(ssoBaseUrl), cookie);
-
-                    if (cookieFromRequest.Key == "userInfo")
-                    {
-                        userName = cookieFromRequest.Value.Split('=')[1];
-                    }
-                }
-
-                webRequest.AllowAutoRedirect = false;
-
-                var response = (HttpWebResponse)webRequest.GetResponse();
-
-                var status = response.StatusCode;
-
-                if (status != HttpStatusCode.OK || string.IsNullOrEmpty(userName))
-                {
-                    context.SetError("invalid_grant", "The user name or password is incorrect.");
+                    context.SetError("invalid_grant", "SSO auth error");
                     return;
                 }
-
-
 
                 var userManager = context.OwinContext.GetUserManager<ApplicationUserManager>();
 
-                //ApplicationUser user = await userManager.FindAsync(context.UserName, context.Password);       
-                ApplicationUser user = await userManager.FindByNameAsync(userName);
+                var user = await userManager.FindByNameAsync(userName);
 
                 if (user == null)
                 {
-                    context.SetError("invalid_grant", "The user name or password is incorrect.");
+                    context.SetError("invalid_grant", "User not found in Evaluations");
                     return;
                 }
 
-                ClaimsIdentity oAuthIdentity = await user.GenerateUserIdentityAsync(userManager,
+                var oAuthIdentity = await user.GenerateUserIdentityAsync(userManager,
                    OAuthDefaults.AuthenticationType);
-                ClaimsIdentity cookiesIdentity = await user.GenerateUserIdentityAsync(userManager,
+                var cookiesIdentity = await user.GenerateUserIdentityAsync(userManager,
                     CookieAuthenticationDefaults.AuthenticationType);
 
-                AuthenticationProperties properties = CreateProperties(user.UserName);
-                AuthenticationTicket ticket = new AuthenticationTicket(oAuthIdentity, properties);
+                var properties = CreateProperties(user.UserName);
+                var ticket = new AuthenticationTicket(oAuthIdentity, properties);
                 context.Validated(ticket);
                 context.Request.Context.Authentication.SignIn(cookiesIdentity);
 
@@ -93,6 +67,53 @@ namespace RedBox.Web.Providers
                 var ex = e;
             }
         }
+
+        private static string GetUsernameViaSSO(OAuthGrantResourceOwnerCredentialsContext context)
+        {
+
+            try
+            {
+                string userName = null;
+                var ssoBaseUrl = ConfigurationManager.AppSettings["ssoBaseUrl"];
+
+                var webRequest = (HttpWebRequest)WebRequest.Create(ssoBaseUrl + "/Pages/SSO.aspx");
+
+                webRequest.CookieContainer = new CookieContainer();
+
+                foreach (var cookieFromRequest in context.Request.Cookies.ToList())
+                {
+                    var cookie = new Cookie(cookieFromRequest.Key, cookieFromRequest.Value);
+
+                    webRequest.CookieContainer.Add(new Uri(ssoBaseUrl), cookie);
+
+                }
+
+                var response = (HttpWebResponse)webRequest.GetResponse();
+
+                var status = response.StatusCode;
+
+                if (status != HttpStatusCode.OK)
+                {
+                    return null;
+                }
+
+                using (var resp = webRequest.GetResponse())
+                {
+                    var stream = resp.GetResponseStream();
+                    if (stream != null)
+                    {
+                        userName = new StreamReader(stream).ReadToEnd();
+                    }
+                }
+
+                return userName;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
 
         public override Task TokenEndpoint(OAuthTokenEndpointContext context)
         {
