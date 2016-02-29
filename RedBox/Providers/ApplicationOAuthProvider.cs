@@ -32,7 +32,7 @@ namespace RedBox.Web.Providers
         {
             try
             {
-                var userName = GetUsernameViaSSO(context);
+                var userName = "alexandru.mahu"; // GetUsernameViaSSO(context);
 
                 if (string.IsNullOrWhiteSpace(userName))
                 {
