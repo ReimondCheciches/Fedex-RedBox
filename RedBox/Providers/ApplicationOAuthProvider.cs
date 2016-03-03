@@ -32,11 +32,12 @@ namespace RedBox.Web.Providers
         {
             try
             {
-                var userName = GetUsernameViaSSO(context);
+                var ssoMessage = "";
+                var userName = GetUsernameViaSSO(context, out ssoMessage);
 
                 if (string.IsNullOrWhiteSpace(userName))
                 {
-                    context.SetError("invalid_grant", "SSO auth error");
+                    context.SetError("invalid_grant", ssoMessage);
                     return;
                 }
 
@@ -68,8 +69,9 @@ namespace RedBox.Web.Providers
             }
         }
 
-        private static string GetUsernameViaSSO(OAuthGrantResourceOwnerCredentialsContext context)
+        private static string GetUsernameViaSSO(OAuthGrantResourceOwnerCredentialsContext context, out string message)
         {
+            message = "";
 
             try
             {
@@ -94,6 +96,7 @@ namespace RedBox.Web.Providers
 
                 if (status != HttpStatusCode.OK)
                 {
+                    message = "HttpStatusCode not OK for Timesheet";
                     return null;
                 }
 
@@ -108,8 +111,9 @@ namespace RedBox.Web.Providers
 
                 return userName;
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                message = "Exception: " + e.Message;
                 return null;
             }
         }
