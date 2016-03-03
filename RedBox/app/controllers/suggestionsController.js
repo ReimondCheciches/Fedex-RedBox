@@ -39,7 +39,7 @@
                 $scope.archived = false;
                 $scope.currentMonth = true;
 
-                loadSuggestions();
+                // loadSuggestions();
             };
             init();
 

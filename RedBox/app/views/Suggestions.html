@@ -40,8 +40,8 @@
                 <span class="fa fa-calendar"></span> All-time
             </md-button>
         </md-toolbar>
-    </div>
-    <md-card layout-gt-sm="columns" ng-repeat="suggestion in suggestions">
+    </div> 
+    <md-card layout-gt-sm="columns" ng-repeat="suggestion in suggestions track by suggestion.id">
         <md-toolbar>
             <md-card-content layout="row" flex layout-align="left center">
                 <span class="claim">{{::suggestion.description}}</span>

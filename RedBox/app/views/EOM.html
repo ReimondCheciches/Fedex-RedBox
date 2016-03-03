@@ -6,7 +6,7 @@
                 <span class="fa fa-thumbs-up"></span>{{currentNumberOfVotes}}
             </md-button>
 
-	       
+
 	        <md-button class="md-raised md-primary" ng-if="currentUser.isAdmin" ng-click="stopVote()" ng-disabled="disableStopVote"><span class="fa fa-flag"></span> END VOTING</md-button>
 			<div ng-show="!hasVoted" ng-clock>
 				VOTE HERE
@@ -84,6 +84,6 @@
 
 	    </div>
 
-       
+
 	</div>
 </div>

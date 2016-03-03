@@ -76,7 +76,7 @@
                                                                            class="fa fa-chevron-down"></span><span
                             ng-show="hideDetails" class="fa fa-chevron-up"></span> Details
                     </md-button>
-                    <md-button 
+                    <md-button
                                ng-if="currentUser.userName === event.userName && !event.archived"
                                ng-click="cancelEvent(event)"
                                ng-show="!event.isCanceld">
@@ -107,7 +107,7 @@
                     <dl flex>
                         <dt><span class="fa fa-play-circle"></span> Going</dt>
                         <dd>
-                            <ol>
+                            <ol> 
                                 <li ng-repeat="guser in event.goingUsers">{{guser.fullName}}</li>
                             </ol>
                         </dd>

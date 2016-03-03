@@ -5,7 +5,6 @@ using System;
 using System.Web.Http;
 using RedBox.Services.UserServices;
 using Unity.WebApi;
-using Microsoft.Practices.Unity.Configuration;
 using RedBox.DataAccess.Repositories;
 using RedBox.Services.EOMService;
 

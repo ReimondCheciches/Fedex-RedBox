@@ -41,7 +41,6 @@
                 $scope.archived = false;
                 $scope.currentMonth = true;
 
-                loadEvents();
             };
             init();
 
