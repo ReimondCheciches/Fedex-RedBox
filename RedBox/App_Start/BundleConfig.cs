@@ -22,23 +22,23 @@ namespace RedBox.Web
                         "~/Scripts/underscore.js"
                         ));
 
-            bundles.Add(new ScriptBundle("~/js/app").Include(
-                       "~/app/services/appRouter.js",
-                       "~/app/services/authInterceptorService.js",
-                       "~/app/services/authentification.js",
-                       "~/app/services/userService.js",
-                       "~/app/services/eomService.js",
-                       "~/app/services/eventService.js",
-                       "~/app/services/suggestionService.js",
-                       "~/app/controllers/mainController.js",
-                       "~/app/controllers/suggestionsController.js",
-                       "~/app/controllers/eomController.js",
-                       "~/app/controllers/eventsController.js"
+            //bundles.Add(new ScriptBundle("~/js/app").Include(
+            //           "~/app/services/appRouter.js",
+            //           "~/app/services/authInterceptorService.js",
+            //           "~/app/services/authentification.js",
+            //           "~/app/services/userService.js",
+            //           "~/app/services/eomService.js",
+            //           "~/app/services/eventService.js",
+            //           "~/app/services/suggestionService.js",
+            //           "~/app/controllers/mainController.js",
+            //           "~/app/controllers/suggestionsController.js",
+            //           "~/app/controllers/eomController.js",
+            //           "~/app/controllers/eventsController.js"
 
-                       ));
+            //           ));
 
-            //bundles.Add(new ScriptBundle("~/js/app").Include("~/app/services/appRouter.js"));
-            //bundles.Add(new ScriptBundle("~/js/app").IncludeDirectory("~/app", "*.js", true));
+            bundles.Add(new ScriptBundle("~/js/app").Include("~/app/services/appRouter.js"));
+            bundles.Add(new ScriptBundle("~/js/app").IncludeDirectory("~/app", "*.js", true));
 
 
             bundles.Add(new StyleBundle("~/css/vendor").Include(
