@@ -1,5 +1,5 @@
 ﻿(function () {
-    var myApp = angular.module('myApp');
+    var myApp = angular.module('Redbox');
 
     myApp.controller('eventsController', ['$scope', '$location', 'eventService', '$q', 'isAuth',
         function ($scope, $location, eventService, $q, isAuth) {
@@ -41,7 +41,6 @@
                 $scope.archived = false;
                 $scope.currentMonth = true;
 
-                loadEvents();
             };
             init();
 
@@ -74,8 +73,6 @@
                     event.notNowUsers = response.notNowUsers;
                     event.notNow = response.notNow;
 
-                    console.log(event);
-                    console.log(response);
                 });
             };
 
@@ -177,25 +174,6 @@
                 });
 
                 return deferred.promise;
-
-
-                $scope.allTime = true;
-                $scope.currentWeek = false;
-                $scope.currentMonth = false;
-
-                //$scope.events = $scope.allEvents;
-
-                if ($scope.archived) {
-                    $scope.showArchived();
-                }
-
-                if ($scope.newest) {
-                    $scope.orderNewest($scope.events);
-                    return;
-                }
-                if ($scope.hotest) {
-                    $scope.orderHotest($scope.events);
-                }
             };
 
             var filterItems = function () {

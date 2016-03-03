@@ -1,5 +1,5 @@
 ﻿(function () {
-    var myApp = angular.module('myApp');
+    var myApp = angular.module('Redbox');
 
     myApp.controller('userController', function ($scope, $location, authService, $http) {
 
@@ -10,8 +10,7 @@
 
         $scope.loginData = {
             Username: '',
-            Password: '',
-
+            Password: ''
         };
 
         $scope.changePassword = function () {
@@ -20,21 +19,20 @@
                 newPassword: $scope.loginData.NewPassword,
                 confirmPassword: $scope.loginData.NewPasswordConfirm
             };
-            $http.post('api/Account/ChangePassword', request).success(function(response) {
+            $http.post('api/Account/ChangePassword', request).success(function() {
                 $http.post('api/User/UpdateNeedsPasswordReset').success(function () {
                     authService.authentification.isAuth = true;
                     authService.authentification.userName = $scope.loginData.Username;
                     $location.path('/');
                 });
             }).error(function(error) {
-                console.log(error);
                 if (error.modelState)
                     $scope.message = "";
                 $scope.isNotAuthenticated = true;
                     for (var prop in error.modelState) {
                         $scope.message += error.modelState[prop][0];
                     }
-                
+
             });
         }
 

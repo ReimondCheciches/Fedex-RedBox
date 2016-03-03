@@ -91,39 +91,38 @@ namespace RedBox.Services.EventService
 
             _repository.SaveChanges();
 
-             userEvent =
-               _repository.GetEntities<UserEvent>()
-                   .FirstOrDefault(
-                       p => p.EventId == respondToEventRequest.EventId && p.UserId.Equals(respondToEventRequest.UserId));
+            userEvent =
+              _repository.GetEntities<UserEvent>()
+                  .FirstOrDefault(
+                      p => p.EventId == respondToEventRequest.EventId && p.UserId.Equals(respondToEventRequest.UserId));
 
-            var eventItem =
-                _repository.GetEntities<Event>()
-                    .Where(e => e.Id == userEvent.EventId)
-                    .Include(e => e.AspNetUser.UserInfo)
-                    .FirstOrDefault();
-
-            if (eventItem == null)
-                return null;
+            var goingUsers = GetGoingStatus(userEvent, EventResponse.Going);
+            var tentativeUsers = GetGoingStatus(userEvent, EventResponse.Tentative);
+            var notNowUsers = GetGoingStatus(userEvent, EventResponse.NotNow);
 
             return new EventModel()
             {
                 Going = userEvent != null && userEvent.Response.Equals(EventResponse.Going.ToString()),
                 Tentative = userEvent != null && userEvent.Response.Equals(EventResponse.Tentative.ToString()),
                 NotNow = userEvent != null && userEvent.Response.Equals(EventResponse.NotNow.ToString()),
-                GoingUsers =
-                    eventItem.UserEvents.Where(x => x.Response.Equals(EventResponse.Going.ToString()))
-                        .Select(u => new UserModel() {FullName = u.AspNetUser.UserInfo.FullName})
-                        .ToList(),
-                TentativeUsers =
-                    eventItem.UserEvents.Where(x => x.Response.Equals(EventResponse.Tentative.ToString()))
-                        .Select(u => new UserModel() {FullName = u.AspNetUser.UserInfo.FullName})
-                        .ToList(),
-                NotNowUsers =
-                    eventItem.UserEvents.Where(x => x.Response.Equals(EventResponse.NotNow.ToString()))
-                        .Select(u => new UserModel() {FullName = u.AspNetUser.UserInfo.FullName})
-                        .ToList()
+                GoingUsers = goingUsers,
+                TentativeUsers = tentativeUsers,
+                NotNowUsers = notNowUsers
             };
 
+        }
+
+        private List<UserModel> GetGoingStatus(UserEvent userEvent, EventResponse eventResponse)
+        {
+            var response = eventResponse.ToString();
+
+            return _repository.GetEntities<Event>()
+                .Where(e => e.Id == userEvent.EventId)
+                .SelectMany(e => e.UserEvents)
+                .Include(e => e.AspNetUser.UserInfo)
+                .Where(ue => ue.Response.Equals(response))
+                .Select(u => new UserModel { FullName = u.AspNetUser.UserInfo.FullName })
+                .ToList();
         }
 
         public void ArchiveEvent(int eventId)
@@ -141,7 +140,7 @@ namespace RedBox.Services.EventService
 
         public void CancelEvent(EventRequest eventRequest, string userId)
         {
-            var eventObject = _repository.GetEntities<Event>() .FirstOrDefault(
+            var eventObject = _repository.GetEntities<Event>().FirstOrDefault(
               p => p.Id == eventRequest.Id && p.UserId.Equals(userId));
 
             if (eventObject == null) return;

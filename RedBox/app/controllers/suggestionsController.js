@@ -1,11 +1,10 @@
 ﻿(function () {
-    var myApp = angular.module('myApp');
+    var myApp = angular.module('Redbox');
 
-    myApp.controller('suggestionsController', ['$scope', '$location', 'suggestionService', '$q', 'isAuth',
+    myApp.controller('suggestionsController', ['$scope', '$location',
+    'suggestionService', '$q', 'isAuth',
         function ($scope, $location, suggestionService, $q, isAuth) {
-
-            if (!isAuth)
-                return;
+            if (!isAuth) ;
 
             var allSuggestions;
 
@@ -39,7 +38,7 @@
                 $scope.archived = false;
                 $scope.currentMonth = true;
 
-                loadSuggestions();
+                // loadSuggestions();
             };
             init();
 

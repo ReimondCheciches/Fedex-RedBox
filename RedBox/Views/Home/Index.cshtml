@@ -1,24 +1,64 @@
-﻿<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS, and JavaScript.</p>
-    <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>ASP.NET Web API is a framework that makes it easy to build HTTP services that reach
-        a broad range of clients, including browsers and mobile devices. ASP.NET Web API
-        is an ideal platform for building RESTful applications on the .NET Framework.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301870">Learn more &raquo;</a></p>
+﻿@{Layout = "~/Views/Shared/_Layout.cshtml";}
+
+<div ng-app="Redbox" ng-cloak>
+    <div class="wrapper" ng-controller="mainController">
+
+        <!--<md-progress-linear md-mode="indeterminate" ng-show="showLoading"></md-progress-linear>-->
+
+        <div class="login" ng-show="isLoaded && !isLogged()">
+            <div class="login-div checking" ng-cloak>
+                <div class="login-header md-toolbar md-default-theme">
+                    <div class="logging-in">
+                        <div class="indeterminate">
+                            <img src="Content/Images/login-bg.png">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div ng-show="isLoaded && isLogged()" ng-cloak>
+            <header>
+                <div class="header">
+                    <div class="changer">
+                        <div></div>
+                        <ul>
+                            <li class="user-status"><span><strong>{{currentUser.fullName}}</strong></span></li>
+                            <li><a href="http://timesheet.techromix.com/">Timesheet</a></li>
+                            <li><a href="https://techromix.atlassian.net">Jira</a></li>
+                            <li><a href="https://techromix.atlassian.net/wiki/">Confluence</a></li>
+                            <li class="active"><a href="https://redbox.techromix.net">Redbox</a></li>
+                            <li><a href="http://evaluation.techromix.com/">Evaluation</a></li>
+                            <li><a href="http://blog.techromix.com">Blog</a></li>
+                            <li><a target="_blank" href="https://sites.google.com/a/techromix.com/internal-site/">Google Site <span class="fa fa-external-link"></span></a></li>
+                            <li><a target="_blank" href="https://sites.google.com/a/techromix.com/dev/">Dev Team <span class="fa fa-external-link"></span></a></li>
+                            <li><a target="_blank" href="https://sites.google.com/a/techromix.com/tmx-qa-team/home/">QA Team <span class="fa fa-external-link"></span></a></li>
+                        </ul>
+                    </div>
+                    <h1>Redbox</h1>
+                    <div class="col-md-8 no-padding text-right logged" ng-show="isLogged()">
+                        <span>Welcome <strong>{{currentUser.fullName}}</strong> !</span>&nbsp;<a ng-click="logOut()">logout</a>
+                    </div>
+                </div>
+                <nav>
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" ng-class="{'active': isTabActive('Suggestions')}" ng-hide="hideSelfEvaluation"><a href="#Suggestions">Suggestions</a></li>
+                        <li role="presentation" ng-class="{'active': isTabActive('Events')}"><a href="#Events">Gatherings</a></li>
+                        <li role="presentation" ng-class="{'active': isTabActive('EOM')}"><a href="#EOM">EOM</a></li>
+                    </ul>
+                </nav>
+            </header>
+
+            <div ng-view></div>
+            <footer>
+                Created at FedEx 2016
+            </footer>
+        </div>
     </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301871">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301872">Learn more &raquo;</a></p>
-    </div>
+    <div class="clearfix"></div>
+    <script>
+        var ssoBaseUrl = "http://timesheet.techromix.com/";
+        window.ssoLoginUrl = ssoBaseUrl + '/Account/Login.aspx?ReturnUrl=';
+        window.ssoLogoutUrl = ssoBaseUrl + '/Account/LogOut.aspx';
+    </script>
 </div>
