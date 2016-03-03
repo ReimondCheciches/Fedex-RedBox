@@ -1,7 +1,7 @@
 ﻿(function () {
     'use strict';
 
-    var module = angular.module('myApp');
+    var module = angular.module('Redbox');
 
     module.service('eventService', ['$http', '$q', function ($http, $q) {
 

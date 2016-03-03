@@ -1,57 +1,62 @@
-﻿(function () {
-    var myApp = angular.module('myApp');
+(function() {
+    var myApp = angular.module('Redbox');
 
-    myApp.controller('mainController', function ($scope, $rootScope, $location, authService, eomService, toastr) {
+    myApp.controller('mainController', ['$scope', '$rootScope', '$location', 'authService', 'eomService', 'toastr',
+        function($scope, $rootScope, $location, authService, eomService, toastr) {
 
-        $scope.isLoaded = false;
+            $scope.isLoaded = false;
 
-        var tabToUrlMapping = {
-            "Suggestions": ["/", "Suggestions"],
-            "EOM": ["/EOM"],
-            "Events": ["/Events"]
-        };
+            var tabToUrlMapping = {
+                "Suggestions": ["/", "Suggestions"],
+                "EOM": ["/EOM"],
+                "Events": ["/Events"]
+            };
 
-        $scope.isTabActive = function (tabName) {
+            $scope.isTabActive = function(tabName) {
 
-            var tab = tabToUrlMapping[tabName];
+                var tab = tabToUrlMapping[tabName];
 
-            if (!tab)
+                if (!tab)
+                    return false;
+
+                return _.find(tab, function(t) {
+                    return t === $location.path();
+                });
+
+            };
+
+            $rootScope.isLogged = function() {
+
+                if (authService.authentification.fullName) {
+                    $rootScope.currentUser = authService.authentification;
+                    return true;
+                }
+
                 return false;
+            };
 
-            return _.find(tab, function (t) {
-                return t === $location.path();
-            });
+            $scope.logOut = function() {
+                authService.logOut();
+            };
 
-        };
-
-        $rootScope.isLogged = function () {
 
             if (authService.authentification.fullName) {
-                $rootScope.currentUser = authService.authentification;
-                return true;
+                eomService.hasVoted().then(function(hasVoted) {
+                    if (!hasVoted)
+                        toastr.info('Please take your time to vote for EOM', null, {
+                            onTap: function() {
+                                $location.path('/EOM');
+                            },
+                            timeOut: 7000,
+                            iconClass: 'toast-blue'
+                        });
+                });
             }
 
-            return false;
-        };
 
-        $scope.logOut = function () {
-            authService.logOut();
-        };
-
-        eomService.hasVoted().then(function (hasVoted) {
-            if (!hasVoted)
-                toastr.info('Please take your time to vote for EOM', null, {
-                    onTap : function() {
-                        $location.path('/EOM');
-                    },
-                    timeOut: 7000,
-                    iconClass: 'toast-blue'
-                });
-        });
-
-
-        $scope.isLoaded = true;
-    });
+            $scope.isLoaded = true;
+        }
+    ]);
 
 
 }());

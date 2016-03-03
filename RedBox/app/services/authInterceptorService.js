@@ -1,7 +1,7 @@
 ﻿'use strict';
 (function() {
-    var myApp = angular.module('myApp');
-    myApp.factory('authInterceptorService', function ($q, $location, localStorageService) {
+    var myApp = angular.module('Redbox');
+    myApp.factory('authInterceptorService', ['$q', '$location', 'localStorageService', function ($q, $location, localStorageService) {
 
         var authInterceptorServiceFactory = {};
 
@@ -29,5 +29,5 @@
         authInterceptorServiceFactory.responseError = _responseError;
 
         return authInterceptorServiceFactory;
-    });
+    }]);
 }());

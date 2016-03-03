@@ -1,7 +1,7 @@
 ﻿(function() {
     'use strict';
 
-    var myApp = angular.module('myApp');
+    var myApp = angular.module('Redbox');
 
     myApp.service('eomService', ['$http', '$q', function ($http, $q) {
 
@@ -10,7 +10,7 @@
 
             $http.post('/api/eom/addVote', {userId : userId, reason : reason}).success(function () {
                 deferred.resolve();
-            }).error(function (err, status) {
+            }).error(function (err) {
                 deferred.reject(err);
             });
 
@@ -22,7 +22,7 @@
 
             $http.get('/api/eom/hasVoted').success(function(response) {
                 deferred.resolve(response);
-            }).error(function(err, status) {
+            }).error(function(err) {
                 deferred.reject(err);
             });
 
@@ -34,7 +34,7 @@
 
             $http.get('/api/eom/getNumberOfCurrentEOMVotes').success(function (response) {
                 deferred.resolve(response);
-            }).error(function (err, status) {
+            }).error(function (err) {
                 deferred.reject(err);
             });
 
@@ -46,7 +46,7 @@
 
             $http.get('/api/eom/GetAllEOMs').success(function (response) {
                 deferred.resolve(response);
-            }).error(function (err, status) {
+            }).error(function (err) {
                 deferred.reject(err);
             });
 
@@ -58,7 +58,7 @@
 
             $http.get('/api/eom/GetCurrentEOM').success(function (response) {
                 deferred.resolve(response);
-            }).error(function (err, status) {
+            }).error(function (err) {
                 deferred.reject(err);
             });
 
@@ -71,7 +71,7 @@
 
             $http.get('/api/eom/endVote').success(function (response) {
                 deferred.resolve(response);
-            }).error(function (err, status) {
+            }).error(function (err) {
                 deferred.reject(err);
             });
 

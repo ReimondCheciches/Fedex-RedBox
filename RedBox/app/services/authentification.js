@@ -1,8 +1,8 @@
 ﻿'use strict';
 (function () {
-    var myApp = angular.module('myApp');
+    var myApp = angular.module('Redbox');
 
-    myApp.factory('authService', function ($http, $q, localStorageService, $rootScope) {
+    myApp.factory('authService',['$http', '$q', 'localStorageService', function ($http, $q, localStorageService) {
 
         var serviceBase = '/';
         var authServiceFactory = {};
@@ -14,7 +14,7 @@
 
         };
 
-        var _saveRegistration = function (registration) {
+        var _saveRegistration = function () {
             _logOut();
 
             return $http.post('api/account/logout').then(function (response) {
@@ -45,7 +45,7 @@
 
                     deferred.resolve(response);
                 });
-            }).error(function (err, status) {
+            }).error(function (err) {
                 localStorageService.remove('authorizationData');
 
                 _authentification.isAuth = false;
@@ -91,5 +91,5 @@
         authServiceFactory.fillAuthData = _fillAuthData;
         authServiceFactory.authentification = _authentification;
         return authServiceFactory;
-    });
+    }]);
 }());
