@@ -16,7 +16,7 @@ namespace RedBox.Web
                         "~/Scripts/angular-aria.js",
                         "~/Scripts/angular-material/angular-material.js",
                         "~/Scripts/angular-messages.js",
-                        "~/Scripts/angular-toastr.js",
+                        "~/Scripts/angular-toastr.tpls.js",
                         "~/Scripts/angular-local-storage.js",
                         "~/Scripts/angular-ui/ui-bootstrap-tpls.js",
                         "~/Scripts/underscore.js"
@@ -37,8 +37,7 @@ namespace RedBox.Web
 
             //           ));
 
-            bundles.Add(new ScriptBundle("~/js/app").Include("~/app/services/appRouter.js"));
-            bundles.Add(new ScriptBundle("~/js/app").IncludeDirectory("~/app", "*.js", true));
+            bundles.Add(new ScriptBundle("~/js/app").IncludeDirectory("~/app/src", "*.js", true));
 
 
             bundles.Add(new StyleBundle("~/css/vendor").Include(

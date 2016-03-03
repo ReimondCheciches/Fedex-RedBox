@@ -1,0 +1,50 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	0	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+div	D:\Projects\Redbox\RedBox\app\views\EOM.html	/^<div class="container">$/;"	function	line:1
+div	D:\Projects\Redbox\RedBox\app\views\EOM.html	/^  <div layout-gt-sm="columns">$/;"	function	line:2
+div	D:\Projects\Redbox\RedBox\app\views\EOM.html	/^    <div flex-gt-sm="40">$/;"	function	line:3
+md	D:\Projects\Redbox\RedBox\app\views\EOM.html	/^      <md-button class="md-fab md-primary md-accent" aria-label="Use Android" ng-if="currentUser.isAdmin">$/;"	function	line:5
+span	D:\Projects\Redbox\RedBox\app\views\EOM.html	/^        <span class="fa fa-thumbs-up"><\/span>{{currentNumberOfVotes}}$/;"	function	line:6
+span	D:\Projects\Redbox\RedBox\app\views\EOM.html	/^        <span class="fa fa-flag"><\/span>$/;"	function	line:14
+div	D:\Projects\Redbox\RedBox\app\views\EOM.html	/^      <div ng-show="!hasVoted" ng-clock>$/;"	function	line:16
+md	D:\Projects\Redbox\RedBox\app\views\EOM.html	/^      <md-card ng-show="!hasVoted" ng-clock>$/;"	function	line:20
+md	D:\Projects\Redbox\RedBox\app\views\EOM.html	/^        <md-card-content layout-align="top left">$/;"	function	line:21
+h	D:\Projects\Redbox\RedBox\app\views\EOM.html	/^          <h2>{{currentEom.date | date : 'MMMM yyyy'}}<\/h2>$/;"	function	line:22
+form	D:\Projects\Redbox\RedBox\app\views\EOM.html	/^          <form ng-submit="$event.preventDefault()">$/;"	function	line:23
+md	D:\Projects\Redbox\RedBox\app\views\EOM.html	/^              <md-item-template>$/;"	function	line:35
+span	D:\Projects\Redbox\RedBox\app\views\EOM.html	/^                <span md-highlight-text="searchText" md-highlight-flags="^i">{{item.fullName}}<\/span>$/;"	function	line:36
+md	D:\Projects\Redbox\RedBox\app\views\EOM.html	/^              <md-not-found>$/;"	function	line:38
+a	D:\Projects\Redbox\RedBox\app\views\EOM.html	/^                <a ng-click="ctrl.newState(searchText)">Create a new one!<\/a>$/;"	function	line:40
+md	D:\Projects\Redbox\RedBox\app\views\EOM.html	/^            <md-input-container class="md-block callout-box-mini" flex>$/;"	function	line:43
+label	D:\Projects\Redbox\RedBox\app\views\EOM.html	/^              <label>Reason<\/label>$/;"	function	line:44
+textarea	D:\Projects\Redbox\RedBox\app\views\EOM.html	/^              <textarea ng-model="reason" columns="1" maxlength="100" md-maxlength="100"><\/textarea>$/;"	function	line:45
+div	D:\Projects\Redbox\RedBox\app\views\EOM.html	/^        <div layout="row" layout-padding layout-align="right center">$/;"	function	line:49
+md	D:\Projects\Redbox\RedBox\app\views\EOM.html	/^          <md-button class="md-raised md-accent" ng-click="vote()" ng-disabled="!reason || !selectedItem">$/;"	function	line:50
+span	D:\Projects\Redbox\RedBox\app\views\EOM.html	/^            <span class="fa fa-thumbs-up"><\/span>$/;"	function	line:51
+md	D:\Projects\Redbox\RedBox\app\views\EOM.html	/^      <md-card ng-show="hasVoted" ng-clock>$/;"	function	line:55
+md	D:\Projects\Redbox\RedBox\app\views\EOM.html	/^        <md-toolbar layout-padding class="md-accent">$/;"	function	line:56
+h	D:\Projects\Redbox\RedBox\app\views\EOM.html	/^          <h1>Thank you for your vote!<\/h1>$/;"	function	line:57
+p	D:\Projects\Redbox\RedBox\app\views\EOM.html	/^          <p>Others are still deciding.<br>You will be announced when voting concludes.$/;"	function	line:58
+div	D:\Projects\Redbox\RedBox\app\views\EOM.html	/^    <div flex>$/;"	function	line:63
+md	D:\Projects\Redbox\RedBox\app\views\EOM.html	/^      <md-card ng-repeat="eom in eoms track by $index">$/;"	function	line:64
+md	D:\Projects\Redbox\RedBox\app\views\EOM.html	/^        <md-toolbar class="md-primary">$/;"	function	line:65
+div	D:\Projects\Redbox\RedBox\app\views\EOM.html	/^            <div>$/;"	function	line:71
+span	D:\Projects\Redbox\RedBox\app\views\EOM.html	/^              <span class="winner">{{eom.winner}}<\/span>$/;"	function	line:72
+br	D:\Projects\Redbox\RedBox\app\views\EOM.html	/^              <br>$/;"	function	line:73
+span	D:\Projects\Redbox\RedBox\app\views\EOM.html	/^              <span class="month">{{eom.date | date : 'MMMM yyyy'}}<\/span>$/;"	function	line:74
+span	D:\Projects\Redbox\RedBox\app\views\EOM.html	/^            <span class="fa fa-trophy fa-5x "><\/span>$/;"	function	line:76
+md	D:\Projects\Redbox\RedBox\app\views\EOM.html	/^          <md-card-actions layout-padding layout="row" layout-align="left center">$/;"	function	line:78
+md	D:\Projects\Redbox\RedBox\app\views\EOM.html	/^            <md-button ng-click="hideDetails = !hideDetails">$/;"	function	line:79
+span	D:\Projects\Redbox\RedBox\app\views\EOM.html	/^              <span ng-show="!hideDetails" class="fa fa-chevron-down"><\/span>$/;"	function	line:80
+span	D:\Projects\Redbox\RedBox\app\views\EOM.html	/^              <span ng-show="hideDetails" class="fa fa-chevron-up"><\/span>$/;"	function	line:81
+md	D:\Projects\Redbox\RedBox\app\views\EOM.html	/^          <md-toolbar ng-show="hideDetails" class="md-dark animate-show animate-hide">$/;"	function	line:84
+dl	D:\Projects\Redbox\RedBox\app\views\EOM.html	/^              <dl >$/;"	function	line:91
+dt	D:\Projects\Redbox\RedBox\app\views\EOM.html	/^                <dt>{{votes.userFullName}}$/;"	function	line:92
+span	D:\Projects\Redbox\RedBox\app\views\EOM.html	/^                  <span class="fa fa-thumbs-up"><\/span>{{votes.votes}}<\/dt>$/;"	function	line:93
+dd	D:\Projects\Redbox\RedBox\app\views\EOM.html	/^                <dd>$/;"	function	line:94
+ul	D:\Projects\Redbox\RedBox\app\views\EOM.html	/^                  <ul >$/;"	function	line:95
+li	D:\Projects\Redbox\RedBox\app\views\EOM.html	/^                    <li ng-repeat="r in votes.reasons track by $index">{{r}}<\/li>$/;"	function	line:96

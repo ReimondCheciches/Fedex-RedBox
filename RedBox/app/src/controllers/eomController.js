@@ -50,7 +50,6 @@
         });
       };
 
-
       $scope.vote = function () {
         eomService.vote($scope.selectedItem.id, $scope.reason).then(function () {
           $scope.hasVoted = true;

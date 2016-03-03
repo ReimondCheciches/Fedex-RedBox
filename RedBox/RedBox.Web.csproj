@@ -212,19 +212,17 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="app\controllers\eomController.js" />
-    <Content Include="app\controllers\eventsController.js" />
-    <Content Include="app\controllers\suggestionsController.js" />
-    <Content Include="app\controllers\mainController.js" />
-    <Content Include="app\controllers\userController.js" />
-    <Content Include="app\directives\toggleClass.js" />
-    <Content Include="app\services\appRouter.js" />
-    <Content Include="app\services\authentification.js" />
-    <Content Include="app\services\authInterceptorService.js" />
-    <Content Include="app\services\eomService.js" />
-    <Content Include="app\services\eventService.js" />
-    <Content Include="app\services\suggestionService.js" />
-    <Content Include="app\services\userService.js" />
+    <Content Include="app\src\controllers\eomController.js" />
+    <Content Include="app\src\controllers\eventsController.js" />
+    <Content Include="app\src\controllers\suggestionsController.js" />
+    <Content Include="app\src\controllers\mainController.js" />
+    <Content Include="app\src\appRouter.js" />
+    <Content Include="app\src\services\authentification.js" />
+    <Content Include="app\src\services\authInterceptorService.js" />
+    <Content Include="app\src\services\eomService.js" />
+    <Content Include="app\src\services\eventService.js" />
+    <Content Include="app\src\services\suggestionService.js" />
+    <Content Include="app\src\services\userService.js" />
     <Content Include="app\views\EOM.html" />
     <Content Include="app\views\Events.html" />
     <Content Include="app\views\Suggestions.html" />

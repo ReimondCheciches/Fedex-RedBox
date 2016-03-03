@@ -1,135 +1,208 @@
-﻿<div class="callout-box">
-    <div class="container">
-        <md-card layout-padding>
-            <md-input-container class="md-block big" flex>
-                <label>Call out people to a place or event</label>
-                <textarea ng-model="event.description" columns="1" maxlength="200" md-maxlength="200"></textarea>
-            </md-input-container>
-            <div layout="row" layout-align="space-between top">
-                <md-input-container>
-                    <label>Where?</label>
-                    <input ng-model="event.location">
-                </md-input-container>
-                <md-datepicker ng-model="event.date" md-placeholder="When?"></md-datepicker>
-                <md-input-container>
-                    <label>At?</label>
-                    <input maxlength="8" ng-model="event.time">
-                </md-input-container>
-            </div>
-            <md-card-actions layout="column" layout-align="top start">
-                <md-button class="md-raised md-primary" ng-click="submitEvent(event)" ng-disabled="!event.description">
-                    <span class="fa fa-rocket"></span> Submit
-                </md-button>
-            </md-card-actions>
-        </md-card>
-    </div>
+<div class="callout-box">
+  <div class="container">
+    <md-card layout-padding>
+      <md-input-container class="md-block big" flex>
+        <label>Call out people to a place or event</label>
+        <textarea ng-model="event.description" columns="1" maxlength="200" md-maxlength="200"></textarea>
+      </md-input-container>
+      <div layout="row" layout-align="space-between top">
+        <md-input-container>
+          <label>Where?</label>
+          <input ng-model="event.location">
+        </md-input-container>
+        <md-datepicker ng-model="event.date" md-placeholder="When?"></md-datepicker>
+        <md-input-container>
+          <label>At?</label>
+          <input maxlength="8" ng-model="event.time">
+        </md-input-container>
+      </div>
+      <md-card-actions layout="column" layout-align="top start">
+        <md-button
+          class="md-raised md-primary"
+          ng-click="submitEvent(event)"
+          ng-disabled="!event.description">
+          <span class="fa fa-rocket"></span>
+          Submit
+        </md-button>
+      </md-card-actions>
+    </md-card>
+  </div>
 </div>
 <div class="container">
-    <div layout-gt-sm="row">
-        <md-toolbar class="md-whiteframe-3dp md-btn-group md-accent" flex layout-xs="columns" layout-sm="row"
-                    layout-gt-sm="row"
-                    layout-margin layout-align="left top">
-            <md-button ng-class="{'md-raised md-ink-ripple':newest}" ng-disabled="newest" ng-click="orderNewest()"><span
-                    class="fa fa-certificate"></span> New
-            </md-button>
-            <md-button ng-class="{'md-raised md-ink-ripple':hotest}" ng-disabled="hotest" ng-click="orderHotest()"><span
-                    class="fa fa-fire"></span> Popular
-            </md-button>
-            <md-button ng-class="{'md-raised md-ink-ripple':archived}" ng-disabled="archived" ng-click="showArchived()">
-                <span class="fa fa-archive"></span> Archived
-            </md-button>
+  <div layout-gt-sm="row">
+    <md-toolbar
+      class="md-whiteframe-3dp md-btn-group md-accent"
+      flex
+      layout-xs="columns"
+      layout-sm="row"
+      layout-gt-sm="row"
+      layout-margin
+      layout-align="left top">
+      <md-button
+        ng-class="{'md-raised md-ink-ripple':newest}"
+        ng-disabled="newest"
+        ng-click="orderNewest()">
+        <span class="fa fa-certificate"></span>
+        New
+      </md-button>
+      <md-button
+        ng-class="{'md-raised md-ink-ripple':hotest}"
+        ng-disabled="hotest"
+        ng-click="orderHotest()">
+        <span class="fa fa-fire"></span>
+        Popular
+      </md-button>
+      <md-button
+        ng-class="{'md-raised md-ink-ripple':archived}"
+        ng-disabled="archived"
+        ng-click="showArchived()">
+        <span class="fa fa-archive"></span>
+        Archived
+      </md-button>
+    </md-toolbar>
+    <md-toolbar
+      class="md-whiteframe-3dp md-btn-group md-accent"
+      flex
+      layout-xs="columns"
+      layout-sm="row"
+      layout-gt-sm="row"
+      layout-margin
+      layout-align="left top">
+      <md-button
+        ng-class="{'md-raised md-ink-ripple':currentWeek}"
+        ng-disabled="currentWeek"
+        ng-click="showEventsForCurrentWeek()">
+        <span class="fa fa-calendar-o"></span>
+        Week
+      </md-button>
+      <md-button
+        ng-class="{'md-raised md-ink-ripple':currentMonth}"
+        ng-disabled="currentMonth"
+        ng-click=" showEventsForCurrentMonth()">
+        <span class="fa fa-calendar-times-o"></span>
+        Month
+      </md-button>
+      <md-button
+        ng-class="{'md-raised md-ink-ripple':allTime}"
+        ng-disabled="allTime"
+        ng-click="showAllTime()">
+        <span class="fa fa-calendar"></span>
+        All-time
+      </md-button>
+    </md-toolbar>
+  </div>
+  <md-card ng-repeat="event in events track by event.id">
+    <md-toolbar class="md-primary" layout="column" layout-align="start start">
+      <md-card-content
+        layout="row"
+        class="layout-align-space-between-center"
+        flex
+        layout-align="center start">
+        <div flex>
+          <small>{{event.fullName}}</small>
+          <br>
+          <p>
+            <strong>{{event.description}}</strong>
+          </p>
+          <p class="event-details">
+            <strong>
+              {{event.location}}
+              {{event.location && event.time ? ' / ' : ''}}
+              {{event.time}}
+              {{(event.location || event.time) && event.eventDate ? ' / ' : ''}}
+              {{event.eventDate | date}}</strong>
+          </p>
+        </div>
+      </md-card-content>
+      <md-card-actions
+        layout-gt-sm="row"
+        layout-align="end center"
+        class="layout-align-space-between-center text-center">
+        <div flex layout="end center">
+          <md-button ng-click="hideDetails = !hideDetails">
+            <span ng-show="!hideDetails" class="fa fa-chevron-down"></span>
+            <span ng-show="hideDetails" class="fa fa-chevron-up"></span>
+            Details
+          </md-button>
+          <md-button
+            ng-if="currentUser.userName === event.userName && !event.archived"
+            ng-click="cancelEvent(event)"
+            ng-show="!event.isCanceld">
+            <span class="fa fa-stop-circle"></span>
+            Cancel
+          </md-button>
+          <md-button ng-if="!event.archived && currentUser.isAdmin" ng-click="archiveEvent(event.id)">
+            <span class="fa fa-archive"></span>
+            Archive
+          </md-button>
+        </div>
+        <md-toolbar
+          class="md-whiteframe-3dp md-btn-group md-accent"
+          layout-xs="columns"
+          layout-sm="row"
+          layout-gt-sm="row"
+          layout-margin
+          layout-align="left top"
+          ng-if="!event.archived">
+          <md-button
+            ng-class="{'md-raised':event.going}"
+            ng-click="respondToEvent(event.id, 'Going')"
+            ng-disabled="event.going">
+            <span class="fa fa-play-circle"></span>
+            Going
+          </md-button>
+          <md-button
+            ng-class="{'md-raised':event.tentative}"
+            ng-click="respondToEvent(event.id, 'Tentative')"
+            ng-disabled="event.tentative">
+            <span class="fa fa-pause-circle"></span>
+            Tentative
+          </md-button>
+          <md-button
+            ng-class="{'md-raised':event.notNow}"
+            ng-click="respondToEvent(event.id, 'NotNow')"
+            ng-disabled="event.notNow">
+            <span class="fa fa-stop-circle"></span>
+            Not Now
+          </md-button>
         </md-toolbar>
-        <md-toolbar class="md-whiteframe-3dp md-btn-group md-accent" flex layout-xs="columns" layout-sm="row"
-                    layout-gt-sm="row"
-                    layout-margin layout-align="left top">
-            <md-button ng-class="{'md-raised md-ink-ripple':currentWeek}" ng-disabled="currentWeek"
-                       ng-click="showEventsForCurrentWeek()"><span class="fa fa-calendar-o"></span> Week
-            </md-button>
-            <md-button ng-class="{'md-raised md-ink-ripple':currentMonth}" ng-disabled="currentMonth"
-                       ng-click=" showEventsForCurrentMonth()"><span class="fa fa-calendar-times-o"></span> Month
-            </md-button>
-            <md-button ng-class="{'md-raised md-ink-ripple':allTime}" ng-disabled="allTime" ng-click="showAllTime()">
-                <span class="fa fa-calendar"></span> All-time
-            </md-button>
-        </md-toolbar>
-    </div>
-    <md-card ng-repeat="event in events track by event.id">
-        <md-toolbar class="md-primary" layout="column" layout-align="start start">
-            <md-card-content layout="row" class="layout-align-space-between-center" flex layout-align="center start">
-                <div flex>
-                    <small>{{event.fullName}}</small>
-                    <br>
-                    <p><strong>{{event.description}}</strong></p>
-                    <p class="event-details">
-                        <strong>
-                            {{event.location}}
-                            {{event.location && event.time ? ' / ' : ''}}
-                            {{event.time}}
-                            {{(event.location || event.time) && event.eventDate ? ' / ' : ''}}
-                            {{event.eventDate | date}}</strong></p>
-                </div>
-            </md-card-content>
-            <md-card-actions layout-gt-sm="row" layout-align="end center"
-                             class="layout-align-space-between-center text-center">
-                <div flex layout="end center">
-                    <md-button ng-click="hideDetails = !hideDetails"><span ng-show="!hideDetails"
-                                                                           class="fa fa-chevron-down"></span><span
-                            ng-show="hideDetails" class="fa fa-chevron-up"></span> Details
-                    </md-button>
-                    <md-button
-                               ng-if="currentUser.userName === event.userName && !event.archived"
-                               ng-click="cancelEvent(event)"
-                               ng-show="!event.isCanceld">
-                        <span class="fa fa-stop-circle"></span> Cancel
-                    </md-button>
-                    <md-button ng-if="!event.archived && currentUser.isAdmin" ng-click="archiveEvent(event.id)"><span
-                            class="fa fa-archive"></span> Archive
-                    </md-button>
-                </div>
-                <md-toolbar class="md-whiteframe-3dp md-btn-group md-accent" layout-xs="columns" layout-sm="row"
-                            layout-gt-sm="row" layout-margin
-                            layout-align="left top" ng-if="!event.archived">
-                    <md-button ng-class="{'md-raised':event.going}" ng-click="respondToEvent(event.id, 'Going')"
-                               ng-disabled="event.going"><span class="fa fa-play-circle"></span> Going
-                    </md-button>
-                    <md-button ng-class="{'md-raised':event.tentative}" ng-click="respondToEvent(event.id, 'Tentative')"
-                               ng-disabled="event.tentative"><span class="fa fa-pause-circle"></span> Tentative
-                    </md-button>
-                    <md-button ng-class="{'md-raised':event.notNow}" ng-click="respondToEvent(event.id, 'NotNow')"
-                               ng-disabled="event.notNow"><span class="fa fa-stop-circle"></span> Not Now
-                    </md-button>
-                </md-toolbar>
-                <p ng-if="event.isCanceld" class="warning">This even is currently canceled</p>
-            </md-card-actions>
-            <md-toolbar ng-show="hideDetails" class="md-dark animate-show animate-hide">
+        <p ng-if="event.isCanceld" class="warning">This even is currently canceled</p>
+      </md-card-actions>
+      <md-toolbar ng-show="hideDetails" class="md-dark animate-show animate-hide">
 
-                <md-card-content layout-gt-sm="row" flex layout-align="left top">
-                    <dl flex>
-                        <dt><span class="fa fa-play-circle"></span> Going</dt>
-                        <dd>
-                            <ol> 
-                                <li ng-repeat="guser in event.goingUsers">{{guser.fullName}}</li>
-                            </ol>
-                        </dd>
-                    </dl>
-                    <dl flex>
-                        <dt><span class="fa fa-pause-circle"></span> Tentative</dt>
-                        <dd>
-                            <ol>
-                                <li ng-repeat="tuser in event.tentativeUsers">{{tuser.fullName}}</li>
-                            </ol>
-                        </dd>
-                    </dl>
-                    <dl flex>
-                        <dt><span class="fa fa-stop-circle"></span> Not Now</dt>
-                        <dd>
-                            <ol>
-                                <li ng-repeat="nuser in event.notNowUsers">{{nuser.fullName}}</li>
-                            </ol>
-                        </dd>
-                    </dl>
-                </md-card-content>
-            </md-toolbar>
-        </md-toolbar>
-    </md-card>
+        <md-card-content layout-gt-sm="row" flex layout-align="left top">
+          <dl flex>
+            <dt>
+              <span class="fa fa-play-circle"></span>
+              Going</dt>
+            <dd>
+              <ol>
+                <li ng-repeat="guser in event.goingUsers">{{guser.fullName}}</li>
+              </ol>
+            </dd>
+          </dl>
+          <dl flex>
+            <dt>
+              <span class="fa fa-pause-circle"></span>
+              Tentative</dt>
+            <dd>
+              <ol>
+                <li ng-repeat="tuser in event.tentativeUsers">{{tuser.fullName}}</li>
+              </ol>
+            </dd>
+          </dl>
+          <dl flex>
+            <dt>
+              <span class="fa fa-stop-circle"></span>
+              Not Now</dt>
+            <dd>
+              <ol>
+                <li ng-repeat="nuser in event.notNowUsers">{{nuser.fullName}}</li>
+              </ol>
+            </dd>
+          </dl>
+        </md-card-content>
+      </md-toolbar>
+    </md-toolbar>
+  </md-card>
 </div>

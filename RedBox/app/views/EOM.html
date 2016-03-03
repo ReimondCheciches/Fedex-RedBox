@@ -1,89 +1,108 @@
-﻿<div class="container">
-	<div layout-gt-sm="columns">
-	    <div flex-gt-sm="40">
+<div class="container">
+  <div layout-gt-sm="columns">
+    <div flex-gt-sm="40">
 
-            <md-button class="md-fab md-primary md-accent" aria-label="Use Android" ng-if="currentUser.isAdmin">
-                <span class="fa fa-thumbs-up"></span>{{currentNumberOfVotes}}
-            </md-button>
+      <md-button class="md-fab md-primary md-accent" aria-label="Use Android" ng-if="currentUser.isAdmin">
+        <span class="fa fa-thumbs-up"></span>{{currentNumberOfVotes}}
+      </md-button>
 
+      <md-button
+        class="md-raised md-primary"
+        ng-if="currentUser.isAdmin"
+        ng-click="stopVote()"
+        ng-disabled="disableStopVote">
+        <span class="fa fa-flag"></span>
+        END VOTING</md-button>
+      <div ng-show="!hasVoted" ng-clock>
+        VOTE HERE
+      </div>
 
-	        <md-button class="md-raised md-primary" ng-if="currentUser.isAdmin" ng-click="stopVote()" ng-disabled="disableStopVote"><span class="fa fa-flag"></span> END VOTING</md-button>
-			<div ng-show="!hasVoted" ng-clock>
-				VOTE HERE
-			</div>
+      <md-card ng-show="!hasVoted" ng-clock>
+        <md-card-content layout-align="top left">
+          <h2>{{currentEom.date | date : 'MMMM yyyy'}}</h2>
+          <form ng-submit="$event.preventDefault()">
+            <md-autocomplete
+              ng-disabled="isDisabled"
+              md-no-cache="noCache"
+              md-selected-item="selectedItem"
+              md-search-text-change="searchTextChange(searchText)"
+              md-search-text="searchUser"
+              md-selected-item-change="selectedItemChange(item)"
+              md-items="item in querySearch(searchUser)"
+              md-item-text="item.fullName"
+              md-min-length="0"
+              placeholder="Search Employee...">
+              <md-item-template>
+                <span md-highlight-text="searchText" md-highlight-flags="^i">{{item.fullName}}</span>
+              </md-item-template>
+              <md-not-found>
+                No states matching "{{searchText}}" were found.
+                <a ng-click="ctrl.newState(searchText)">Create a new one!</a>
+              </md-not-found>
+            </md-autocomplete>
+            <md-input-container class="md-block callout-box-mini" flex>
+              <label>Reason</label>
+              <textarea ng-model="reason" columns="1" maxlength="100" md-maxlength="100"></textarea>
+            </md-input-container>
+          </form>
+        </md-card-content>
+        <div layout="row" layout-padding layout-align="right center">
+          <md-button class="md-raised md-accent" ng-click="vote()" ng-disabled="!reason || !selectedItem">
+            <span class="fa fa-thumbs-up"></span>
+            Vote</md-button>
+        </div>
+      </md-card>
+      <md-card ng-show="hasVoted" ng-clock>
+        <md-toolbar layout-padding class="md-accent">
+          <h1>Thank you for your vote!</h1>
+          <p>Others are still deciding.<br>You will be announced when voting concludes.
+          </p>
+        </md-toolbar>
+      </md-card>
+    </div>
+    <div flex>
+      <md-card ng-repeat="eom in eoms track by $index">
+        <md-toolbar class="md-primary">
+          <md-card-content
+            layout="row"
+            class="layout-align-space-between-center"
+            flex
+            layout-align="left center">
+            <div>
+              <span class="winner">{{eom.winner}}</span>
+              <br>
+              <span class="month">{{eom.date | date : 'MMMM yyyy'}}</span>
+            </div>
+            <span class="fa fa-trophy fa-5x "></span>
+          </md-card-content>
+          <md-card-actions layout-padding layout="row" layout-align="left center">
+            <md-button ng-click="hideDetails = !hideDetails">
+              <span ng-show="!hideDetails" class="fa fa-chevron-down"></span>
+              <span ng-show="hideDetails" class="fa fa-chevron-up"></span>
+              Details</md-button>
+          </md-card-actions>
+          <md-toolbar ng-show="hideDetails" class="md-dark animate-show animate-hide">
+            <md-card-content
+              layout="row"
+              class="layout-align-space-between-center"
+              flex
+              layout-align="left center"
+              ng-repeat="votes in eom.allVotes | orderBy : 'votes' : true">
+              <dl >
+                <dt>{{votes.userFullName}}
+                  <span class="fa fa-thumbs-up"></span>{{votes.votes}}</dt>
+                <dd>
+                  <ul >
+                    <li ng-repeat="r in votes.reasons track by $index">{{r}}</li>
+                  </ul>
+                </dd>
+              </dl>
+            </md-card-content>
+          </md-toolbar>
+        </md-toolbar>
+      </md-card>
 
-	        <md-card ng-show="!hasVoted" ng-clock>
-	            <md-card-content layout-align="top left">
-	                <h2>{{currentEom.date | date : 'MMMM yyyy'}}</h2>
-	                <form ng-submit="$event.preventDefault()">
-	                    <md-autocomplete
-	                        ng-disabled="isDisabled"
-	                        md-no-cache="noCache"
-	                        md-selected-item="selectedItem"
-	                        md-search-text-change="searchTextChange(searchText)"
-	                        md-search-text="searchUser"
-	                        md-selected-item-change="selectedItemChange(item)"
-	                        md-items="item in querySearch(searchUser)"
-	                        md-item-text="item.fullName"
-	                        md-min-length="0"
-	                        placeholder="Search Employee...">
-	                        <md-item-template>
-	                            <span md-highlight-text="searchText" md-highlight-flags="^i">{{item.fullName}}</span>
-	                        </md-item-template>
-	                        <md-not-found>
-	                            No states matching "{{searchText}}" were found.
-	                            <a ng-click="ctrl.newState(searchText)">Create a new one!</a>
-	                        </md-not-found>
-	                    </md-autocomplete>
-	                    <md-input-container class="md-block callout-box-mini" flex>
-	                        <label>Reason</label>
-	                        <textarea ng-model="reason" columns="1" maxlength="100" md-maxlength="100"></textarea>
-	                    </md-input-container>
-	                </form>
-	            </md-card-content>
-	            <div layout="row" layout-padding layout-align="right center">
-	                <md-button class="md-raised md-accent" ng-click="vote()" ng-disabled="!reason || !selectedItem"><span class="fa fa-thumbs-up"></span> Vote</md-button>
-	            </div>
-	        </md-card>
-	        <md-card ng-show="hasVoted" ng-clock>
-	            <md-toolbar layout-padding class="md-accent">
-	                <h1>Thank you for your vote!</h1>
-	                <p>Others are still deciding.<br>You will be announced when voting concludes.
-	                </p>
-	            </md-toolbar>
-	        </md-card>
-	    </div>
-	    <div flex>
-	        <md-card ng-repeat="eom in eoms track by $index">
-	            <md-toolbar class="md-primary">
-	                <md-card-content layout="row" class="layout-align-space-between-center" flex layout-align="left center">
-	                    <div>
-	                        <span class="winner">{{eom.winner}}</span>
-	                        <br>
-	                        <span class="month">{{eom.date | date : 'MMMM yyyy'}}</span>
-	                    </div>
-	                    <span class="fa fa-trophy fa-5x "></span>
-	                </md-card-content>
-	                <md-card-actions layout-padding layout="row" layout-align="left center">
-	                    <md-button ng-click="hideDetails = !hideDetails"><span ng-show="!hideDetails" class="fa fa-chevron-down"></span><span ng-show="hideDetails" class="fa fa-chevron-up"></span> Details</md-button>
-	                </md-card-actions>
-	                <md-toolbar ng-show="hideDetails" class="md-dark animate-show animate-hide">
-	                    <md-card-content layout="row" class="layout-align-space-between-center" flex layout-align="left center" ng-repeat="votes in eom.allVotes | orderBy : 'votes' : true">
-	                        <dl >
-	                            <dt>{{votes.userFullName}} <span class="fa fa-thumbs-up"></span>{{votes.votes}}</dt>
-	                            <dd>
-	                                <ul >
-	                                    <li ng-repeat="r in votes.reasons track by $index">{{r}}</li>
-	                                </ul>
-	                            </dd>
-	                        </dl>
-	                    </md-card-content>
-	                </md-toolbar>
-	            </md-toolbar>
-	        </md-card>
+    </div>
 
-	    </div>
-
-
-	</div>
+  </div>
 </div>

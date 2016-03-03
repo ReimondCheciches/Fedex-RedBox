@@ -12,6 +12,8 @@
     "rules" : {
         "no-param-reassign": [2, {"props": false}],
         "func-names":0,
-        "vars-on-top":0
+        "vars-on-top":0,
+        "no-use-before-define": [2, {"functions": false}],
+        "eqeqeq": [2, "smart"]
       }
 }
